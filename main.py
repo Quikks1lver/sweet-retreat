@@ -3,12 +3,14 @@
 # My first pygame!
 
 import pygame
-from Player import Player
+from characters.Player import Player
+import background.Background_Methods as bg_methods
 
 # constants
 WIDTH, HEIGHT = 800, 600
 PLAYER_X_START, PLAYER_Y_START = 50, 460
-PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 2, 2
+PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 1.1, 0.3
+PLAYER_Y_TOP_THRESHOLD, PLAYER_Y_BOTTOM_THRESHOLD = 440, 500
 
 # initialize the pygame & create screen
 pygame.init()
@@ -21,22 +23,8 @@ stage_width = background_width * 2
 stage_pos_x = 0
 start_scrolling_pos_x = WIDTH / 2
 
-def draw_background() -> None:
-    """
-    Draws background onto screen, scrolling if necessary
-    This was super helpful: https://www.youtube.com/watch?v=US3HSusUBeI
-    :return:
-    """
-    # get relative x position, and subtract background width to ensure background can be seen
-    rel_x = stage_pos_x % background_width
-    screen.blit(background, (rel_x - background_width, 0))
-
-    # seamlessly blit another background when relative pos is less than display surface width
-    if rel_x < WIDTH:
-        screen.blit(background, (rel_x, 0))
-
 # init player character
-player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x, stage_width, WIDTH)
+player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x, stage_width, WIDTH, PLAYER_Y_TOP_THRESHOLD, PLAYER_Y_BOTTOM_THRESHOLD)
 
 running = True
 while running:
@@ -48,20 +36,17 @@ while running:
 
         # key presses
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                player.set_x_velocity(-PLAYER_X_VELOCITY)
-            if event.key == pygame.K_RIGHT:
-                player.set_x_velocity(PLAYER_X_VELOCITY)
+            if event.key == pygame.K_LEFT: player.set_x_velocity(-PLAYER_X_VELOCITY)
+            if event.key == pygame.K_RIGHT: player.set_x_velocity(PLAYER_X_VELOCITY)
+            if event.key == pygame.K_UP: player.set_y_velocity(-PLAYER_Y_VELOCITY)
+            if event.key == pygame.K_DOWN: player.set_y_velocity(PLAYER_Y_VELOCITY)
         if event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                player.set_x_velocity(0)
+            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: player.set_x_velocity(0)
+            if event.key == pygame.K_UP or event.key == pygame.K_DOWN: player.set_y_velocity(0)
 
     player.move_player()
+    stage_pos_x += bg_methods.determine_stage_change(player)
 
-    # move stage itself when player is in "middle" portion of display
-    if not player.x < player.start_scrolling_pos_x and not player.x > player.stage_width - player.start_scrolling_pos_x:
-        stage_pos_x += -player.x_velocity
-
-    draw_background()
+    bg_methods.draw_background(screen, background, stage_pos_x, background_width, WIDTH)
     player.draw_player(screen)
     pygame.display.update()

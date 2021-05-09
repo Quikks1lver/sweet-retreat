@@ -5,7 +5,7 @@ class Player():
     Represents a player character in the pygame
     """
 
-    def __init__(self, image_path: str, x_start: int, y_start: int, start_scrolling_pos_x: int, stage_width: int, game_width: int):
+    def __init__(self, image_path: str, x_start: int, y_start: int, start_scrolling_pos_x: int, stage_width: int, game_width: int, y_top_threshold: int, y_bottom_threshold: int):
         """
         Initialize a player character
         :param image_path: file path of player image
@@ -14,19 +14,24 @@ class Player():
         :param start_scrolling_pos_x: point at which background scrolls/moves, not the player
         :param stage_width: width of stage
         :param game_width: width of game window
+        :param y_top_threshold: top threshold where character cannot go above
+        :param y_bottom_threshold: bottom threshold where character cannot go below
         """
         self.image = pygame.image.load(image_path)
         self.image_width = self.image.get_width()
 
         self.x = x_start
         self.y = y_start
-        self.x_velocity = 0
-        self.y_velocity = 0
+        self.x_velocity = 0.0
+        self.y_velocity = 0.0
         self.real_x_position = self.image_width
 
         self.start_scrolling_pos_x = start_scrolling_pos_x
         self.stage_width = stage_width
         self.game_width = game_width
+
+        self.y_top_threshold = y_top_threshold
+        self.y_bottom_threshold = y_bottom_threshold
 
     def draw_player(self, screen) -> None:
         """
@@ -62,11 +67,14 @@ class Player():
         self.y += self.y_velocity
 
         # makes sure player doesn't go beyond stage to the right
-        if self.x > self.stage_width - self.image_width:
-            self.x = self.stage_width - self.image_width
+        if self.x > self.stage_width - self.image_width: self.x = self.stage_width - self.image_width
         # makes sure player doesn't go beyond stage to the left
-        if self.x < 0:
-            self.x = 0
+        if self.x < 0: self.x = 0
+        # makes sure player doesn't go above top threshold
+        if self.y < self.y_top_threshold: self.y = self.y_top_threshold
+        # makes sure player doesn't go below bottom threshold
+        if self.y > self.y_bottom_threshold: self.y = self.y_bottom_threshold
+
 
         # where x position of player is less than scrolling threshold
         if self.x < self.start_scrolling_pos_x:
