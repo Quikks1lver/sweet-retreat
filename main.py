@@ -3,7 +3,7 @@
 # My first pygame!
 
 import pygame
-from Player import Player
+from characters.Player import Player
 
 # constants
 WIDTH, HEIGHT = 800, 600
