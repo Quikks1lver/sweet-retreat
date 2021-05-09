@@ -4,6 +4,7 @@
 
 import pygame
 from characters.Player import Player
+import background.Background_Methods as bg_methods
 
 # constants
 WIDTH, HEIGHT = 800, 600
@@ -20,20 +21,6 @@ background_width, background_height = background.get_rect().size
 stage_width = background_width * 2
 stage_pos_x = 0
 start_scrolling_pos_x = WIDTH / 2
-
-def draw_background() -> None:
-    """
-    Draws background onto screen, scrolling if necessary
-    This was super helpful: https://www.youtube.com/watch?v=US3HSusUBeI
-    :return:
-    """
-    # get relative x position, and subtract background width to ensure background can be seen
-    rel_x = stage_pos_x % background_width
-    screen.blit(background, (rel_x - background_width, 0))
-
-    # seamlessly blit another background when relative pos is less than display surface width
-    if rel_x < WIDTH:
-        screen.blit(background, (rel_x, 0))
 
 # init player character
 player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x, stage_width, WIDTH)
@@ -57,11 +44,8 @@ while running:
                 player.set_x_velocity(0)
 
     player.move_player()
+    stage_pos_x += bg_methods.determine_stage_change(player)
 
-    # move stage itself when player is in "middle" portion of display
-    if not player.x < player.start_scrolling_pos_x and not player.x > player.stage_width - player.start_scrolling_pos_x:
-        stage_pos_x += -player.x_velocity
-
-    draw_background()
+    bg_methods.draw_background(screen, background, stage_pos_x, background_width, WIDTH)
     player.draw_player(screen)
     pygame.display.update()
