@@ -1,8 +1,14 @@
+# Adam Fernandes
+# May 2021
+# My first pygame!
+
 import pygame
+from Player import Player
 
 # constants
 WIDTH, HEIGHT = 800, 600
 PLAYER_X_START, PLAYER_Y_START = 50, 460
+PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 2, 2
 
 # initialize the pygame & create screen
 pygame.init()
@@ -11,62 +17,51 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 # background and stage
 background = pygame.image.load("images/background.png").convert()
 background_width, background_height = background.get_rect().size
-stage_width: int = background_width * 2
+stage_width = background_width * 2
 stage_pos_x = 0
 start_scrolling_pos_x = WIDTH / 2
 
-player_image = pygame.image.load("images/ghost.png")
-player_x, player_y = PLAYER_X_START, PLAYER_Y_START
-player_x_change, player_y_change = 0, 0
-player_circle = 64
-
-def player(x: float, y: float):
+def draw_background() -> None:
     """
-    draws player on the screen
+    Draws background onto screen, scrolling if necessary
+    This was super helpful: https://www.youtube.com/watch?v=US3HSusUBeI
+    :return:
     """
-    screen.blit(player_image, (x, y))
-
-running: bool = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                player_x_change = -2
-            if event.key == pygame.K_RIGHT:
-                player_x_change = 2
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                player_x_change = 0
-
-    screen.blit(background, (0, 0))
-
-    player_x += player_x_change
-    if player_x > stage_width - 64:
-        player_x = stage_width - 64
-    if player_x < 0:
-        player_x = 0
-
-    if player_x < start_scrolling_pos_x:
-        player_circle = player_x
-    elif player_x > stage_width - start_scrolling_pos_x:
-        player_circle = player_x - stage_width + WIDTH
-    else:
-        player_circle = start_scrolling_pos_x
-        stage_pos_x += -player_x_change
-
+    # get relative x position, and subtract background width to ensure background can be seen
     rel_x = stage_pos_x % background_width
     screen.blit(background, (rel_x - background_width, 0))
+
+    # seamlessly blit another background when relative pos is less than display surface width
     if rel_x < WIDTH:
         screen.blit(background, (rel_x, 0))
 
-    # pygame.draw.circle(s, WHITE, (circlePosX, playerPosY - 25), circleRadius, 0)
-    player(player_circle, player_y)
+# init player character
+player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x, stage_width, WIDTH)
 
+running = True
+while running:
+
+    for event in pygame.event.get():
+        # break out of game loop if user quits
+        if event.type == pygame.QUIT:
+            running = False
+
+        # key presses
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                player.set_x_velocity(-PLAYER_X_VELOCITY)
+            if event.key == pygame.K_RIGHT:
+                player.set_x_velocity(PLAYER_X_VELOCITY)
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                player.set_x_velocity(0)
+
+    player.move_player()
+
+    # move stage itself when player is in "middle" portion of display
+    if not player.x < player.start_scrolling_pos_x and not player.x > player.stage_width - player.start_scrolling_pos_x:
+        stage_pos_x += -player.x_velocity
+
+    draw_background()
+    player.draw_player(screen)
     pygame.display.update()
-
-    # WATCH THIS
-    # TODO
-    # https: // www.youtube.com / watch?v = US3HSusUBeI
