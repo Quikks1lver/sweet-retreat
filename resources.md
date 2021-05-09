@@ -3,8 +3,9 @@
 ### General
 
 - [PyGame tutorial](https://www.youtube.com/watch?v=FfWpgLFMI7w)
-- [Background Movement](https://www.youtube.com/watch?v=AX8YU2hLBUg)
-- [More Background](https://www.youtube.com/watch?v=US3HSusUBeI)
+- 2D Movement
+  - [Player Movement](https://www.youtube.com/watch?v=AX8YU2hLBUg)
+  - [Background Scrolling](https://www.youtube.com/watch?v=US3HSusUBeI)
 
 ### Images
 
