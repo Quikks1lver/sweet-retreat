@@ -33,13 +33,18 @@ class Player():
         self.y_top_threshold = y_top_threshold
         self.y_bottom_threshold = y_bottom_threshold
 
+        self.is_right_facing = True
+
     def draw_player(self, screen) -> None:
         """
         draws player onto the pygame window
         :param screen: pygame display
         :return: None
         """
-        screen.blit(self.image, (self.real_x_position, self.y))
+        if self.is_right_facing:
+            screen.blit(self.image, (self.real_x_position, self.y))
+        else:
+            screen.blit(pygame.transform.flip(self.image, True, False), (self.real_x_position, self.y))
 
     def set_x_velocity(self, new_velocity: float) -> None:
         """
@@ -48,6 +53,11 @@ class Player():
         :return:
         """
         self.x_velocity = new_velocity
+        
+        # change orientation
+        if self.x_velocity == 0:
+            return
+        self.is_right_facing = False if self.x_velocity > 0 else True
 
     def set_y_velocity(self, new_velocity: float) -> None:
         """
