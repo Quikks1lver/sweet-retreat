@@ -24,7 +24,8 @@ stage_pos_x = 0
 start_scrolling_pos_x = WIDTH / 2
 
 # init player character
-player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x, stage_width, WIDTH, PLAYER_Y_TOP_THRESHOLD, PLAYER_Y_BOTTOM_THRESHOLD)
+player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
+                stage_width, WIDTH, PLAYER_Y_TOP_THRESHOLD, PLAYER_Y_BOTTOM_THRESHOLD)
 
 running = True
 while running:
