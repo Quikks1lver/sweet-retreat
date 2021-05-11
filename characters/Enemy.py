@@ -29,6 +29,19 @@ class Enemy(Player):
         self.x_velocity = x_velocity
         self.y_velocity = y_velocity
 
+    def draw(self, screen, player: Player) -> None:
+        """
+        Draws enemy to screen, with associated metadata
+        :param screen:
+        :return:
+        """
+        super().draw(screen)
+
+        # print distance from player
+        font = pygame.font.Font("fonts/dewangga.otf", 23)
+        health_status = font.render(str(int(abs(self.real_x_position - player.real_x_position))), True, (255, 255, 255))
+        screen.blit(health_status, (self.real_x_position + 21, self.y - 20))
+
     def move(self, player: Player) -> None:
         """
         Moves enemy according to current position and player's position
@@ -61,3 +74,12 @@ class Enemy(Player):
             self.real_x_position = self.x - self.stage_width + self.game_width
         else:
             self.real_x_position = self.start_scrolling_pos_x
+
+    def has_collision(self, player: Player, threshold: float) -> bool:
+        """
+        Determines whether the enemy collides with the player
+        :param player: player character
+        :param threshold: below or equal to which is considered a collision
+        :return:
+        """
+        return True if math.dist([self.x, self.y], [player.x, player.y]) <= threshold else False

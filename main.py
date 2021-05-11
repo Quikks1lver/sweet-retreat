@@ -68,7 +68,7 @@ while running:
     player.move()
     for e in enemies:
         e.move(player)
-        if player.is_collision(e, COLLISION_THRESHOLD):
+        if e.has_collision(player, COLLISION_THRESHOLD):
             collision = True
 
     # move stage if need be
@@ -77,7 +77,7 @@ while running:
     # draw everyone to screen
     bg_methods.draw_background(screen, background_collision if collision else background, stage_pos_x, background_width, WIDTH)
     player.draw(screen)
-    for e in enemies: e.draw(screen)
+    for e in enemies: e.draw(screen, player)
 
     # update display
     pygame.display.update()
