@@ -1,3 +1,4 @@
+import math
 import pygame
 
 class Player():
@@ -5,17 +6,18 @@ class Player():
     Represents a player character in the pygame
     """
 
-    def __init__(self, image_path: str, x_start: int, y_start: int, start_scrolling_pos_x: int, stage_width: int, game_width: int, y_top_threshold: int, y_bottom_threshold: int):
+    def __init__(self, image_path: str, x_start: int, y_start: int, start_scrolling_pos_x: int, stage_width: int, game_width: int, y_top_threshold: int, y_bottom_threshold: int, health: int):
         """
         Initialize a player character
         :param image_path: file path of player image
         :param x_start:
         :param y_start:
         :param start_scrolling_pos_x: point at which background scrolls/moves, not the player
-        :param stage_width: width of stage
-        :param game_width: width of game window
+        :param stage_width: width of stage (a few times the background image)
+        :param game_width: width of game window itself
         :param y_top_threshold: top threshold where character cannot go above
         :param y_bottom_threshold: bottom threshold where character cannot go below
+        :param health: hit points of character
         """
         self.image = pygame.image.load(image_path)
         self.image_width = self.image.get_width()
@@ -33,9 +35,11 @@ class Player():
         self.y_top_threshold = y_top_threshold
         self.y_bottom_threshold = y_bottom_threshold
 
+        self.health = health
+
         self.is_left_facing = False
 
-    def draw_player(self, screen) -> None:
+    def draw(self, screen) -> None:
         """
         draws player onto the pygame window, changing orientation if necessary
         :param screen: pygame display
@@ -64,7 +68,7 @@ class Player():
         """
         self.y_velocity = new_velocity
 
-    def move_player(self) -> None:
+    def move(self) -> None:
         """
         Moves player character according to current position and velocities
         This was super helpful: https://www.youtube.com/watch?v=AX8YU2hLBUg
@@ -92,3 +96,12 @@ class Player():
         # scroll stage (handled elsewhere), but keep player "still" in the middle area
         else:
             self.real_x_position = self.start_scrolling_pos_x
+
+    def is_collision(self, enemy, threshold: float) -> bool:
+        """
+        Determines whether the player
+        :param enemy: enemy character object
+        :param threshold: below or equal to which is considered a collision
+        :return:
+        """
+        return True if math.dist([self.x, self.y], [enemy.x, enemy.y]) <= threshold else False
