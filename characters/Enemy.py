@@ -27,6 +27,7 @@ class Enemy(Player):
         super().__init__(image_path, x_start, y_start, start_scrolling_pos_x, stage_width,
                          game_width, y_top_threshold, y_bottom_threshold, health)
 
+        self.max_health = health
         self.x_velocity = x_velocity
         self.y_velocity = y_velocity
 
@@ -84,3 +85,11 @@ class Enemy(Player):
         :return:
         """
         return True if math.dist([self.x, self.y], [player.x, player.y]) <= threshold else False
+
+    def respawn(self):
+        """
+        Respawns the enemy character
+        :return:
+        """
+        self.health = self.max_health
+        self.x = self.stage_width * (1.3 if random.randint(0, 1) == 0 else -1.3)
