@@ -101,10 +101,12 @@ while running:
     # move stage if need be
     stage_pos_x += bg_methods.determine_stage_change(player)
 
-    # draw everyone to screen
+    # draw everyone to screen; also, check for bullet collisions here
     bg_methods.draw_background(screen, background_collision if collision else background, stage_pos_x, background_width, WIDTH)
     player.draw(screen)
-    for e in enemies: e.draw(screen, player)
+    for e in enemies:
+        e.check_for_bullet_collision(player.get_current_weapon().bullet, COLLISION_THRESHOLD)
+        e.draw(screen, player)
 
     # game over screen
     if player.health <= 0: game_over(screen)
