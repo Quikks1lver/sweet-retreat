@@ -31,6 +31,7 @@ background_width, background_height = background.get_rect().size
 stage_width = background_width * 2
 stage_pos_x = 0
 start_scrolling_pos_x = WIDTH / 2
+background_collision = pygame.image.load("images/background_collision.png").convert()
 
 # init player and enemy characters
 player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
@@ -42,8 +43,11 @@ for i in range(NUM_ENEMIES):
     enemies.append(Enemy(f"images/{enemy_img}", PLAYER_X_START + random.randint(bounds[0], bounds[1]), PLAYER_Y_START, start_scrolling_pos_x,
                          stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, ENEMY_HEALTH, ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY))
 
+collision = False
 running = True
 while running:
+    collision = False
+
     # event handlers
     for event in pygame.event.get():
         # break out of game loop if user quits
@@ -65,13 +69,13 @@ while running:
     for e in enemies:
         e.move(player)
         if player.is_collision(e, COLLISION_THRESHOLD):
-            print("Collision!")
+            collision = True
 
     # move stage if need be
     stage_pos_x += bg_methods.determine_stage_change(player)
 
     # draw everyone to screen
-    bg_methods.draw_background(screen, background, stage_pos_x, background_width, WIDTH)
+    bg_methods.draw_background(screen, background_collision if collision else background, stage_pos_x, background_width, WIDTH)
     player.draw(screen)
     for e in enemies: e.draw(screen)
 
