@@ -1,5 +1,7 @@
 import math
 import pygame
+from typing import List
+from weapons.Weapon import Weapon
 
 class Player():
     """
@@ -39,6 +41,9 @@ class Player():
 
         self.is_left_facing = False
 
+        self.weapons: List[Weapon] = []
+        self.current_weapon = 0
+
     def draw(self, screen) -> None:
         """
         draws player and metadata onto the pygame window, changing orientation if necessary
@@ -54,6 +59,9 @@ class Player():
         health_string = str(int(self.health))
         health_status = font.render(health_string, True, (255, 0, 0))
         screen.blit(health_status, (self.real_x_position + 20, self.y + 70))
+
+        # print weapon
+        if len(self.weapons) > 0: self.weapons[self.current_weapon].draw(screen)
 
     def set_x_velocity(self, new_velocity: float) -> None:
         """

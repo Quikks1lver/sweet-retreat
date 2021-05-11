@@ -1,7 +1,8 @@
 import math
 import pygame
-from .Player import Player
 import random
+from .Player import Player
+from weapons.Weapon import Weapon
 
 class Enemy(Player):
     """

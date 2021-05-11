@@ -9,6 +9,7 @@ from typing import List
 import background.Background_Methods as bg_methods
 from characters.Player import Player
 from characters.Enemy import Enemy
+from weapons.Weapon import Weapon
 
 # constants
 WIDTH, HEIGHT = 800, 600
@@ -61,6 +62,9 @@ def game_over(screen) -> None:
     font = pygame.font.Font("./fonts/dewangga.otf", 50)
     health_status = font.render("GAME OVER", True, (255, 0, 0))
     screen.blit(health_status, (WIDTH / 2.75, HEIGHT / 2))
+
+w = Weapon("images/revolver.png", player, 1, 10)
+player.weapons.append(w)
 
 collision = False
 running = True
