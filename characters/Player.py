@@ -51,7 +51,7 @@ class Player():
 
         # print health
         font = pygame.font.Font("fonts/dewangga.otf", 23)
-        health_string = str(self.health)
+        health_string = str(int(self.health))
         health_status = font.render(health_string, True, (255, 0, 0))
         screen.blit(health_status, (self.real_x_position + 20, self.y + 70))
 
@@ -103,3 +103,11 @@ class Player():
         # scroll stage (handled elsewhere), but keep player "still" in the middle area
         else:
             self.real_x_position = self.start_scrolling_pos_x
+
+    def take_damage(self, damage: float) -> None:
+        """
+        Character hitpoints get removed
+        :param damage: number of hitpoints to be removed
+        :return:
+        """
+        self.health -= abs(damage)
