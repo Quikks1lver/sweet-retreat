@@ -8,7 +8,7 @@ from typing import List
 
 import background.Background_Methods as bg_methods
 from characters.Player import Player
-from characters.Enemy import Enemy
+from characters.Enemy import Enemy, Enemy_Collision
 from weapons.Weapon import Weapon
 
 # constants
@@ -19,12 +19,14 @@ ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY = 0.07, 0.1
 NUM_ENEMIES = 5
 PLAYER_HEALTH = 100
 PLAYER_X_START, PLAYER_Y_START = 50, 460
-PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 0.9, 0.3
+PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 1.1, 0.3
 STARTING_WEAPON_VELOCITY = 4
 STARTING_WEAPON_DAMAGE = 10
 STARTING_WEAPON_AMMO = 50
 Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD = 440, 530
 COLLISION_THRESHOLD = 25
+ENEMY_HIT_SCORE = 1
+ENEMY_DEFEATED_SCORE = 11
 
 # initialize the pygame & create screen
 pygame.init()
@@ -53,20 +55,37 @@ enemies: List[Enemy] = []
 
 for i in range(NUM_ENEMIES):
     enemy_img = "gingerbread-man.png" if random.randint(0, 1) == 0 else "cupcake.png"
-    bounds = [-.5 * stage_width, 0] if random.randint(0, 1) == 0 else [stage_width, 1.5 * stage_width]
-    enemies.append(Enemy(f"images/{enemy_img}", PLAYER_X_START + random.randint(bounds[0], bounds[1]), PLAYER_Y_START, start_scrolling_pos_x,
+    enemy_start = stage_width + 200 if random.randint(0, 1) == 0 else -200
+    enemies.append(Enemy(f"images/{enemy_img}", enemy_start, PLAYER_Y_START, start_scrolling_pos_x,
                          stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, ENEMY_HEALTH, ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY))
 
-# game states
-def game_over(screen) -> None:
+# game helpers
+def display_score(screen, score: int) -> None:
+    """
+    Displays score to the screen
+    :param screen:
+    :param score:
+    :return:
+    """
+    font = pygame.font.Font("./fonts/dewangga.otf", 40)
+    score_text = font.render(f"Score: {str(score)}", True, (255, 255, 255)) # white
+    screen.blit(score_text, (20, 20))
+
+def game_over(screen, score: int) -> None:
     """
     Displays game over screen
+    :param screen:
+    :param score:
     :return:
     """
     screen.fill([0, 0, 0]) # black
     font = pygame.font.Font("./fonts/dewangga.otf", 50)
-    health_status = font.render("GAME OVER", True, (255, 0, 0))
-    screen.blit(health_status, (WIDTH / 2.75, HEIGHT / 2))
+
+    game_over_text = font.render("GAME OVER", True, (255, 0, 0)) # red
+    score_text = font.render(f"Score: {score}", True, (255, 0, 0))  # red
+
+    screen.blit(game_over_text, (WIDTH / 2.75, HEIGHT / 2.4))
+    screen.blit(score_text, (WIDTH / 2.75, HEIGHT / 2.4 + 40))
 
 collision = False
 running = True
@@ -101,13 +120,21 @@ while running:
     # move stage if need be
     stage_pos_x += bg_methods.determine_stage_change(player)
 
-    # draw everyone to screen
+    # draw everyone to screen; also, check for bullet collisions here
     bg_methods.draw_background(screen, background_collision if collision else background, stage_pos_x, background_width, WIDTH)
     player.draw(screen)
-    for e in enemies: e.draw(screen, player)
+    for e in enemies:
+        e.draw(screen, player)
+
+        collision_type = e.check_for_bullet_collision(player.get_current_weapon().bullet, COLLISION_THRESHOLD)
+        if collision_type == Enemy_Collision.HIT: player.add_score(ENEMY_HIT_SCORE)
+        elif collision_type == Enemy_Collision.DEFEATED: player.add_score(ENEMY_DEFEATED_SCORE)
+
+    # draws score
+    display_score(screen, player.score)
 
     # game over screen
-    if player.health <= 0: game_over(screen)
+    if player.health <= 0: game_over(screen, player.score)
 
     # update display
     pygame.display.update()

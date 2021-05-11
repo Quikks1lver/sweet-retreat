@@ -1,8 +1,14 @@
+from enum import Enum
 import math
 import pygame
 import random
 from .Player import Player
-from weapons.Weapon import Weapon
+from weapons.Bullet import Bullet, Bullet_State
+
+class Enemy_Collision(Enum):
+    NO_HIT = 0
+    HIT = 1
+    DEFEATED = 2
 
 class Enemy(Player):
     """
@@ -41,8 +47,8 @@ class Enemy(Player):
 
         # print distance from player
         font = pygame.font.Font("fonts/dewangga.otf", 23)
-        health_status = font.render(str(int(abs(self.real_x_position - player.real_x_position))), True, (255, 255, 255))
-        screen.blit(health_status, (self.real_x_position + 21, self.y - 20))
+        dist = font.render(str(int(abs(self.real_x_position - player.real_x_position))), True, (255, 255, 255))
+        screen.blit(dist, (self.real_x_position + 21, self.y - 20))
 
     def move(self, player: Player) -> None:
         """
@@ -86,10 +92,27 @@ class Enemy(Player):
         """
         return True if math.dist([self.x, self.y], [player.x, player.y]) <= threshold else False
 
+    def check_for_bullet_collision(self, bullet: Bullet, threshold: float) -> Enemy_Collision:
+        """
+        Checks whether bullet has hit enemy and updates health and bullet status
+        :param bullet:
+        :param threshold:
+        :return: what kind of collision occurred
+        """
+
+        if bullet.state == Bullet_State.MOVING and math.dist([self.real_x_position, self.y], [bullet.x, bullet.y]) <= threshold:
+            bullet.state = Bullet_State.READY
+            self.take_damage(bullet.damage)
+            if self.health <= 0:
+                self.respawn()
+                return Enemy_Collision.DEFEATED
+            return Enemy_Collision.HIT
+        return Enemy_Collision.NO_HIT
+
     def respawn(self):
         """
         Respawns the enemy character
         :return:
         """
         self.health = self.max_health
-        self.x = self.stage_width * (1.3 if random.randint(0, 1) == 0 else -1.3)
+        self.x = self.stage_width + 200 if random.randint (0, 1) == 0 else -200

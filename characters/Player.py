@@ -44,6 +44,8 @@ class Player():
         self.weapons: List[Weapon] = []
         self.current_weapon = 0
 
+        self.score = 0
+
     def draw(self, screen) -> None:
         """
         draws player and metadata onto the pygame window, changing orientation if necessary
@@ -151,3 +153,19 @@ class Player():
         """
         if self.get_current_weapon() == None: return
         else: self.get_current_weapon().fire()
+
+    def add_score(self, amount: int) -> None:
+        """
+        Adds amount to score
+        :param: amount to add
+        :return:
+        """
+        self.score += amount
+
+    def remove_score(self, amount: int) -> None:
+        """
+        Removes amount from score
+        :param amount:
+        :return:
+        """
+        self.score -= amount
