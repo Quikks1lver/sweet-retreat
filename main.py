@@ -73,8 +73,7 @@ while running:
     # draw everyone to screen
     bg_methods.draw_background(screen, background, stage_pos_x, background_width, WIDTH)
     player.draw(screen)
-    for e in enemies:
-        e.draw(screen)
+    for e in enemies: e.draw(screen)
 
     # update display
     pygame.display.update()
