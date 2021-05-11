@@ -94,9 +94,11 @@ class Enemy(Player):
         :param threshold:
         :return:
         """
-        if bullet.state == Bullet_State.MOVING and math.dist([self.x, self.y], [bullet.x, bullet.y]) <= threshold:
+        if bullet.state == Bullet_State.MOVING and math.dist([self.real_x_position, self.y], [bullet.x, bullet.y]) <= threshold:
             bullet.state = Bullet_State.READY
-            self.health -= bullet.damage
+            self.take_damage(bullet.damage)
+        if self.health <= 0:
+            self.respawn()
 
     def respawn(self):
         """
@@ -104,4 +106,4 @@ class Enemy(Player):
         :return:
         """
         self.health = self.max_health
-        self.x = self.stage_width * (1.3 if random.randint(0, 1) == 0 else -1.3)
+        self.x = self.stage_width - 200 if random.randint (0, 1) == 0 else -200

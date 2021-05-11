@@ -19,7 +19,7 @@ ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY = 0.07, 0.1
 NUM_ENEMIES = 5
 PLAYER_HEALTH = 100
 PLAYER_X_START, PLAYER_Y_START = 50, 460
-PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 0.9, 0.3
+PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 1.1, 0.3
 STARTING_WEAPON_VELOCITY = 4
 STARTING_WEAPON_DAMAGE = 10
 STARTING_WEAPON_AMMO = 50
@@ -53,8 +53,8 @@ enemies: List[Enemy] = []
 
 for i in range(NUM_ENEMIES):
     enemy_img = "gingerbread-man.png" if random.randint(0, 1) == 0 else "cupcake.png"
-    bounds = [-.5 * stage_width, 0] if random.randint(0, 1) == 0 else [stage_width, 1.5 * stage_width]
-    enemies.append(Enemy(f"images/{enemy_img}", PLAYER_X_START + random.randint(bounds[0], bounds[1]), PLAYER_Y_START, start_scrolling_pos_x,
+    enemy_start = stage_width + 200 if random.randint(0, 1) == 0 else -200
+    enemies.append(Enemy(f"images/{enemy_img}", enemy_start, PLAYER_Y_START, start_scrolling_pos_x,
                          stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, ENEMY_HEALTH, ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY))
 
 # game states
@@ -105,8 +105,8 @@ while running:
     bg_methods.draw_background(screen, background_collision if collision else background, stage_pos_x, background_width, WIDTH)
     player.draw(screen)
     for e in enemies:
-        e.check_for_bullet_collision(player.get_current_weapon().bullet, COLLISION_THRESHOLD)
         e.draw(screen, player)
+        e.check_for_bullet_collision(player.get_current_weapon().bullet, COLLISION_THRESHOLD)
 
     # game over screen
     if player.health <= 0: game_over(screen)
