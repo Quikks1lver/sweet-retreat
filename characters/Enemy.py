@@ -77,7 +77,7 @@ class Enemy(Player):
         else:
             self.real_x_position = self.start_scrolling_pos_x
 
-    def has_collision(self, player: Player, threshold: float) -> bool:
+    def has_collision_with_player(self, player: Player, threshold: float) -> bool:
         """
         Determines whether the enemy collides with the player
         :param player: player character

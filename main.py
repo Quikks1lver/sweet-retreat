@@ -93,7 +93,7 @@ while running:
     player.move()
     for e in enemies:
         e.move(player)
-        if e.has_collision(player, COLLISION_THRESHOLD):
+        if e.has_collision_with_player(player, COLLISION_THRESHOLD):
             player.take_damage(ENEMY_HIT)
             collision = True
 
