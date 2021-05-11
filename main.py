@@ -38,11 +38,13 @@ background_collision = pygame.image.load("images/background_collision.png").conv
 player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
                 stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, PLAYER_HEALTH)
 enemies: List[Enemy] = []
+
 # DEBUGGING
 # enemies.append(Enemy(f"images/cupcake.png", PLAYER_X_START + 10, PLAYER_Y_START,
 #                      start_scrolling_pos_x,
 #                      stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, ENEMY_HEALTH, ENEMY_X_VELOCITY,
 #                      ENEMY_Y_VELOCITY))
+
 for i in range(NUM_ENEMIES):
     enemy_img = "gingerbread-man.png" if random.randint(0, 1) == 0 else "cupcake.png"
     bounds = [-.5 * stage_width, 0] if random.randint(0, 1) == 0 else [stage_width, 1.5 * stage_width]
