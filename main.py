@@ -9,6 +9,7 @@ from typing import List
 import background.Background_Methods as bg_methods
 from characters.Player import Player
 from characters.Enemy import Enemy
+from weapons.Weapon import Weapon
 
 # constants
 WIDTH, HEIGHT = 800, 600
@@ -18,7 +19,10 @@ ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY = 0.07, 0.1
 NUM_ENEMIES = 5
 PLAYER_HEALTH = 100
 PLAYER_X_START, PLAYER_Y_START = 50, 460
-PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 0.5, 0.3
+PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 0.9, 0.3
+STARTING_WEAPON_VELOCITY = 4
+STARTING_WEAPON_DAMAGE = 10
+STARTING_WEAPON_AMMO = 50
 Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD = 440, 530
 COLLISION_THRESHOLD = 25
 
@@ -37,12 +41,16 @@ background_collision = pygame.image.load("images/background_collision.png").conv
 # init player and enemy characters
 player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
                 stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, PLAYER_HEALTH)
+player.add_weapon(Weapon("images/revolver.png", "images/bullet.png", player, STARTING_WEAPON_VELOCITY, STARTING_WEAPON_DAMAGE, STARTING_WEAPON_AMMO))
+
 enemies: List[Enemy] = []
+
 # DEBUGGING
 # enemies.append(Enemy(f"images/cupcake.png", PLAYER_X_START + 10, PLAYER_Y_START,
 #                      start_scrolling_pos_x,
 #                      stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, ENEMY_HEALTH, ENEMY_X_VELOCITY,
 #                      ENEMY_Y_VELOCITY))
+
 for i in range(NUM_ENEMIES):
     enemy_img = "gingerbread-man.png" if random.randint(0, 1) == 0 else "cupcake.png"
     bounds = [-.5 * stage_width, 0] if random.randint(0, 1) == 0 else [stage_width, 1.5 * stage_width]
@@ -77,6 +85,7 @@ while running:
             if event.key == pygame.K_RIGHT: player.set_x_velocity(PLAYER_X_VELOCITY)
             if event.key == pygame.K_UP: player.set_y_velocity(-PLAYER_Y_VELOCITY)
             if event.key == pygame.K_DOWN: player.set_y_velocity(PLAYER_Y_VELOCITY)
+            if event.key == pygame.K_SPACE: player.fire_current_weapon()
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: player.set_x_velocity(0)
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN: player.set_y_velocity(0)
@@ -85,7 +94,7 @@ while running:
     player.move()
     for e in enemies:
         e.move(player)
-        if e.has_collision(player, COLLISION_THRESHOLD):
+        if e.has_collision_with_player(player, COLLISION_THRESHOLD):
             player.take_damage(ENEMY_HIT)
             collision = True
 
