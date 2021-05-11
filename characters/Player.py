@@ -119,3 +119,19 @@ class Player():
         :return:
         """
         self.health -= abs(damage)
+
+    def add_weapon(self, w: Weapon):
+        """
+        Adds a weapon to the player's inventory
+        :param w:
+        :return:
+        """
+        self.weapons.append(w)
+
+    def switch_to_next_weapon(self):
+        """
+        Switches to the next weapon in inventory, if available
+        :return:
+        """
+        self.current_weapon += 1 % len(self.weapons)
+        if len(self.weapons) == 0: self.current_weapon = 0
