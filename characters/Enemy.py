@@ -106,4 +106,4 @@ class Enemy(Player):
         :return:
         """
         self.health = self.max_health
-        self.x = self.stage_width - 200 if random.randint (0, 1) == 0 else -200
+        self.x = self.stage_width + 200 if random.randint (0, 1) == 0 else -200
