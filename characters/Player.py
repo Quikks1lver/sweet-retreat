@@ -41,12 +41,19 @@ class Player():
 
     def draw(self, screen) -> None:
         """
-        draws player onto the pygame window, changing orientation if necessary
+        draws player and metadata onto the pygame window, changing orientation if necessary
         :param screen: pygame display
         :return: None
         """
+        # print character
         if self.is_left_facing: screen.blit(self.image, (self.real_x_position, self.y))
         else: screen.blit(pygame.transform.flip(self.image, True, False), (self.real_x_position, self.y))
+
+        # print health
+        font = pygame.font.Font("fonts/dewangga.otf", 23)
+        health_string = str(int(self.health))
+        health_status = font.render(health_string, True, (255, 0, 0))
+        screen.blit(health_status, (self.real_x_position + 20, self.y + 70))
 
     def set_x_velocity(self, new_velocity: float) -> None:
         """
@@ -97,11 +104,10 @@ class Player():
         else:
             self.real_x_position = self.start_scrolling_pos_x
 
-    def is_collision(self, enemy, threshold: float) -> bool:
+    def take_damage(self, damage: float) -> None:
         """
-        Determines whether the player
-        :param enemy: enemy character object
-        :param threshold: below or equal to which is considered a collision
+        Character hitpoints get removed
+        :param damage: number of hitpoints to be removed
         :return:
         """
-        return True if math.dist([self.x, self.y], [enemy.x, enemy.y]) <= threshold else False
+        self.health -= abs(damage)
