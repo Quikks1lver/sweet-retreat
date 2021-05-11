@@ -7,10 +7,11 @@ class Weapon():
     Represents a (typically ranged) weapon that either a character uses
     """
 
-    def __init__(self, image_path: str, bullet_image: str, character: Player, projectile_x_velocity: float, damage: float, ammo: int):
+    def __init__(self, image_path: str, sound_path: str, bullet_image: str, character: Player, projectile_x_velocity: float, damage: float, ammo: int):
         """
         Initializes a new weapon
         :param image_path:
+        :param sound_path: sound when firing
         :param character: character who's using the weapon
         :param projectile_x_velocity: how fast the bullet/projectile travels
         :param damage: damage hit
@@ -19,6 +20,8 @@ class Weapon():
         self.character: Player = character
         self.x = 0
         self.y = 0
+
+        self.sound = pygame.mixer.Sound(sound_path)
 
         self.image = pygame.image.load(image_path)
         self.image_width = self.image.get_width()
@@ -34,7 +37,7 @@ class Weapon():
         :return:
         """
         self.x = self.character.real_x_position - self.image_width if self.character.is_left_facing else \
-                 self.character.real_x_position + self.image_width + (self.character.image_width/2)
+                 self.character.real_x_position + self.image_width + (self.character.image_width / 2)
         self.y = self.character.y + 15
 
         if self.character.is_left_facing: screen.blit(self.image, (self.x, self.y))
@@ -47,7 +50,10 @@ class Weapon():
         Fires weapon
         :return:
         """
-        if self.bullet.state == Bullet_State.READY:
+        if self.bullet.state == Bullet_State.READY and self.ammo > 0:
+            # sound
+            self.sound.play()
+
             # offsets for where bullet comes out of weapon
             dx = -10 if self.character.is_left_facing else 10
             dy = -5

@@ -26,3 +26,44 @@ def determine_stage_change(player: Player) -> int:
         return -player.x_velocity
     else:
         return 0
+
+def display_score(screen, score: int) -> None:
+    """
+    Displays score to the screen
+    :param screen:
+    :param score:
+    :return:
+    """
+    font = pygame.font.Font("./fonts/dewangga.otf", 40)
+    score_text = font.render(f"Score: {str(score)}", True, (255, 255, 255)) # white
+    screen.blit(score_text, (20, 20))
+
+def display_ammo(screen, ammo: int) -> None:
+    """
+    Displays ammo to the screen
+    :param screen:
+    :param ammo:
+    :return:
+    """
+    font = pygame.font.Font("./fonts/dewangga.otf", 25)
+    ammo_bar = ""
+    for i in range(ammo): ammo_bar += "I"
+
+    ammo_text = font.render(f"Ammo: {ammo_bar}", True, (255, 255, 255))  # white
+    screen.blit(ammo_text, (20, 60))
+
+def game_over(screen, score: int, game_width: int, game_height: int) -> None:
+    """
+    Displays game over screen
+    :param screen:
+    :param score:
+    :return:
+    """
+    screen.fill([0, 0, 0]) # black
+    font = pygame.font.Font("./fonts/dewangga.otf", 50)
+
+    game_over_text = font.render("GAME OVER", True, (255, 0, 0)) # red
+    score_text = font.render(f"Score: {score}", True, (255, 0, 0))  # red
+
+    screen.blit(game_over_text, (game_width / 2.75, game_height / 2.4))
+    screen.blit(score_text, (game_width / 2.75, game_height / 2.4 + 40))

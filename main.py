@@ -15,11 +15,11 @@ from weapons.Weapon import Weapon
 WIDTH, HEIGHT = 800, 600
 ENEMY_HIT = .1
 ENEMY_HEALTH = 50
-ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY = 0.07, 0.1
+ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY = 0.4, 0.1
 NUM_ENEMIES = 5
 PLAYER_HEALTH = 100
 PLAYER_X_START, PLAYER_Y_START = 50, 460
-PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 1.1, 0.3
+PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 1.5, 0.5
 STARTING_WEAPON_VELOCITY = 4
 STARTING_WEAPON_DAMAGE = 10
 STARTING_WEAPON_AMMO = 50
@@ -40,52 +40,21 @@ stage_pos_x = 0
 start_scrolling_pos_x = WIDTH / 2
 background_collision = pygame.image.load("images/background_collision.png").convert()
 
+# sounds
+hit_sound = pygame.mixer.Sound("sounds/hit.wav")
+explosion_sound = pygame.mixer.Sound("sounds/explosion.wav")
+
 # init player and enemy characters
 player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
                 stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, PLAYER_HEALTH)
-player.add_weapon(Weapon("images/revolver.png", "images/bullet.png", player, STARTING_WEAPON_VELOCITY, STARTING_WEAPON_DAMAGE, STARTING_WEAPON_AMMO))
-
+player.add_weapon(Weapon("images/revolver.png",  "sounds/weapon.wav", "images/bullet.png", player, STARTING_WEAPON_VELOCITY,
+                         STARTING_WEAPON_DAMAGE, STARTING_WEAPON_AMMO))
 enemies: List[Enemy] = []
-
-# DEBUGGING
-# enemies.append(Enemy(f"images/cupcake.png", PLAYER_X_START + 10, PLAYER_Y_START,
-#                      start_scrolling_pos_x,
-#                      stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, ENEMY_HEALTH, ENEMY_X_VELOCITY,
-#                      ENEMY_Y_VELOCITY))
-
 for i in range(NUM_ENEMIES):
     enemy_img = "gingerbread-man.png" if random.randint(0, 1) == 0 else "cupcake.png"
     enemy_start = stage_width + 200 if random.randint(0, 1) == 0 else -200
     enemies.append(Enemy(f"images/{enemy_img}", enemy_start, PLAYER_Y_START, start_scrolling_pos_x,
                          stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, ENEMY_HEALTH, ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY))
-
-# game helpers
-def display_score(screen, score: int) -> None:
-    """
-    Displays score to the screen
-    :param screen:
-    :param score:
-    :return:
-    """
-    font = pygame.font.Font("./fonts/dewangga.otf", 40)
-    score_text = font.render(f"Score: {str(score)}", True, (255, 255, 255)) # white
-    screen.blit(score_text, (20, 20))
-
-def game_over(screen, score: int) -> None:
-    """
-    Displays game over screen
-    :param screen:
-    :param score:
-    :return:
-    """
-    screen.fill([0, 0, 0]) # black
-    font = pygame.font.Font("./fonts/dewangga.otf", 50)
-
-    game_over_text = font.render("GAME OVER", True, (255, 0, 0)) # red
-    score_text = font.render(f"Score: {score}", True, (255, 0, 0))  # red
-
-    screen.blit(game_over_text, (WIDTH / 2.75, HEIGHT / 2.4))
-    screen.blit(score_text, (WIDTH / 2.75, HEIGHT / 2.4 + 40))
 
 collision = False
 running = True
@@ -127,14 +96,19 @@ while running:
         e.draw(screen, player)
 
         collision_type = e.check_for_bullet_collision(player.get_current_weapon().bullet, COLLISION_THRESHOLD)
-        if collision_type == Enemy_Collision.HIT: player.add_score(ENEMY_HIT_SCORE)
-        elif collision_type == Enemy_Collision.DEFEATED: player.add_score(ENEMY_DEFEATED_SCORE)
+        if collision_type == Enemy_Collision.HIT:
+            player.add_score(ENEMY_HIT_SCORE)
+            hit_sound.play()
+        elif collision_type == Enemy_Collision.DEFEATED:
+            player.add_score(ENEMY_DEFEATED_SCORE)
+            explosion_sound.play()
 
-    # draws score
-    display_score(screen, player.score)
+    # draw score & ammo metadata
+    bg_methods.display_score(screen, player.score)
+    bg_methods.display_ammo(screen, player.get_current_weapon().ammo)
 
     # game over screen
-    if player.health <= 0: game_over(screen, player.score)
+    if player.health <= 0: bg_methods.game_over(screen, player.score, WIDTH, HEIGHT)
 
     # update display
     pygame.display.update()

@@ -18,6 +18,9 @@
 - [Image Resizing](https://www.img2go.com/)
 - [Online Image Tools](https://onlineimagetools.com/)
 
+### Sounds
+- [FreeSound](https://freesound.org/)
+
 ### Fonts
 - [Dafont](https://www.dafont.com/)
   - [dewangga](https://www.dafont.com/new.php?page=12&text=dewangga)
