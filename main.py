@@ -20,6 +20,9 @@ NUM_ENEMIES = 5
 PLAYER_HEALTH = 100
 PLAYER_X_START, PLAYER_Y_START = 50, 460
 PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 0.5, 0.3
+STARTING_WEAPON_VELOCITY = 7
+STARTING_WEAPON_DAMAGE = 10
+STARTING_WEAPON_AMMO = 50
 Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD = 440, 530
 COLLISION_THRESHOLD = 25
 
@@ -38,6 +41,8 @@ background_collision = pygame.image.load("images/background_collision.png").conv
 # init player and enemy characters
 player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
                 stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, PLAYER_HEALTH)
+player.add_weapon(Weapon("images/revolver.png", player, STARTING_WEAPON_VELOCITY, STARTING_WEAPON_DAMAGE, STARTING_WEAPON_AMMO))
+
 enemies: List[Enemy] = []
 
 # DEBUGGING
@@ -62,9 +67,6 @@ def game_over(screen) -> None:
     font = pygame.font.Font("./fonts/dewangga.otf", 50)
     health_status = font.render("GAME OVER", True, (255, 0, 0))
     screen.blit(health_status, (WIDTH / 2.75, HEIGHT / 2))
-
-w = Weapon("images/revolver.png", player, 1, 10)
-player.weapons.append(w)
 
 collision = False
 running = True
