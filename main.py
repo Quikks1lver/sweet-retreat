@@ -19,7 +19,7 @@ ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY = 0.07, 0.1
 NUM_ENEMIES = 5
 PLAYER_HEALTH = 100
 PLAYER_X_START, PLAYER_Y_START = 50, 460
-PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 1.1, 0.3
+PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 1.5, 0.5
 STARTING_WEAPON_VELOCITY = 4
 STARTING_WEAPON_DAMAGE = 10
 STARTING_WEAPON_AMMO = 50
@@ -43,7 +43,8 @@ background_collision = pygame.image.load("images/background_collision.png").conv
 # init player and enemy characters
 player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
                 stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, PLAYER_HEALTH)
-player.add_weapon(Weapon("images/revolver.png", "images/bullet.png", player, STARTING_WEAPON_VELOCITY, STARTING_WEAPON_DAMAGE, STARTING_WEAPON_AMMO))
+player.add_weapon(Weapon("images/revolver.png",  "sounds/weapon.wav", "images/bullet.png", player, STARTING_WEAPON_VELOCITY,
+                         STARTING_WEAPON_DAMAGE, STARTING_WEAPON_AMMO))
 
 enemies: List[Enemy] = []
 

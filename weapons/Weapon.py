@@ -7,10 +7,11 @@ class Weapon():
     Represents a (typically ranged) weapon that either a character uses
     """
 
-    def __init__(self, image_path: str, bullet_image: str, character: Player, projectile_x_velocity: float, damage: float, ammo: int):
+    def __init__(self, image_path: str, sound_path: str, bullet_image: str, character: Player, projectile_x_velocity: float, damage: float, ammo: int):
         """
         Initializes a new weapon
         :param image_path:
+        :param sound_path: sound when firing
         :param character: character who's using the weapon
         :param projectile_x_velocity: how fast the bullet/projectile travels
         :param damage: damage hit
@@ -19,6 +20,8 @@ class Weapon():
         self.character: Player = character
         self.x = 0
         self.y = 0
+
+        self.sound = pygame.mixer.Sound(sound_path)
 
         self.image = pygame.image.load(image_path)
         self.image_width = self.image.get_width()
@@ -48,6 +51,9 @@ class Weapon():
         :return:
         """
         if self.bullet.state == Bullet_State.READY and self.ammo > 0:
+            # sound
+            self.sound.play()
+
             # offsets for where bullet comes out of weapon
             dx = -10 if self.character.is_left_facing else 10
             dy = -5
