@@ -61,7 +61,7 @@ class Player():
         screen.blit(health_status, (self.real_x_position + 20, self.y + 70))
 
         # print weapon
-        if len(self.weapons) > 0: self.weapons[self.current_weapon].draw(screen)
+        if len(self.weapons) > 0: self.get_current_weapon().draw(screen)
 
     def set_x_velocity(self, new_velocity: float) -> None:
         """
