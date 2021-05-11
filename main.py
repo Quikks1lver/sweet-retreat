@@ -40,6 +40,10 @@ stage_pos_x = 0
 start_scrolling_pos_x = WIDTH / 2
 background_collision = pygame.image.load("images/background_collision.png").convert()
 
+# sounds
+hit_sound = pygame.mixer.Sound("sounds/hit.wav")
+explosion_sound = pygame.mixer.Sound("sounds/explosion.wav")
+
 # init player and enemy characters
 player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
                 stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, PLAYER_HEALTH)
@@ -100,8 +104,12 @@ while running:
         e.draw(screen, player)
 
         collision_type = e.check_for_bullet_collision(player.get_current_weapon().bullet, COLLISION_THRESHOLD)
-        if collision_type == Enemy_Collision.HIT: player.add_score(ENEMY_HIT_SCORE)
-        elif collision_type == Enemy_Collision.DEFEATED: player.add_score(ENEMY_DEFEATED_SCORE)
+        if collision_type == Enemy_Collision.HIT:
+            player.add_score(ENEMY_HIT_SCORE)
+            hit_sound.play()
+        elif collision_type == Enemy_Collision.DEFEATED:
+            player.add_score(ENEMY_DEFEATED_SCORE)
+            explosion_sound.play()
 
     # draw score & ammo metadata
     bg_methods.display_score(screen, player.score)
