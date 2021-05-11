@@ -34,7 +34,7 @@ class Weapon():
         :return:
         """
         self.x = self.character.real_x_position - self.image_width if self.character.is_left_facing else \
-                 self.character.real_x_position + self.image_width + (self.character.image_width/2)
+                 self.character.real_x_position + self.image_width + (self.character.image_width / 2)
         self.y = self.character.y + 15
 
         if self.character.is_left_facing: screen.blit(self.image, (self.x, self.y))
@@ -47,7 +47,7 @@ class Weapon():
         Fires weapon
         :return:
         """
-        if self.bullet.state == Bullet_State.READY:
+        if self.bullet.state == Bullet_State.READY and self.ammo > 0:
             # offsets for where bullet comes out of weapon
             dx = -10 if self.character.is_left_facing else 10
             dy = -5

@@ -38,6 +38,20 @@ def display_score(screen, score: int) -> None:
     score_text = font.render(f"Score: {str(score)}", True, (255, 255, 255)) # white
     screen.blit(score_text, (20, 20))
 
+def display_ammo(screen, ammo: int) -> None:
+    """
+    Displays ammo to the screen
+    :param screen:
+    :param ammo:
+    :return:
+    """
+    font = pygame.font.Font("./fonts/dewangga.otf", 25)
+    ammo_bar = ""
+    for i in range(ammo): ammo_bar += "I"
+
+    ammo_text = font.render(f"Ammo: {ammo_bar}", True, (255, 255, 255))  # white
+    screen.blit(ammo_text, (20, 60))
+
 def game_over(screen, score: int, game_width: int, game_height: int) -> None:
     """
     Displays game over screen

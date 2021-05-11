@@ -102,8 +102,9 @@ while running:
         if collision_type == Enemy_Collision.HIT: player.add_score(ENEMY_HIT_SCORE)
         elif collision_type == Enemy_Collision.DEFEATED: player.add_score(ENEMY_DEFEATED_SCORE)
 
-    # draws score
+    # draw score & ammo metadata
     bg_methods.display_score(screen, player.score)
+    bg_methods.display_ammo(screen, player.get_current_weapon().ammo)
 
     # game over screen
     if player.health <= 0: bg_methods.game_over(screen, player.score, WIDTH, HEIGHT)
