@@ -3,6 +3,7 @@ import pygame
 import random
 from .Player import Player
 from weapons.Weapon import Weapon
+from weapons.Bullet import Bullet, Bullet_State
 
 class Enemy(Player):
     """
@@ -41,8 +42,8 @@ class Enemy(Player):
 
         # print distance from player
         font = pygame.font.Font("fonts/dewangga.otf", 23)
-        health_status = font.render(str(int(abs(self.real_x_position - player.real_x_position))), True, (255, 255, 255))
-        screen.blit(health_status, (self.real_x_position + 21, self.y - 20))
+        dist = font.render(str(int(abs(self.real_x_position - player.real_x_position))), True, (255, 255, 255))
+        screen.blit(dist, (self.real_x_position + 21, self.y - 20))
 
     def move(self, player: Player) -> None:
         """
@@ -85,6 +86,17 @@ class Enemy(Player):
         :return:
         """
         return True if math.dist([self.x, self.y], [player.x, player.y]) <= threshold else False
+
+    def check_for_bullet_collision(self, bullet: Bullet, threshold: float) -> None:
+        """
+        Checks whether bullet has hit enemy and updates health and bullet status
+        :param bullet:
+        :param threshold:
+        :return:
+        """
+        if bullet.state == Bullet_State.MOVING and math.dist([self.x, self.y], [bullet.x, bullet.y]) <= threshold:
+            bullet.state = Bullet_State.READY
+            self.health -= bullet.damage
 
     def respawn(self):
         """
