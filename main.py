@@ -59,34 +59,6 @@ for i in range(NUM_ENEMIES):
     enemies.append(Enemy(f"images/{enemy_img}", enemy_start, PLAYER_Y_START, start_scrolling_pos_x,
                          stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, ENEMY_HEALTH, ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY))
 
-# game helpers
-def display_score(screen, score: int) -> None:
-    """
-    Displays score to the screen
-    :param screen:
-    :param score:
-    :return:
-    """
-    font = pygame.font.Font("./fonts/dewangga.otf", 40)
-    score_text = font.render(f"Score: {str(score)}", True, (255, 255, 255)) # white
-    screen.blit(score_text, (20, 20))
-
-def game_over(screen, score: int) -> None:
-    """
-    Displays game over screen
-    :param screen:
-    :param score:
-    :return:
-    """
-    screen.fill([0, 0, 0]) # black
-    font = pygame.font.Font("./fonts/dewangga.otf", 50)
-
-    game_over_text = font.render("GAME OVER", True, (255, 0, 0)) # red
-    score_text = font.render(f"Score: {score}", True, (255, 0, 0))  # red
-
-    screen.blit(game_over_text, (WIDTH / 2.75, HEIGHT / 2.4))
-    screen.blit(score_text, (WIDTH / 2.75, HEIGHT / 2.4 + 40))
-
 collision = False
 running = True
 while running:
@@ -131,10 +103,10 @@ while running:
         elif collision_type == Enemy_Collision.DEFEATED: player.add_score(ENEMY_DEFEATED_SCORE)
 
     # draws score
-    display_score(screen, player.score)
+    bg_methods.display_score(screen, player.score)
 
     # game over screen
-    if player.health <= 0: game_over(screen, player.score)
+    if player.health <= 0: bg_methods.game_over(screen, player.score, WIDTH, HEIGHT)
 
     # update display
     pygame.display.update()
