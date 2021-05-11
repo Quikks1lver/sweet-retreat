@@ -13,12 +13,12 @@ from characters.Enemy import Enemy
 # constants
 WIDTH, HEIGHT = 800, 600
 ENEMY_HEALTH = 50
-ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY = 0.15, 0.1
+ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY = 0.07, 0.1
 NUM_ENEMIES = 5
 PLAYER_HEALTH = 100
 PLAYER_X_START, PLAYER_Y_START = 50, 460
-PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 0.7, 0.3
-Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD = 440, 500
+PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 0.5, 0.3
+Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD = 440, 530
 COLLISION_THRESHOLD = 25
 
 # initialize the pygame & create screen
@@ -37,13 +37,14 @@ player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scroll
                 stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, PLAYER_HEALTH)
 enemies: List[Enemy] = []
 for i in range(NUM_ENEMIES):
-    enemy_img = "gingerbread-man.png" if i % 2 == 0 else "cupcake.png"
-    enemies.append(Enemy(f"images/{enemy_img}", random.randint(-WIDTH, WIDTH), PLAYER_Y_START, start_scrolling_pos_x,
+    enemy_img = "gingerbread-man.png" if random.randint(0, 1) == 0 else "cupcake.png"
+    bounds = [-.5 * stage_width, 0] if random.randint(0, 1) == 0 else [stage_width, 1.5 * stage_width]
+    enemies.append(Enemy(f"images/{enemy_img}", PLAYER_X_START + random.randint(bounds[0], bounds[1]), PLAYER_Y_START, start_scrolling_pos_x,
                          stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, ENEMY_HEALTH, ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY))
 
 running = True
 while running:
-
+    # event handlers
     for event in pygame.event.get():
         # break out of game loop if user quits
         if event.type == pygame.QUIT:
@@ -59,17 +60,21 @@ while running:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: player.set_x_velocity(0)
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN: player.set_y_velocity(0)
 
+    # move all characters
     player.move()
     for e in enemies:
         e.move(player)
-        player.is_collision(e, COLLISION_THRESHOLD)
+        if player.is_collision(e, COLLISION_THRESHOLD):
+            print("Collision!")
 
+    # move stage if need be
     stage_pos_x += bg_methods.determine_stage_change(player)
 
+    # draw everyone to screen
     bg_methods.draw_background(screen, background, stage_pos_x, background_width, WIDTH)
     player.draw(screen)
-
     for e in enemies:
         e.draw(screen)
 
+    # update display
     pygame.display.update()
