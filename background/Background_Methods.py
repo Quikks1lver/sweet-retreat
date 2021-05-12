@@ -1,10 +1,48 @@
 import pygame
 from characters.Player import Player
 
+def draw_ammo_box(screen, player: Player, score_cost: int, ammo_gain: int, trying_to_buy: bool) -> None:
+    """
+    Draws ammo box onto the screen
+    :param screen:
+    :param player: player character
+    :param score_cost: how much ammo costs
+    :param ammo_gain: how much ammo player will gain from buying
+    :param trying_to_buy: whether player is trying to buy ammo or not
+    :return:
+    """
+    # draw ammo box and description of cost on left side of screen
+    if player.x < player.start_scrolling_pos_x:
+        x_start, y_start = 100, 370
+
+        ammo_box_img = pygame.image.load("images/ammo_box.png")
+        screen.blit(ammo_box_img, (x_start, y_start))
+
+        font = pygame.font.Font("./fonts/dewangga.otf", 24)
+        title = font.render("Press 'B' for Ammo", True, (255, 255, 255))  # white
+        score_title = font.render(f"Cost: {score_cost} score", True, (255, 255, 255))  # white
+        screen.blit(title, (100, 315))
+        screen.blit(score_title, (100, 340))
+
+        if trying_to_buy and player.score >= score_cost:
+            if player.x >= x_start and player.x <= (x_start + ammo_box_img.get_width()):
+                player.get_current_weapon().add_ammo(ammo_gain)
+                player.remove_score(score_cost)
+
+    # draw sparkles when approaching ammo box from right
+    if player.x >= player.start_scrolling_pos_x and player.x <= player.start_scrolling_pos_x + 7:
+        sparkles_img = pygame.image.load("images/sparkles.png")
+        screen.blit(sparkles_img, (100, 370))
+
 def draw_background(screen, background_img, stage_pos_x: int, background_width: int, game_width: int) -> None:
     """
     Draws background onto screen, scrolling if necessary
     This was super helpful: https://www.youtube.com/watch?v=US3HSusUBeI
+    :param screen:
+    :param background_img:
+    :param stage_pos_x:
+    :param background_width:
+    :param game_width:
     :return:
     """
     # get relative x position, and subtract background width to ensure background can be seen
@@ -57,8 +95,12 @@ def game_over(screen, score: int, game_width: int, game_height: int) -> None:
     Displays game over screen
     :param screen:
     :param score:
+    :param game_width:
+    :param game_height:
     :return:
     """
+    pygame.mixer.stop()
+
     screen.fill([0, 0, 0]) # black
     font = pygame.font.Font("./fonts/dewangga.otf", 50)
 

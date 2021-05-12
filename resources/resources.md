@@ -15,6 +15,8 @@
   - [cupcake monster](https://www.flaticon.com/free-icon/cupcake_3473934?term=cake%20monster&related_id=3473934)
   - [revolver](https://www.flaticon.com/free-icon/revolver_3464006?term=revolver&page=1&position=46&page=1&position=46&related_id=3464006&origin=search)
   - [bullet](https://www.flaticon.com/free-icon/bullet_473484?term=bullet&page=2&position=10&page=2&position=10&related_id=473484&origin=search)
+  - [ammo box](https://www.flaticon.com/free-icon/box_4611172?term=ammo%20box&page=1&position=7&page=1&position=7&related_id=4611172&origin=search)
+  - [sparkles](https://www.flaticon.com/free-icon/miscellaneous_1740227?term=sparkles&page=1&position=49&page=1&position=49&related_id=1740227&origin=search)
 - [Image Resizing](https://www.img2go.com/)
 - [Online Image Tools](https://onlineimagetools.com/)
 
