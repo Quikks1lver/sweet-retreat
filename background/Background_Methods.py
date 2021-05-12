@@ -1,6 +1,23 @@
 import pygame
 from characters.Player import Player
 
+def draw_ammo_box(screen, player: Player) -> None:
+    """
+    Draws ammo box onto the screen
+    :param screen:
+    :param player: player character
+    :return:
+    """
+    # draw ammo box on left side of screen
+    if player.x < player.start_scrolling_pos_x:
+        ammo_box_img = pygame.image.load("images/ammo_box.png")
+        screen.blit(ammo_box_img, (100, 370))
+    # draw sparkles when approaching ammo box from right
+    if player.x >= player.start_scrolling_pos_x and player.x <= player.start_scrolling_pos_x + 7:
+        print('sparkles')
+        sparkles_img = pygame.image.load("images/sparkles.png")
+        screen.blit(sparkles_img, (100, 370))
+
 def draw_background(screen, background_img, stage_pos_x: int, background_width: int, game_width: int) -> None:
     """
     Draws background onto screen, scrolling if necessary
