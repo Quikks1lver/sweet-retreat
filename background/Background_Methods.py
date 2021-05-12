@@ -65,15 +65,15 @@ def determine_stage_change(player: Player) -> int:
     else:
         return 0
 
-def display_score(screen, score: int) -> None:
+def display_points(screen, points: int) -> None:
     """
     Displays score to the screen
     :param screen:
-    :param score:
+    :param points:
     :return:
     """
     font = pygame.font.Font("./fonts/dewangga.otf", 40)
-    score_text = font.render(f"Score: {str(score)}", True, (255, 255, 255)) # white
+    score_text = font.render(f"Points: {str(points)}", True, (255, 255, 255)) # white
     screen.blit(score_text, (20, 20))
 
 def display_ammo(screen, ammo: int) -> None:
@@ -102,10 +102,11 @@ def game_over(screen, score: int, game_width: int, game_height: int) -> None:
     pygame.mixer.stop()
 
     screen.fill([0, 0, 0]) # black
-    font = pygame.font.Font("./fonts/dewangga.otf", 50)
+    large_font = pygame.font.Font("./fonts/dewangga.otf", 50)
+    small_font = pygame.font.Font("./fonts/dewangga.otf", 35)
 
-    game_over_text = font.render("GAME OVER", True, (255, 0, 0)) # red
-    score_text = font.render(f"Score: {score}", True, (255, 0, 0))  # red
+    game_over_text = large_font.render("GAME OVER", True, (255, 0, 0)) # red
+    score_text = small_font.render(f"Enemies Defeated: {score}", True, (255, 0, 0))  # red
 
     screen.blit(game_over_text, (game_width / 2.75, game_height / 2.4))
-    screen.blit(score_text, (game_width / 2.75, game_height / 2.4 + 40))
+    screen.blit(score_text, (game_width / 2.75, game_height / 2.4 + 50))

@@ -65,6 +65,7 @@ collision = False
 running = True
 died = False
 final_score = 0
+enemies_defeated = 0
 
 # game loop
 while running:
@@ -113,17 +114,18 @@ while running:
         elif collision_type == Enemy_Collision.DEFEATED:
             player.add_score(ENEMY_DEFEATED_SCORE)
             explosion_sound.play()
+            enemies_defeated += 1
 
     # draw score & ammo metadata
-    bg_methods.display_score(screen, player.score)
+    bg_methods.display_points(screen, player.score)
     bg_methods.display_ammo(screen, player.get_current_weapon().ammo)
 
     # game over screen
     if player.health <= 0:
         if not died:
-            final_score = player.score
+            final_score = enemies_defeated
             died = True
-        bg_methods.game_over(screen, final_score, WIDTH, HEIGHT)
+        bg_methods.game_over(screen, enemies_defeated, WIDTH, HEIGHT)
 
     # update display
     pygame.display.update()
