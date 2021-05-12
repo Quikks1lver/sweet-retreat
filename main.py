@@ -9,7 +9,7 @@ from typing import List
 import background.Background_Methods as bg_methods
 from characters.Player import Player
 from characters.Enemy import Enemy, Enemy_Collision
-from weapons.Weapon import Weapon
+from weapons.Arsenal import Arsenal
 
 # constants
 WIDTH, HEIGHT = 800, 600
@@ -26,10 +26,6 @@ PLAYER_X_START, PLAYER_Y_START = 50, 460
 PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 2, 0.5
 
 AMMO_COST, AMMO_GAIN = 75, 25
-STARTING_WEAPON_VELOCITY = 7
-STARTING_WEAPON_DAMAGE = 10
-STARTING_WEAPON_AMMO = 50
-
 MYSTERY_BOX_COST = 15
 
 Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD = 440, 530
@@ -53,8 +49,7 @@ explosion_sound = pygame.mixer.Sound("sounds/explosion.wav")
 # init player and enemy characters
 player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
                 stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, PLAYER_HEALTH)
-player.add_weapon(Weapon("images/revolver.png",  "sounds/weapon.wav", "images/bullet.png", player, STARTING_WEAPON_VELOCITY,
-                         STARTING_WEAPON_DAMAGE, STARTING_WEAPON_AMMO))
+player.add_weapon(Arsenal.revolver(player))
 
 enemies: List[Enemy] = []
 for i in range(NUM_ENEMIES):
