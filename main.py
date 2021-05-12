@@ -18,17 +18,19 @@ NUM_ENEMIES = 5
 ENEMY_HIT = .5
 ENEMY_HEALTH = 50
 ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY = 0.4, 0.1
-ENEMY_HIT_SCORE = 1
-ENEMY_DEFEATED_SCORE = 11
+ENEMY_HIT_POINTS = 1
+ENEMY_DEFEATED_POINTS = 11
 
 PLAYER_HEALTH = 100
 PLAYER_X_START, PLAYER_Y_START = 50, 460
-PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 1.5, 0.5
+PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 2, 0.5
 
 AMMO_COST, AMMO_GAIN = 75, 25
 STARTING_WEAPON_VELOCITY = 7
 STARTING_WEAPON_DAMAGE = 10
 STARTING_WEAPON_AMMO = 50
+
+MYSTERY_BOX_COST = 15
 
 Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD = 440, 530
 COLLISION_THRESHOLD = 25
@@ -70,7 +72,7 @@ enemies_defeated = 0
 # game loop
 while running:
     collision = False
-    trying_to_buy_ammo = False
+    trying_to_buy_item = False
 
     # event handlers
     for event in pygame.event.get():
@@ -85,7 +87,7 @@ while running:
             if event.key == pygame.K_UP: player.set_y_velocity(-PLAYER_Y_VELOCITY)
             if event.key == pygame.K_DOWN: player.set_y_velocity(PLAYER_Y_VELOCITY)
             if event.key == pygame.K_SPACE: player.fire_current_weapon()
-            if event.key == pygame.K_b: trying_to_buy_ammo = True
+            if event.key == pygame.K_b: trying_to_buy_item = True
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: player.set_x_velocity(0)
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN: player.set_y_velocity(0)
@@ -103,21 +105,22 @@ while running:
 
     # draw everything to screen; also, check for bullet collisions here
     bg_methods.draw_background(screen, background_collision if collision else background, stage_pos_x, background_width, WIDTH)
-    bg_methods.draw_ammo_box(screen, player, AMMO_COST, AMMO_GAIN, trying_to_buy_ammo)
+    bg_methods.draw_ammo_box(screen, player, AMMO_COST, AMMO_GAIN, trying_to_buy_item)
+    bg_methods.draw_mystery_box(screen, player, MYSTERY_BOX_COST, trying_to_buy_item)
     player.draw(screen)
     for e in enemies:
         e.draw(screen, player)
 
         collision_type = e.check_for_bullet_collision(player.get_current_weapon().bullet, COLLISION_THRESHOLD)
         if collision_type == Enemy_Collision.HIT:
-            player.add_score(ENEMY_HIT_SCORE)
+            player.add_points(ENEMY_HIT_POINTS)
         elif collision_type == Enemy_Collision.DEFEATED:
-            player.add_score(ENEMY_DEFEATED_SCORE)
+            player.add_points(ENEMY_DEFEATED_POINTS)
             explosion_sound.play()
             enemies_defeated += 1
 
     # draw score & ammo metadata
-    bg_methods.display_points(screen, player.score)
+    bg_methods.display_points(screen, player.points)
     bg_methods.display_ammo(screen, player.get_current_weapon().ammo)
 
     # game over screen

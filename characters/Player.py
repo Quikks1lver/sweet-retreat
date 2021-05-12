@@ -44,7 +44,7 @@ class Player():
         self.weapons: List[Weapon] = []
         self.current_weapon = 0
 
-        self.score = 0
+        self.points = 0
 
     def draw(self, screen) -> None:
         """
@@ -154,18 +154,18 @@ class Player():
         if self.get_current_weapon() == None: return
         else: self.get_current_weapon().fire()
 
-    def add_score(self, amount: int) -> None:
+    def add_points(self, amount: int) -> None:
         """
-        Adds amount to score
+        Adds amount to points
         :param: amount to add
         :return:
         """
-        self.score += amount
+        self.points += amount
 
-    def remove_score(self, amount: int) -> None:
+    def remove_points(self, amount: int) -> None:
         """
-        Removes amount from score
+        Removes amount from points
         :param amount:
         :return:
         """
-        self.score -= amount
+        self.points -= amount
