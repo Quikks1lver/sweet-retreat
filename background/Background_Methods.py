@@ -6,6 +6,9 @@ def draw_ammo_box(screen, player: Player, score_cost: int, ammo_gain: int, tryin
     Draws ammo box onto the screen
     :param screen:
     :param player: player character
+    :param score_cost: how much ammo costs
+    :param ammo_gain: how much ammo player will gain from buying
+    :param trying_to_buy: whether player is trying to buy ammo or not
     :return:
     """
     # draw ammo box and description of cost on left side of screen
@@ -35,6 +38,11 @@ def draw_background(screen, background_img, stage_pos_x: int, background_width: 
     """
     Draws background onto screen, scrolling if necessary
     This was super helpful: https://www.youtube.com/watch?v=US3HSusUBeI
+    :param screen:
+    :param background_img:
+    :param stage_pos_x:
+    :param background_width:
+    :param game_width:
     :return:
     """
     # get relative x position, and subtract background width to ensure background can be seen
@@ -87,6 +95,8 @@ def game_over(screen, score: int, game_width: int, game_height: int) -> None:
     Displays game over screen
     :param screen:
     :param score:
+    :param game_width:
+    :param game_height:
     :return:
     """
     pygame.mixer.stop()
