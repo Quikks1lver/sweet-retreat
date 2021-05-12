@@ -55,11 +55,12 @@ player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scroll
                 stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, PLAYER_HEALTH)
 player.add_weapon(Weapon("images/revolver.png",  "sounds/weapon.wav", "images/bullet.png", player, STARTING_WEAPON_VELOCITY,
                          STARTING_WEAPON_DAMAGE, STARTING_WEAPON_AMMO))
+
 enemies: List[Enemy] = []
 for i in range(NUM_ENEMIES):
-    enemy_img = "gingerbread-man.png" if random.randint(0, 1) == 0 else "cupcake.png"
+    enemy_img = "gingerbread-man" if random.randint(0, 1) == 0 else "cupcake"
     enemy_start = stage_width + 200 if random.randint(0, 1) == 0 else -200
-    enemies.append(Enemy(f"images/{enemy_img}", enemy_start, PLAYER_Y_START, start_scrolling_pos_x,
+    enemies.append(Enemy(f"images/{enemy_img}.png", enemy_start, PLAYER_Y_START, start_scrolling_pos_x,
                          stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, ENEMY_HEALTH, ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY))
 
 # important flags and variables for main game loop
