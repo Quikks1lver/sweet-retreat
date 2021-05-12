@@ -1,20 +1,33 @@
 import pygame
 from characters.Player import Player
 
-def draw_ammo_box(screen, player: Player) -> None:
+def draw_ammo_box(screen, player: Player, score_cost: int, ammo_gain: int, trying_to_buy: bool) -> None:
     """
     Draws ammo box onto the screen
     :param screen:
     :param player: player character
     :return:
     """
-    # draw ammo box on left side of screen
+    # draw ammo box and description of cost on left side of screen
     if player.x < player.start_scrolling_pos_x:
+        x_start, y_start = 100, 370
+
         ammo_box_img = pygame.image.load("images/ammo_box.png")
-        screen.blit(ammo_box_img, (100, 370))
+        screen.blit(ammo_box_img, (x_start, y_start))
+
+        font = pygame.font.Font("./fonts/dewangga.otf", 24)
+        title = font.render("Press 'B' for Ammo", True, (255, 255, 255))  # white
+        score_title = font.render(f"Cost: {score_cost} score", True, (255, 255, 255))  # white
+        screen.blit(title, (100, 315))
+        screen.blit(score_title, (100, 340))
+
+        if trying_to_buy and player.score >= score_cost:
+            if player.x >= x_start and player.x <= (x_start + ammo_box_img.get_width()):
+                player.get_current_weapon().add_ammo(ammo_gain)
+                player.remove_score(score_cost)
+
     # draw sparkles when approaching ammo box from right
     if player.x >= player.start_scrolling_pos_x and player.x <= player.start_scrolling_pos_x + 7:
-        print('sparkles')
         sparkles_img = pygame.image.load("images/sparkles.png")
         screen.blit(sparkles_img, (100, 370))
 
@@ -76,6 +89,8 @@ def game_over(screen, score: int, game_width: int, game_height: int) -> None:
     :param score:
     :return:
     """
+    pygame.mixer.stop()
+
     screen.fill([0, 0, 0]) # black
     font = pygame.font.Font("./fonts/dewangga.otf", 50)
 

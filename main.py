@@ -13,7 +13,7 @@ from weapons.Weapon import Weapon
 
 # constants
 WIDTH, HEIGHT = 800, 600
-ENEMY_HIT = .1
+ENEMY_HIT = .5
 ENEMY_HEALTH = 50
 ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY = 0.4, 0.1
 NUM_ENEMIES = 5
@@ -27,6 +27,7 @@ Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD = 440, 530
 COLLISION_THRESHOLD = 25
 ENEMY_HIT_SCORE = 1
 ENEMY_DEFEATED_SCORE = 11
+AMMO_COST, AMMO_GAIN = 75, 25
 
 # initialize the pygame & create screen
 pygame.init()
@@ -55,10 +56,16 @@ for i in range(NUM_ENEMIES):
     enemies.append(Enemy(f"images/{enemy_img}", enemy_start, PLAYER_Y_START, start_scrolling_pos_x,
                          stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, ENEMY_HEALTH, ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY))
 
+# important flags and variables for main game loop
 collision = False
 running = True
+died = False
+final_score = 0
+
+# game loop
 while running:
     collision = False
+    trying_to_buy_ammo = False
 
     # event handlers
     for event in pygame.event.get():
@@ -73,6 +80,7 @@ while running:
             if event.key == pygame.K_UP: player.set_y_velocity(-PLAYER_Y_VELOCITY)
             if event.key == pygame.K_DOWN: player.set_y_velocity(PLAYER_Y_VELOCITY)
             if event.key == pygame.K_SPACE: player.fire_current_weapon()
+            if event.key == pygame.K_b: trying_to_buy_ammo = True
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: player.set_x_velocity(0)
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN: player.set_y_velocity(0)
@@ -90,7 +98,7 @@ while running:
 
     # draw everything to screen; also, check for bullet collisions here
     bg_methods.draw_background(screen, background_collision if collision else background, stage_pos_x, background_width, WIDTH)
-    bg_methods.draw_ammo_box(screen, player)
+    bg_methods.draw_ammo_box(screen, player, AMMO_COST, AMMO_GAIN, trying_to_buy_ammo)
     player.draw(screen)
     for e in enemies:
         e.draw(screen, player)
@@ -107,7 +115,11 @@ while running:
     bg_methods.display_ammo(screen, player.get_current_weapon().ammo)
 
     # game over screen
-    if player.health <= 0: bg_methods.game_over(screen, player.score, WIDTH, HEIGHT)
+    if player.health <= 0:
+        if not died:
+            final_score = player.score
+            died = True
+        bg_methods.game_over(screen, final_score, WIDTH, HEIGHT)
 
     # update display
     pygame.display.update()
