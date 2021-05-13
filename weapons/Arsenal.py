@@ -25,7 +25,7 @@ class Arsenal():
         return Weapon("Ray Gun", "images/ray_gun.png",  "sounds/ray_gun.wav", "images/ray_gun_bullet.png", player, 2, 100, 25)
 
     @staticmethod
-    def sniper_rifle(player: Player) -> Weapon:
+    def sniper(player: Player) -> Weapon:
         """
         Returns a sniper rifle weapon
         :param player:
