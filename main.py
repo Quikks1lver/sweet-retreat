@@ -84,6 +84,7 @@ while running:
             if event.key == pygame.K_DOWN: player.set_y_velocity(PLAYER_Y_VELOCITY)
             if event.key == pygame.K_SPACE: player.fire_current_weapon()
             if event.key == pygame.K_b: trying_to_buy_item = True
+            if event.key == pygame.K_v: player.switch_to_next_weapon()
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: player.set_x_velocity(0)
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN: player.set_y_velocity(0)

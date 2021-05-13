@@ -135,7 +135,8 @@ class Player():
         Switches to the next weapon in inventory, if available
         :return:
         """
-        self.current_weapon += 1 % len(self.weapons)
+        self.current_weapon += 1
+        self.current_weapon %= len(self.weapons)
         if len(self.weapons) == 0: self.current_weapon = 0
 
     def get_current_weapon(self) -> Union[Weapon, None]:
