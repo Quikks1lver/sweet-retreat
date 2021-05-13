@@ -117,7 +117,7 @@ while running:
 
     # draw score & ammo metadata
     bg_methods.display_points(screen, player.points)
-    bg_methods.display_ammo(screen, player.get_current_weapon().ammo)
+    bg_methods.display_ammo(screen, player.get_current_weapon())
 
     # game over screen
     if player.health <= 0:

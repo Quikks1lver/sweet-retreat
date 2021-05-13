@@ -1,5 +1,6 @@
 import pygame
 from characters.Player import Player
+from weapons.Weapon import Weapon
 
 def draw_ammo_box(screen, player: Player, cost: int, ammo_gain: int, trying_to_buy: bool) -> None:
     """
@@ -111,19 +112,21 @@ def display_points(screen, points: int) -> None:
     score_text = font.render(f"Points: {str(points)}", True, (255, 255, 255)) # white
     screen.blit(score_text, (20, 20))
 
-def display_ammo(screen, ammo: int) -> None:
+def display_ammo(screen, weapon: Weapon) -> None:
     """
     Displays ammo to the screen
     :param screen:
-    :param ammo:
+    :param weapon:
     :return:
     """
     font = pygame.font.Font("./fonts/dewangga.otf", 25)
     ammo_bar = ""
-    for i in range(ammo): ammo_bar += "I"
+    for i in range(weapon.ammo): ammo_bar += "I"
 
-    ammo_text = font.render(f"Ammo: {ammo_bar}", True, (255, 255, 255))  # white
-    screen.blit(ammo_text, (20, 60))
+    weapon_name_text = font.render(f"{weapon.name} ", True, (77, 255, 77))  # neon green
+    ammo_text = font.render(f"ammo: {ammo_bar}", True, (255, 255, 255))  # white
+    screen.blit(weapon_name_text, (20, 60))
+    screen.blit(ammo_text, (20 + weapon_name_text.get_width(), 60))
 
 def game_over(screen, score: int, game_width: int, game_height: int) -> None:
     """
