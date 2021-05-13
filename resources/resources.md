@@ -13,7 +13,7 @@
   - [player](https://www.flaticon.com/free-icon/ghost_93236?related_id=93236&origin=pack)
   - [gingerbread man](https://www.flaticon.com/free-icon/gingerbread-man_1669473?term=gingerbread%20man&related_id=1669473)
   - [cupcake monster](https://www.flaticon.com/free-icon/cupcake_3473934?term=cake%20monster&related_id=3473934)
-  - [revolver](https://www.flaticon.com/free-icon/revolver_3464006?term=revolver&page=1&position=46&page=1&position=46&related_id=3464006&origin=search)
+  - [revolver](https://www.flaticon.com/free-icon/revolver_942434?term=revolver&page=1&position=15&page=1&position=15&related_id=942434&origin=search)
   - [bullet](https://www.flaticon.com/free-icon/bullet_473484?term=bullet&page=2&position=10&page=2&position=10&related_id=473484&origin=search)
   - [ammo box](https://www.flaticon.com/free-icon/box_4611487?term=ammo%20box&page=1&position=6&page=1&position=6&related_id=4611487&origin=search)
   - [sparkles](https://www.flaticon.com/free-icon/miscellaneous_1740304?term=sparkles&page=1&position=35&page=1&position=35&related_id=1740304&origin=search)
