@@ -22,4 +22,4 @@ class Arsenal():
         :param player:
         :return:
         """
-        # TODO
+        return Weapon("Ray Gun", "images/ray_gun.png",  "sounds/ray_gun.wav", "images/ray_gun_bullet.png", player, 2, 100, 25)
