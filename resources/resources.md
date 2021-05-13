@@ -32,6 +32,7 @@
   - [ray gun](https://freesound.org/people/micahellis/sounds/530529/)
   - [sniper](https://freesound.org/people/EMSIarma/sounds/108852/)
   - [rifle](https://freesound.org/people/snapssound/sounds/536635/)
+  - [mystery box](https://freesound.org/people/skylarjulian/sounds/558416/)
 
 ### Fonts
 - [Dafont](https://www.dafont.com/)

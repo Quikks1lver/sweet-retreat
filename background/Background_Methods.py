@@ -63,6 +63,8 @@ def draw_mystery_box(screen, player: Player, cost: int, trying_to_buy: bool) -> 
         if trying_to_buy and player.points >= cost:
             if player.real_x_position >= x_start and player.real_x_position <= (x_start + mystery_box_img.get_width()):
                 # TODO
+
+                pygame.mixer.Sound("sounds/mystery_box.wav").play()
                 player.remove_points(cost)
 
     # draw sparkles when approaching mystery box from left
