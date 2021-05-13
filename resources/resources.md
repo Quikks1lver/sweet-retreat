@@ -14,7 +14,9 @@
   - [gingerbread man](https://www.flaticon.com/free-icon/gingerbread-man_1669473?term=gingerbread%20man&related_id=1669473)
   - [cupcake monster](https://www.flaticon.com/free-icon/cupcake_3473934?term=cake%20monster&related_id=3473934)
   - [revolver](https://www.flaticon.com/free-icon/revolver_942434?term=revolver&page=1&position=15&page=1&position=15&related_id=942434&origin=search)
+  - [ray gun](https://www.flaticon.com/free-icon/space-gun_1816000?term=ray%20gun&page=1&position=19&page=1&position=19&related_id=1816000&origin=search)
   - [sniper](https://www.flaticon.com/free-icon/sniper_760303?term=sniper&related_id=760303)
+  - [rifle](https://www.flaticon.com/free-icon/gun_1693466?term=rifle&page=1&position=12&page=1&position=12&related_id=1693466&origin=search)
   - [bullet](https://www.flaticon.com/free-icon/bullet_4004012?term=bullet&page=1&position=74&page=1&position=74&related_id=4004012&origin=search)
   - [ray gun bullet](https://www.flaticon.com/free-icon/bullet_942275?term=bullet&page=2&position=46&page=2&position=46&related_id=942275&origin=search)
   - [ammo box](https://www.flaticon.com/free-icon/box_4611487?term=ammo%20box&page=1&position=6&page=1&position=6&related_id=4611487&origin=search)
@@ -29,6 +31,7 @@
   - [revolver](https://freesound.org/people/NoiseCollector/sounds/184130/)
   - [ray gun](https://freesound.org/people/micahellis/sounds/530529/)
   - [sniper](https://freesound.org/people/EMSIarma/sounds/108852/)
+  - [rifle](https://freesound.org/people/snapssound/sounds/536635/)
 
 ### Fonts
 - [Dafont](https://www.dafont.com/)

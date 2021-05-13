@@ -32,3 +32,12 @@ class Arsenal():
         :return:
         """
         return Weapon("Sniper", "images/sniper.png", "sounds/sniper.wav", "images/bullet.png", player, 10, 25, 10)
+
+    @staticmethod
+    def rifle(player: Player) -> Weapon:
+        """
+        Returns a rifle weapon
+        :param player:
+        :return:
+        """
+        return Weapon("Rifle", "images/rifle.png", "sounds/rifle.wav", "images/bullet.png", player, 30, 15, 75)
