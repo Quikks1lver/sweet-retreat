@@ -50,6 +50,7 @@ explosion_sound = pygame.mixer.Sound("sounds/explosion.wav")
 player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
                 stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, PLAYER_HEALTH)
 player.add_weapon(Arsenal.revolver(player))
+player.add_weapon(Arsenal.ray_gun(player))
 
 enemies: List[Enemy] = []
 for i in range(NUM_ENEMIES):
@@ -84,7 +85,7 @@ while running:
             if event.key == pygame.K_DOWN: player.set_y_velocity(PLAYER_Y_VELOCITY)
             if event.key == pygame.K_SPACE: player.fire_current_weapon()
             if event.key == pygame.K_b: trying_to_buy_item = True
-            if event.key == pygame.K_v: player.switch_to_next_weapon()
+            if event.key == pygame.K_v and not player.get_current_weapon().is_being_used(): player.switch_to_next_weapon()
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: player.set_x_velocity(0)
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN: player.set_y_velocity(0)

@@ -72,3 +72,10 @@ class Weapon():
         :return:
         """
         self.ammo += amount
+
+    def is_being_used(self) -> bool:
+        """
+        Returns whether the current weapon is being used (whether a bullet is in motion or not)
+        :return: True if bullet is in motion, False otherwise
+        """
+        return self.bullet.state == Bullet_State.MOVING
