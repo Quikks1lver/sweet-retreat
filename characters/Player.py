@@ -59,7 +59,7 @@ class Player():
         # print health
         font = pygame.font.Font("fonts/dewangga.otf", 23)
         health_string = str(int(self.health))
-        health_status = font.render(health_string, True, (255, 0, 0))
+        health_status = font.render(health_string, True, (255, 0, 0)) # red
         screen.blit(health_status, (self.real_x_position + 20, self.y + 70))
 
         # print weapon
