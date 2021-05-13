@@ -9,7 +9,7 @@ from typing import List
 import background.Background_Methods as bg_methods
 from characters.Player import Player
 from characters.Enemy import Enemy, Enemy_Collision
-from weapons.Weapon import Weapon
+from weapons.Arsenal import Arsenal
 
 # constants
 WIDTH, HEIGHT = 800, 600
@@ -18,17 +18,15 @@ NUM_ENEMIES = 5
 ENEMY_HIT = .5
 ENEMY_HEALTH = 50
 ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY = 0.4, 0.1
-ENEMY_HIT_SCORE = 1
-ENEMY_DEFEATED_SCORE = 11
+ENEMY_HIT_POINTS = 1
+ENEMY_DEFEATED_POINTS = 11
 
 PLAYER_HEALTH = 100
 PLAYER_X_START, PLAYER_Y_START = 50, 460
-PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 1.5, 0.5
+PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 2, 0.5
 
 AMMO_COST, AMMO_GAIN = 75, 25
-STARTING_WEAPON_VELOCITY = 4
-STARTING_WEAPON_DAMAGE = 10
-STARTING_WEAPON_AMMO = 50
+MYSTERY_BOX_COST = 15
 
 Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD = 440, 530
 COLLISION_THRESHOLD = 25
@@ -51,13 +49,13 @@ explosion_sound = pygame.mixer.Sound("sounds/explosion.wav")
 # init player and enemy characters
 player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
                 stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, PLAYER_HEALTH)
-player.add_weapon(Weapon("images/revolver.png",  "sounds/weapon.wav", "images/bullet.png", player, STARTING_WEAPON_VELOCITY,
-                         STARTING_WEAPON_DAMAGE, STARTING_WEAPON_AMMO))
+player.add_weapon(Arsenal.revolver(player))
+
 enemies: List[Enemy] = []
 for i in range(NUM_ENEMIES):
-    enemy_img = "gingerbread-man.png" if random.randint(0, 1) == 0 else "cupcake.png"
+    enemy_img = "gingerbread-man" if random.randint(0, 1) == 0 else "cupcake"
     enemy_start = stage_width + 200 if random.randint(0, 1) == 0 else -200
-    enemies.append(Enemy(f"images/{enemy_img}", enemy_start, PLAYER_Y_START, start_scrolling_pos_x,
+    enemies.append(Enemy(f"images/{enemy_img}.png", enemy_start, PLAYER_Y_START, start_scrolling_pos_x,
                          stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, ENEMY_HEALTH, ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY))
 
 # important flags and variables for main game loop
@@ -65,11 +63,12 @@ collision = False
 running = True
 died = False
 final_score = 0
+enemies_defeated = 0
 
 # game loop
 while running:
     collision = False
-    trying_to_buy_ammo = False
+    trying_to_buy_item = False
 
     # event handlers
     for event in pygame.event.get():
@@ -84,7 +83,8 @@ while running:
             if event.key == pygame.K_UP: player.set_y_velocity(-PLAYER_Y_VELOCITY)
             if event.key == pygame.K_DOWN: player.set_y_velocity(PLAYER_Y_VELOCITY)
             if event.key == pygame.K_SPACE: player.fire_current_weapon()
-            if event.key == pygame.K_b: trying_to_buy_ammo = True
+            if event.key == pygame.K_b: trying_to_buy_item = True
+            if event.key == pygame.K_v: player.switch_to_next_weapon()
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: player.set_x_velocity(0)
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN: player.set_y_velocity(0)
@@ -102,28 +102,30 @@ while running:
 
     # draw everything to screen; also, check for bullet collisions here
     bg_methods.draw_background(screen, background_collision if collision else background, stage_pos_x, background_width, WIDTH)
-    bg_methods.draw_ammo_box(screen, player, AMMO_COST, AMMO_GAIN, trying_to_buy_ammo)
+    bg_methods.draw_ammo_box(screen, player, AMMO_COST, AMMO_GAIN, trying_to_buy_item)
+    bg_methods.draw_mystery_box(screen, player, MYSTERY_BOX_COST, trying_to_buy_item)
     player.draw(screen)
     for e in enemies:
         e.draw(screen, player)
 
         collision_type = e.check_for_bullet_collision(player.get_current_weapon().bullet, COLLISION_THRESHOLD)
         if collision_type == Enemy_Collision.HIT:
-            player.add_score(ENEMY_HIT_SCORE)
+            player.add_points(ENEMY_HIT_POINTS)
         elif collision_type == Enemy_Collision.DEFEATED:
-            player.add_score(ENEMY_DEFEATED_SCORE)
+            player.add_points(ENEMY_DEFEATED_POINTS)
             explosion_sound.play()
+            enemies_defeated += 1
 
     # draw score & ammo metadata
-    bg_methods.display_score(screen, player.score)
-    bg_methods.display_ammo(screen, player.get_current_weapon().ammo)
+    bg_methods.display_points(screen, player.points)
+    bg_methods.display_ammo(screen, player.get_current_weapon())
 
     # game over screen
     if player.health <= 0:
         if not died:
-            final_score = player.score
+            final_score = enemies_defeated
             died = True
-        bg_methods.game_over(screen, final_score, WIDTH, HEIGHT)
+        bg_methods.game_over(screen, enemies_defeated, WIDTH, HEIGHT)
 
     # update display
     pygame.display.update()

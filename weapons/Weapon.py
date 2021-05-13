@@ -7,9 +7,10 @@ class Weapon():
     Represents a (typically ranged) weapon that either a character uses
     """
 
-    def __init__(self, image_path: str, sound_path: str, bullet_image: str, character: Player, projectile_x_velocity: float, damage: float, ammo: int):
+    def __init__(self, name: str, image_path: str, sound_path: str, bullet_image: str, character: Player, projectile_x_velocity: float, damage: float, ammo: int):
         """
         Initializes a new weapon
+        :param name: name of weapon
         :param image_path:
         :param sound_path: sound when firing
         :param character: character who's using the weapon
@@ -17,6 +18,8 @@ class Weapon():
         :param damage: damage hit
         :param ammo: how much ammunition the weapon holds
         """
+        self.name = name
+
         self.character: Player = character
         self.x = 0
         self.y = 0

@@ -44,7 +44,7 @@ class Player():
         self.weapons: List[Weapon] = []
         self.current_weapon = 0
 
-        self.score = 0
+        self.points = 0
 
     def draw(self, screen) -> None:
         """
@@ -59,7 +59,7 @@ class Player():
         # print health
         font = pygame.font.Font("fonts/dewangga.otf", 23)
         health_string = str(int(self.health))
-        health_status = font.render(health_string, True, (255, 0, 0))
+        health_status = font.render(health_string, True, (255, 0, 0)) # red
         screen.blit(health_status, (self.real_x_position + 20, self.y + 70))
 
         # print weapon
@@ -135,7 +135,8 @@ class Player():
         Switches to the next weapon in inventory, if available
         :return:
         """
-        self.current_weapon += 1 % len(self.weapons)
+        self.current_weapon += 1
+        self.current_weapon %= len(self.weapons)
         if len(self.weapons) == 0: self.current_weapon = 0
 
     def get_current_weapon(self) -> Union[Weapon, None]:
@@ -154,18 +155,18 @@ class Player():
         if self.get_current_weapon() == None: return
         else: self.get_current_weapon().fire()
 
-    def add_score(self, amount: int) -> None:
+    def add_points(self, amount: int) -> None:
         """
-        Adds amount to score
+        Adds amount to points
         :param: amount to add
         :return:
         """
-        self.score += amount
+        self.points += amount
 
-    def remove_score(self, amount: int) -> None:
+    def remove_points(self, amount: int) -> None:
         """
-        Removes amount from score
+        Removes amount from points
         :param amount:
         :return:
         """
-        self.score -= amount
+        self.points -= amount
