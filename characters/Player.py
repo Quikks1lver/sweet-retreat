@@ -130,6 +130,18 @@ class Player():
         """
         self.weapons.append(w)
 
+    def add_mystery_weapon(self, weapon: Weapon) -> None:
+        """
+        Adds a mystery weapon to the player's kit
+        :param weapon: weapon to be added
+        :return:
+        """
+        if len(self.weapons) == 1:
+            self.add_weapon(weapon)
+            self.switch_to_next_weapon()
+        else:
+            self.weapons[self.current_weapon] = weapon
+
     def switch_to_next_weapon(self) -> None:
         """
         Switches to the next weapon in inventory, if available and current weapon isn't being used
