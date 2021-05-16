@@ -126,4 +126,4 @@ class MysteryBox():
         weapons.append(Arsenal.sniper(player))
         weapons.append(Arsenal.rifle(player))
 
-        return weapons[random.randint(0, len(weapons))]
+        return weapons[random.randint(0, len(weapons) - 1)]
