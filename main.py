@@ -66,18 +66,21 @@ died = False
 final_score = 0
 enemies_defeated = 0
 
+# clock
+current_time = 0
+MYSTERY_BOX_COOLDOWN = 5000
+MYSTERY_BOX_WEAPON_TIMER = 5000
+
 # game loop
 while running:
+    current_time = pygame.time.get_ticks()
+
     collision = False
     trying_to_buy_item = False
 
     # event handlers
     for event in pygame.event.get():
-        # break out of game loop if user quits
-        if event.type == pygame.QUIT:
-            running = False
-
-        # key presses
+        if event.type == pygame.QUIT: running = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT: player.set_x_velocity(-PLAYER_X_VELOCITY)
             if event.key == pygame.K_RIGHT: player.set_x_velocity(PLAYER_X_VELOCITY)
