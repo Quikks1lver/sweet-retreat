@@ -22,6 +22,7 @@
   - [ammo box](https://www.flaticon.com/free-icon/box_4611487?term=ammo%20box&page=1&position=6&page=1&position=6&related_id=4611487&origin=search)
   - [sparkles](https://www.flaticon.com/free-icon/miscellaneous_1740304?term=sparkles&page=1&position=35&page=1&position=35&related_id=1740304&origin=search)
   - [mystery box](https://www.flaticon.com/free-icon/question_3409508?term=mystery%20box&page=1&position=2&page=1&position=2&related_id=3409508&origin=search)
+  - [explosion](https://www.flaticon.com/free-icon/explosion_599506?term=explosion&page=1&position=2&page=1&position=2&related_id=599506&origin=search)
 - [Image Resizing](https://www.img2go.com/)
 - [Online Image Tools](https://onlineimagetools.com/)
 
