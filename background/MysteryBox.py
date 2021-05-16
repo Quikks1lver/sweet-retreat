@@ -4,8 +4,8 @@ from typing import List
 
 from characters import Player
 from timing.Clock_Methods import Clock_Methods
-from weapons.Weapon import Weapon
 from weapons.Arsenal import Arsenal
+from weapons.Weapon import Weapon
 
 class MysteryBox():
     """
@@ -16,7 +16,6 @@ class MysteryBox():
         self.x_start, self.y_start = 600, 370
 
         self.show_box = True
-        self.waiting_for_weapon_pickup = False
 
         self.target_time = 0
         self.TIMER_DELAY = 5000

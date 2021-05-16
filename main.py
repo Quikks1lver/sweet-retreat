@@ -50,7 +50,7 @@ explosion_sound = pygame.mixer.Sound("sounds/explosion.wav")
 # init player and enemy characters, and MysteryBox
 player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
                 stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, PLAYER_HEALTH)
-player.add_weapon(Arsenal.ray_gun(player))
+player.add_weapon(Arsenal.revolver(player))
 
 enemies: List[Enemy] = []
 for i in range(NUM_ENEMIES):
