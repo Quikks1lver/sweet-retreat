@@ -35,41 +35,6 @@ def draw_ammo_box(screen, player: Player, cost: int, ammo_gain: int, trying_to_b
         sparkles_img = pygame.image.load("images/sparkles.png")
         screen.blit(sparkles_img, (x_start, y_start))
 
-def draw_mystery_box(screen, player: Player, cost: int, trying_to_buy: bool) -> None:
-    """
-    Draws ammo box onto the screen
-    :param screen:
-    :param player: player character
-    :param cost:
-    :param trying_to_buy: whether player is trying to buy ammo or not
-    :return:
-    """
-    x_start, y_start = 600, 370
-    sparkles_threshold = player.stage_width - player.start_scrolling_pos_x
-
-    # draw mystery box and description of cost on right side of screen
-    if player.x >= sparkles_threshold:
-        x_start, y_start = 600, 370
-
-        mystery_box_img = pygame.image.load("images/mystery_box.png")
-        screen.blit(mystery_box_img, (x_start, y_start))
-
-        font = pygame.font.Font("./fonts/dewangga.otf", 24)
-        title = font.render("Press 'B' for Mystery Weapon", True, (255, 255, 255))  # white
-        score_title = font.render(f"Cost: {cost} points", True, (255, 255, 255))  # white
-        screen.blit(title, (x_start - 70, y_start - 55))
-        screen.blit(score_title, (x_start - 10, y_start - 30))
-
-        if trying_to_buy and player.points >= cost:
-            if player.real_x_position >= x_start and player.real_x_position <= (x_start + mystery_box_img.get_width()):
-                # TODO
-                player.remove_points(cost)
-
-    # draw sparkles when approaching mystery box from left
-    if player.x > sparkles_threshold - 10 and player.x < sparkles_threshold:
-        sparkles_img = pygame.image.load("images/sparkles.png")
-        screen.blit(sparkles_img, (x_start, y_start))
-
 def draw_background(screen, background_img, stage_pos_x: int, background_width: int, game_width: int) -> None:
     """
     Draws background onto screen, scrolling if necessary

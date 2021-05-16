@@ -7,6 +7,7 @@ import random
 from typing import List
 
 import background.Background_Methods as bg_methods
+from background.MysteryBox import MysteryBox
 from characters.Player import Player
 from characters.Enemy import Enemy, Enemy_Collision
 from weapons.Arsenal import Arsenal
@@ -23,10 +24,10 @@ ENEMY_DEFEATED_POINTS = 11
 
 PLAYER_HEALTH = 100
 PLAYER_X_START, PLAYER_Y_START = 50, 460
-PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 2, 0.5
+PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 5, 2
 
-AMMO_COST, AMMO_GAIN = 75, 25
-MYSTERY_BOX_COST = 15
+AMMO_COST, AMMO_GAIN = 50, 25
+MYSTERY_BOX_COST = 100
 
 Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD = 440, 530
 COLLISION_THRESHOLD = 25
@@ -46,7 +47,7 @@ background_collision = pygame.image.load("images/background_collision.png").conv
 # sounds
 explosion_sound = pygame.mixer.Sound("sounds/explosion.wav")
 
-# init player and enemy characters
+# init player and enemy characters, and MysteryBox
 player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
                 stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, PLAYER_HEALTH)
 player.add_weapon(Arsenal.revolver(player))
@@ -58,6 +59,8 @@ for i in range(NUM_ENEMIES):
     enemies.append(Enemy(f"images/{enemy_img}.png", enemy_start, PLAYER_Y_START, start_scrolling_pos_x,
                          stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, ENEMY_HEALTH, ENEMY_X_VELOCITY, ENEMY_Y_VELOCITY))
 
+mystery_box = MysteryBox()
+
 # important flags and variables for main game loop
 collision = False
 running = True
@@ -67,16 +70,15 @@ enemies_defeated = 0
 
 # game loop
 while running:
+    current_time = pygame.time.get_ticks()
+
     collision = False
     trying_to_buy_item = False
+    trying_to_pick_up_weapon = False
 
     # event handlers
     for event in pygame.event.get():
-        # break out of game loop if user quits
-        if event.type == pygame.QUIT:
-            running = False
-
-        # key presses
+        if event.type == pygame.QUIT: running = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT: player.set_x_velocity(-PLAYER_X_VELOCITY)
             if event.key == pygame.K_RIGHT: player.set_x_velocity(PLAYER_X_VELOCITY)
@@ -84,6 +86,7 @@ while running:
             if event.key == pygame.K_DOWN: player.set_y_velocity(PLAYER_Y_VELOCITY)
             if event.key == pygame.K_SPACE: player.fire_current_weapon()
             if event.key == pygame.K_b: trying_to_buy_item = True
+            if event.key == pygame.K_c: trying_to_pick_up_weapon = True
             if event.key == pygame.K_v: player.switch_to_next_weapon()
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: player.set_x_velocity(0)
@@ -103,7 +106,7 @@ while running:
     # draw everything to screen; also, check for bullet collisions here
     bg_methods.draw_background(screen, background_collision if collision else background, stage_pos_x, background_width, WIDTH)
     bg_methods.draw_ammo_box(screen, player, AMMO_COST, AMMO_GAIN, trying_to_buy_item)
-    bg_methods.draw_mystery_box(screen, player, MYSTERY_BOX_COST, trying_to_buy_item)
+    mystery_box.draw(screen, player, MYSTERY_BOX_COST, trying_to_buy_item, trying_to_pick_up_weapon)
     player.draw(screen)
     for e in enemies:
         e.draw(screen, player)
