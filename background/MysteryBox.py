@@ -1,7 +1,11 @@
 import pygame
+import random
+from typing import List
+
 from characters import Player
-from weapons.Weapon import Weapon
 from timing.Clock_Methods import Clock_Methods
+from weapons.Weapon import Weapon
+from weapons.Arsenal import Arsenal
 
 class MysteryBox():
     """
@@ -21,6 +25,8 @@ class MysteryBox():
 
         self.sparkles_threshold = 0
 
+        self.mystery_weapon: Weapon = None
+
     def draw(self, screen, player: Player, cost: int, trying_to_buy: bool, trying_to_pick_up_weapon: bool) -> None:
         """
         Draws mystery box and weapons (if available) to screen
@@ -34,7 +40,7 @@ class MysteryBox():
         if self.show_box or Clock_Methods.get_current_time() > self.target_time:
             self.__draw_mystery_box(screen, player, cost, trying_to_buy)
         else:
-            self.__draw_weapon(screen, player, trying_to_pick_up_weapon, Weapon("Rifle", "images/rifle.png", "sounds/rifle.wav", "images/bullet.png", player, 30, 15, 75))
+            self.__draw_weapon(screen, player, trying_to_pick_up_weapon, self.mystery_weapon)
 
     def __draw_mystery_box(self, screen, player: Player, cost: int, trying_to_buy: bool) -> None:
         """
@@ -64,6 +70,8 @@ class MysteryBox():
                 if self.__is_inbounds(player):
                     self.show_box = False
                     self.target_time = Clock_Methods.get_current_time() + self.TIMER_DELAY
+
+                    self.mystery_weapon = MysteryBox.__choose_mystery_weapon(player)
 
                     pygame.mixer.Sound("sounds/mystery_box.wav").play()
                     player.remove_points(cost)
@@ -104,3 +112,18 @@ class MysteryBox():
         :return:
         """
         return True if player.real_x_position >= self.x_start and player.real_x_position <= (self.x_start + self.image.get_width()) else False
+
+    @staticmethod
+    def __choose_mystery_weapon(player: Player) -> Weapon:
+        """
+        Randomly choose and return a mystery weapon
+        :param player:
+        :return:
+        """
+        weapons: List[Weapon] = []
+        weapons.append(Arsenal.ray_gun(player))
+        weapons.append(Arsenal.revolver(player))
+        weapons.append(Arsenal.sniper(player))
+        weapons.append(Arsenal.rifle(player))
+
+        return weapons[random.randint(0, len(weapons))]
