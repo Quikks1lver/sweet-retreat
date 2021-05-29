@@ -11,9 +11,9 @@ class Text():
         Dewangga = "dewangga.otf"
 
     @staticmethod
-    def render(screen, text: str, font, font_size: int, color: Tuple[int, int, int], location: Tuple[int, int]) -> None:
+    def render(screen, text: str, font, font_size: int, color: Tuple[int, int, int], location: Tuple[int, int]) -> int:
         """
-        Renders text to the screen
+        Renders text to the screen, returns width of text
         :param screen:
         :param text: text to be displayed
         :param font: Text.Font enum
@@ -24,3 +24,5 @@ class Text():
         font = pygame.font.Font(f"./text/{font.value}", font_size)
         text = font.render(text, True, color)
         screen.blit(text, location)
+
+        return text.get_width()

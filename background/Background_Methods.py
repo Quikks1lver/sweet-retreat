@@ -1,5 +1,7 @@
 import pygame
+
 from characters.Player import Player
+from text.Text import Text
 from weapons.Weapon import Weapon
 
 def draw_ammo_box(screen, player: Player, cost: int, ammo_gain: int, trying_to_buy: bool) -> None:
@@ -19,11 +21,8 @@ def draw_ammo_box(screen, player: Player, cost: int, ammo_gain: int, trying_to_b
         ammo_box_img = pygame.image.load("images/ammo_box.png")
         screen.blit(ammo_box_img, (x_start, y_start))
 
-        font = pygame.font.Font("./text/dewangga.otf", 24)
-        title = font.render("Press 'B' for Ammo", True, (255, 255, 255))  # white
-        score_title = font.render(f"Cost: {cost} points", True, (255, 255, 255))  # white
-        screen.blit(title, (x_start, y_start - 55))
-        screen.blit(score_title, (x_start, y_start - 30))
+        Text.render(screen, "Press 'B' for Ammo", Text.Font.Dewangga, 24, (255, 255, 255), (x_start, y_start - 55))
+        Text.render(screen, f"Cost: {cost} points", Text.Font.Dewangga, 24, (255, 255, 255), (x_start, y_start - 30))
 
         if trying_to_buy and player.points >= cost:
             if player.x >= x_start and player.x <= (x_start + ammo_box_img.get_width()):
@@ -73,9 +72,7 @@ def display_points(screen, points: int) -> None:
     :param points:
     :return:
     """
-    font = pygame.font.Font("./text/dewangga.otf", 40)
-    score_text = font.render(f"Points: {str(points)}", True, (255, 255, 255)) # white
-    screen.blit(score_text, (20, 20))
+    Text.render(screen, f"Points: {str(points)}", Text.Font.Dewangga, 40, (255, 255, 255), (20, 20))
 
 def display_ammo(screen, weapon: Weapon) -> None:
     """
@@ -84,14 +81,11 @@ def display_ammo(screen, weapon: Weapon) -> None:
     :param weapon:
     :return:
     """
-    font = pygame.font.Font("./text/dewangga.otf", 25)
     ammo_bar = ""
     for i in range(weapon.ammo): ammo_bar += "I"
 
-    weapon_name_text = font.render(f"{weapon.name} ", True, (77, 255, 77))  # neon green
-    ammo_text = font.render(f"ammo: {ammo_bar}", True, (255, 255, 255))  # white
-    screen.blit(weapon_name_text, (20, 60))
-    screen.blit(ammo_text, (20 + weapon_name_text.get_width(), 60))
+    weapon_name_width = Text.render(screen, f"{weapon.name} ", Text.Font.Dewangga, 25, (77, 255, 77), (20, 60))
+    Text.render(screen, f"ammo: {ammo_bar}", Text.Font.Dewangga, 25, (255, 255, 255), (20 + weapon_name_width, 60))
 
 def game_over(screen, score: int, game_width: int, game_height: int) -> None:
     """
@@ -105,11 +99,6 @@ def game_over(screen, score: int, game_width: int, game_height: int) -> None:
     pygame.mixer.stop()
 
     screen.fill([0, 0, 0]) # black
-    large_font = pygame.font.Font("./text/dewangga.otf", 50)
-    small_font = pygame.font.Font("./text/dewangga.otf", 35)
 
-    game_over_text = large_font.render("GAME OVER", True, (255, 0, 0)) # red
-    score_text = small_font.render(f"Enemies Defeated: {score}", True, (255, 0, 0))  # red
-
-    screen.blit(game_over_text, (game_width / 2.75, game_height / 2.4))
-    screen.blit(score_text, (game_width / 2.75, game_height / 2.4 + 50))
+    Text.render(screen, "GAME OVER", Text.Font.Dewangga, 50, (255, 0, 0), (game_width / 2.75, game_height / 2.4))
+    Text.render(screen, f"Enemies Defeated: {score}", Text.Font.Dewangga, 35, (255, 0, 0), (game_width / 2.75, game_height / 2.4 + 50))
