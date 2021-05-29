@@ -1,8 +1,11 @@
 from enum import Enum
-import math
 import pygame
+import math
 import random
+
+
 from .Player import Player
+from text.Text import Text
 from weapons.Bullet import Bullet, Bullet_State
 
 class Enemy_Collision(Enum):
@@ -46,9 +49,8 @@ class Enemy(Player):
         super().draw(screen)
 
         # print distance from player
-        font = pygame.font.Font("fonts/dewangga.otf", 23)
-        dist = font.render(str(int(abs(self.real_x_position - player.real_x_position))), True, (255, 255, 255))
-        screen.blit(dist, (self.real_x_position + 21, self.y - 20))
+        Text.render(screen, str(int(abs(self.real_x_position - player.real_x_position))),
+                    Text.Font.Dewangga, 23, (255, 255, 255), (self.real_x_position + 21, self.y - 20))
 
     def move(self, player: Player) -> None:
         """
