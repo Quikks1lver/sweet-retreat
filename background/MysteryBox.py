@@ -59,7 +59,7 @@ class MysteryBox():
 
             screen.blit(self.image, (self.x_start, self.y_start))
 
-            font = pygame.font.Font("./fonts/dewangga.otf", 24)
+            font = pygame.font.Font("./text/dewangga.otf", 24)
             title = font.render("Press 'B' for Mystery Weapon", True, (255, 255, 255))  # white
             score_title = font.render(f"Cost: {cost} points", True, (255, 255, 255))  # white
             screen.blit(title, (self.x_start - 70, self.y_start - 55))
@@ -94,7 +94,7 @@ class MysteryBox():
             explosion_image = pygame.image.load("images/explosion.png")
             screen.blit(explosion_image, (self.x_start - 2 * weapon.image_width, self.y_start - 80))
 
-            font = pygame.font.Font("./fonts/dewangga.otf", 24)
+            font = pygame.font.Font("./text/dewangga.otf", 24)
             title = font.render(f"Press 'C' for {weapon.name}", True, (0, 255, 0))  # green
             screen.blit(title, (self.x_start - weapon.image_width + 10, self.y_start - 35))
             screen.blit(weapon.image, (self.x_start + 2.5 * weapon.image_width, self.y_start + 30))

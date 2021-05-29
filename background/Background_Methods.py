@@ -19,7 +19,7 @@ def draw_ammo_box(screen, player: Player, cost: int, ammo_gain: int, trying_to_b
         ammo_box_img = pygame.image.load("images/ammo_box.png")
         screen.blit(ammo_box_img, (x_start, y_start))
 
-        font = pygame.font.Font("./fonts/dewangga.otf", 24)
+        font = pygame.font.Font("./text/dewangga.otf", 24)
         title = font.render("Press 'B' for Ammo", True, (255, 255, 255))  # white
         score_title = font.render(f"Cost: {cost} points", True, (255, 255, 255))  # white
         screen.blit(title, (x_start, y_start - 55))
@@ -73,7 +73,7 @@ def display_points(screen, points: int) -> None:
     :param points:
     :return:
     """
-    font = pygame.font.Font("./fonts/dewangga.otf", 40)
+    font = pygame.font.Font("./text/dewangga.otf", 40)
     score_text = font.render(f"Points: {str(points)}", True, (255, 255, 255)) # white
     screen.blit(score_text, (20, 20))
 
@@ -84,7 +84,7 @@ def display_ammo(screen, weapon: Weapon) -> None:
     :param weapon:
     :return:
     """
-    font = pygame.font.Font("./fonts/dewangga.otf", 25)
+    font = pygame.font.Font("./text/dewangga.otf", 25)
     ammo_bar = ""
     for i in range(weapon.ammo): ammo_bar += "I"
 
@@ -105,8 +105,8 @@ def game_over(screen, score: int, game_width: int, game_height: int) -> None:
     pygame.mixer.stop()
 
     screen.fill([0, 0, 0]) # black
-    large_font = pygame.font.Font("./fonts/dewangga.otf", 50)
-    small_font = pygame.font.Font("./fonts/dewangga.otf", 35)
+    large_font = pygame.font.Font("./text/dewangga.otf", 50)
+    small_font = pygame.font.Font("./text/dewangga.otf", 35)
 
     game_over_text = large_font.render("GAME OVER", True, (255, 0, 0)) # red
     score_text = small_font.render(f"Enemies Defeated: {score}", True, (255, 0, 0))  # red

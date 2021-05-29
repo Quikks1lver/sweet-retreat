@@ -57,7 +57,7 @@ class Player():
         else: screen.blit(pygame.transform.flip(self.image, True, False), (self.real_x_position, self.y))
 
         # print health
-        font = pygame.font.Font("fonts/dewangga.otf", 23)
+        font = pygame.font.Font("text/dewangga.otf", 23)
         health_string = str(int(self.health))
         health_status = font.render(health_string, True, (255, 0, 0)) # red
         screen.blit(health_status, (self.real_x_position + 20, self.y + 70))

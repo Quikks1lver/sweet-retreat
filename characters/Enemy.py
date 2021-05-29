@@ -46,7 +46,7 @@ class Enemy(Player):
         super().draw(screen)
 
         # print distance from player
-        font = pygame.font.Font("fonts/dewangga.otf", 23)
+        font = pygame.font.Font("text/dewangga.otf", 23)
         dist = font.render(str(int(abs(self.real_x_position - player.real_x_position))), True, (255, 255, 255))
         screen.blit(dist, (self.real_x_position + 21, self.y - 20))
 
