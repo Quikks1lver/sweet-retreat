@@ -1,5 +1,5 @@
 ## 👻 Sweet Retreat 🍪
-#### A 2D sidescroller action videogame, powered by Pygame
+#### My first videogame: A 2-D action sidescroller, powered by Pygame
 
 ### How to Play
 1. [Install python3](https://www.python.org/downloads/)
