@@ -8,6 +8,7 @@ from typing import List
 
 import background.Background_Methods as bg_methods
 from background.MysteryBox import MysteryBox
+from background.SplashScreen import Splash_Screen
 from characters.Player import Player
 from characters.Enemy import Enemy, Enemy_Collision
 from weapons.Arsenal import Arsenal
@@ -67,6 +68,7 @@ running = True
 died = False
 final_score = 0
 enemies_defeated = 0
+on_splash_screen = True
 
 # game loop
 while running:
@@ -80,6 +82,8 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: running = False
         if event.type == pygame.KEYDOWN:
+            if on_splash_screen and event.key == pygame.K_RETURN: on_splash_screen = False
+            elif on_splash_screen and event.key != pygame.K_RETURN: break
             if event.key == pygame.K_LEFT: player.set_x_velocity(-PLAYER_X_VELOCITY)
             if event.key == pygame.K_RIGHT: player.set_x_velocity(PLAYER_X_VELOCITY)
             if event.key == pygame.K_UP: player.set_y_velocity(-PLAYER_Y_VELOCITY)
@@ -91,6 +95,12 @@ while running:
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: player.set_x_velocity(0)
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN: player.set_y_velocity(0)
+
+    # if at beginning of game, immediately update display and don't do anything else
+    if on_splash_screen:
+        Splash_Screen.draw(screen)
+        pygame.display.update()
+        continue
 
     # move all characters
     player.move()
