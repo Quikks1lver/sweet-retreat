@@ -6,6 +6,7 @@
 - 2D Movement
   - [Player Movement](https://www.youtube.com/watch?v=AX8YU2hLBUg)
   - [Background Scrolling](https://www.youtube.com/watch?v=US3HSusUBeI)
+  - Microsoft Word (for Splash Screen)
 
 ### Images
 - [FreePik](https://www.freepik.com/)
