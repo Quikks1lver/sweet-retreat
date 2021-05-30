@@ -19,6 +19,7 @@ class Splash_Screen():
         splash_screen = pygame.image.load("images/splash_screen.png").convert()
         screen.blit(splash_screen, (0, 0))
 
+        # text appears/disappears every few seconds, like a blinking light
         if Clock_Methods.is_past_this_time(Splash_Screen.TARGET_TIME):
             Text.render(screen, "Press 'ENTER' to begin", Text.Font.Dewangga, 30, (255, 255, 255), (275, 20))
             
