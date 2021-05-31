@@ -8,7 +8,8 @@ from typing import List
 
 import background.Background_Methods as bg_methods
 from background.MysteryBox import MysteryBox
-from background.SplashScreen import Splash_Screen
+from background.Scenes import Scenes
+from background.StartScreen import Start_Screen
 from characters.Player import Player
 from characters.Enemy import Enemy, Enemy_Collision
 from weapons.Arsenal import Arsenal
@@ -62,13 +63,18 @@ for i in range(NUM_ENEMIES):
 
 mystery_box = MysteryBox()
 
+# init starting scenes
+splash_screen = Start_Screen("images/splash_screen.png")
+lore_screen = Start_Screen("images/lore.png")
+directions_screen = Start_Screen("images/directions.png")
+
 # important flags and variables for main game loop
 collision = False
 running = True
 died = False
 final_score = 0
 enemies_defeated = 0
-on_splash_screen = True
+SCENE = 1
 
 # game loop
 while running:
@@ -82,8 +88,8 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: running = False
         if event.type == pygame.KEYDOWN:
-            if on_splash_screen and event.key == pygame.K_RETURN: on_splash_screen = False
-            elif on_splash_screen and event.key != pygame.K_RETURN: break
+            if SCENE < Scenes.GAME.value and event.key == pygame.K_RETURN: SCENE += 1
+            if SCENE < Scenes.GAME.value: break
             if event.key == pygame.K_LEFT: player.set_x_velocity(-PLAYER_X_VELOCITY)
             if event.key == pygame.K_RIGHT: player.set_x_velocity(PLAYER_X_VELOCITY)
             if event.key == pygame.K_UP: player.set_y_velocity(-PLAYER_Y_VELOCITY)
@@ -96,9 +102,14 @@ while running:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: player.set_x_velocity(0)
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN: player.set_y_velocity(0)
 
-    # if at beginning of game, immediately update display and don't do anything else
-    if on_splash_screen:
-        Splash_Screen.draw(screen)
+    # check which scene we're on
+    if SCENE < Scenes.GAME.value:
+        if SCENE == Scenes.SPLASH.value: splash_screen.draw(screen)
+        elif SCENE == Scenes.LORE.value: lore_screen.draw(screen)
+        elif SCENE == Scenes.DIRECTIONS.value: directions_screen.draw(screen)
+        else: pass
+        
+        # immediately update display and continue if on starting few screens
         pygame.display.update()
         continue
 
