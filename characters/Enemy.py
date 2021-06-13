@@ -3,7 +3,6 @@ import pygame
 import math
 import random
 
-
 from .Player import Player
 from text.Text import Text
 from weapons.Bullet import Bullet, Bullet_State
@@ -18,7 +17,9 @@ class Enemy(Player):
     Represents an enemy character in the pygame
     """
 
-    def __init__(self, image_path: str, x_start: int, y_start: int, start_scrolling_pos_x: int, stage_width: int, game_width: int, y_top_threshold: int, y_bottom_threshold: int, health: int, x_velocity: float, y_velocity: float):
+    def __init__(self, image_path: str, x_start: int, y_start: int, start_scrolling_pos_x: int, stage_width: int,
+                 game_width: int, y_top_threshold: int, y_bottom_threshold: int, health: int, x_velocity: float,
+                 y_velocity: float, damage: int, point_gain_on_hit: int, point_gain_on_defeat: int):
         """
         Initialize an enemy character
         :param image_path: file path of player image
@@ -32,6 +33,9 @@ class Enemy(Player):
         :param health: hit points of character
         :param x_velocity:
         :param y_velocity:
+        :param damage: how much damage the enemy deals
+        :param point_gain_on_hit: how many points the player gains by hitting this enemy
+        :param point_gain_on_defeat:  how many points the player gains by defeating this enemy
         """
         super().__init__(image_path, x_start, y_start, start_scrolling_pos_x, stage_width,
                          game_width, y_top_threshold, y_bottom_threshold, health)
@@ -39,6 +43,9 @@ class Enemy(Player):
         self.max_health = health
         self.x_velocity = x_velocity
         self.y_velocity = y_velocity
+        self.damage = damage
+        self.point_gain_on_hit = point_gain_on_hit
+        self.point_gain_on_defeat = point_gain_on_defeat
 
     def move(self, player: Player) -> None:
         """
@@ -106,3 +113,21 @@ class Enemy(Player):
         """
         self.health = self.max_health
         self.x = self.stage_width + 200 if random.randint (0, 1) == 0 else -200
+
+    def damage_amount(self) -> int:
+        """
+        Returns how much damage this enemy deals
+        """
+        return self.damage
+
+    def get_point_gain_on_hit(self) -> int:
+        """
+        Returns how many points the player gains by hitting this enemy
+        """
+        return self.point_gain_on_hit
+
+    def get_point_gain_on_defeat(self) -> int:
+        """
+        Returns how many points the player gains by defeating this enemy
+        """
+        return self.point_gain_on_defeat
