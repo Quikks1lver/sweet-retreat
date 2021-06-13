@@ -7,6 +7,13 @@ class Arsenal():
     """
 
     @staticmethod
+    def bow_and_arrows(player: Player) -> Weapon:
+        """
+        Returns a bow and arrow weapon
+        """
+        return Weapon("Bow & Arrows", "images/bow.png",  "sounds/bow.wav", "images/arrow.png", player, 4, 20, 50)
+
+    @staticmethod
     def desert_eagle(player: Player) -> Weapon:
         """
         Returns a desert eagle weapon
