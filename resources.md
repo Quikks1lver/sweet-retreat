@@ -18,6 +18,10 @@
   - [ray gun](https://www.flaticon.com/free-icon/space-gun_1816000?term=ray%20gun&page=1&position=19&page=1&position=19&related_id=1816000&origin=search)
   - [sniper](https://www.flaticon.com/free-icon/sniper_760303?term=sniper&related_id=760303)
   - [rifle](https://www.flaticon.com/free-icon/gun_1693466?term=rifle&page=1&position=12&page=1&position=12&related_id=1693466&origin=search)
+  - [desert eagle](https://www.flaticon.com/free-icon/gun_683555?term=pistol&page=1&position=2&page=1&position=2&related_id=683555&origin=search&k=1623592581932)
+  - [smg](https://www.flaticon.com/free-icon/machine-gun_2761994?term=submachine%20gun&page=1&position=53&page=1&position=53&related_id=2761994&origin=search)
+  - [bow](https://www.flaticon.com/free-icon/archer_4745704?term=bow%20and%20arrow&page=1&position=34&page=1&position=34&related_id=4745704&origin=search)
+  - [arrow](https://www.flaticon.com/free-icon/arrow_909540?term=bow%20arrow&related_id=909540)
   - [bullet](https://www.flaticon.com/free-icon/bullet_4004012?term=bullet&page=1&position=74&page=1&position=74&related_id=4004012&origin=search)
   - [ray gun bullet](https://www.flaticon.com/free-icon/bullet_942275?term=bullet&page=2&position=46&page=2&position=46&related_id=942275&origin=search)
   - [ammo box](https://www.flaticon.com/free-icon/box_4611487?term=ammo%20box&page=1&position=6&page=1&position=6&related_id=4611487&origin=search)
@@ -35,6 +39,9 @@
   - [ray gun](https://freesound.org/people/micahellis/sounds/530529/)
   - [sniper](https://freesound.org/people/EMSIarma/sounds/108852/)
   - [rifle](https://freesound.org/people/snapssound/sounds/536635/)
+  - [desert eagle](https://freesound.org/people/vabadus/sounds/151071/)
+  - [smg](https://freesound.org/people/CharlieWD100/sounds/440559/)
+  - [bow](https://freesound.org/people/Lydmakeren/sounds/511490/)
   - [mystery box](https://freesound.org/people/skylarjulian/sounds/558416/)
 
 ### Fonts

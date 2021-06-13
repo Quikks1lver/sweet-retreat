@@ -116,9 +116,12 @@ class MysteryBox():
         :return:
         """
         weapons: List[Weapon] = []
+        weapons.append(Arsenal.bow_and_arrows(player))
+        weapons.append(Arsenal.desert_eagle(player))
         weapons.append(Arsenal.ray_gun(player))
         weapons.append(Arsenal.revolver(player))
-        weapons.append(Arsenal.sniper(player))
         weapons.append(Arsenal.rifle(player))
+        weapons.append(Arsenal.smg(player))
+        weapons.append(Arsenal.sniper(player))
 
         return weapons[random.randint(0, len(weapons) - 1)]
