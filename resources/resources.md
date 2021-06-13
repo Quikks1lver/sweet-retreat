@@ -9,8 +9,8 @@
   - Microsoft Word (for Splash Screen)
 
 ### Images
-- [FreePik](https://www.freepik.com/)
-  - [background](https://www.freepik.com/free-vector/cartoon-computer-games-night-forest-landscape-plant-green-natural-environment-wood-grass_10600821.htm#page=1&query=cartoon%20forest%20night&position=36)
+- [FreePik](https://www.freepik.com/) & [FlatIcon](https://www.flaticon.com/)
+  - [background](https://www.freepik.com/free-vector/tasty-candy-land-background-flat-style_2302585.htm#page=4&query=Candy+background&position=8)
   - [player](https://www.flaticon.com/free-icon/ghost_93236?related_id=93236&origin=pack)
   - [gingerbread man](https://www.flaticon.com/free-icon/gingerbread-man_1669473?term=gingerbread%20man&related_id=1669473)
   - [cupcake monster](https://www.flaticon.com/free-icon/cupcake_3473934?term=cake%20monster&related_id=3473934)
@@ -26,6 +26,7 @@
   - [explosion](https://www.flaticon.com/free-icon/explosion_599506?term=explosion&page=1&position=2&page=1&position=2&related_id=599506&origin=search)
 - [Image Resizing](https://www.img2go.com/)
 - [Online Image Tools](https://onlineimagetools.com/)
+- [Image Effects](https://pixlr.com/)
 
 ### Sounds
 - [FreeSound](https://freesound.org/)
