@@ -13,6 +13,7 @@ from background.StartScreen import Start_Screen
 from characters.Player import Player
 from characters.Enemy import Enemy, Enemy_Collision
 from characters.EnemyFactory import EnemyFactory
+from game_state.Game_State import Game_State
 from weapons.Arsenal import Arsenal
 
 # constants
@@ -49,7 +50,7 @@ background_collision = pygame.image.load("images/background_collision.png").conv
 # sounds
 explosion_sound = pygame.mixer.Sound("sounds/explosion.wav")
 
-# init player and enemy characters
+# init player and starting enemy characters
 player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
                 stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, PLAYER_HEALTH)
 player.add_weapon(Arsenal.revolver(player))
@@ -70,13 +71,11 @@ collision = False
 running = True
 died = False
 final_score = 0
-enemies_defeated = 0
+num_enemies_defeated = 0
 SCREEN = 1
 
 # game loop
 while running:
-    current_time = pygame.time.get_ticks()
-
     collision = False
     trying_to_buy_item = False
     trying_to_pick_up_weapon = False
@@ -135,7 +134,7 @@ while running:
         elif collision_type == Enemy_Collision.DEFEATED:
             player.add_points(e.get_point_gain_on_defeat())
             explosion_sound.play()
-            enemies_defeated += 1
+            num_enemies_defeated += 1
 
     # draw score & ammo metadata
     bg_methods.display_points(screen, player.points)
@@ -144,9 +143,12 @@ while running:
     # game over screen
     if player.health <= 0:
         if not died:
-            final_score = enemies_defeated
+            final_score = num_enemies_defeated
             died = True
-        bg_methods.game_over(screen, enemies_defeated, WIDTH, HEIGHT)
+        bg_methods.game_over(screen, num_enemies_defeated, WIDTH, HEIGHT)
+
+    # progress game
+    Game_State.progress(enemies, enemy_factory, num_enemies_defeated)
 
     # update display
     pygame.display.update()
