@@ -8,7 +8,7 @@ from typing import List
 
 import background.Background_Methods as bg_methods
 from background.MysteryBox import MysteryBox
-from background.Scenes import Scenes
+from background.Screens import Screens
 from background.StartScreen import Start_Screen
 from characters.Player import Player
 from characters.Enemy import Enemy, Enemy_Collision
@@ -63,10 +63,10 @@ for i in range(NUM_ENEMIES):
 
 mystery_box = MysteryBox()
 
-# init starting scenes
+# init starting screens
 splash_screen = Start_Screen("images/splash_screen.png")
-lore_screen = Start_Screen("images/lore.png")
-directions_screen = Start_Screen("images/directions.png")
+lore_screen = Start_Screen("images/lore_screen.png")
+directions_screen = Start_Screen("images/directions_screen.png")
 
 # important flags and variables for main game loop
 collision = False
@@ -74,7 +74,7 @@ running = True
 died = False
 final_score = 0
 enemies_defeated = 0
-SCENE = 1
+SCREEN = 1
 
 # game loop
 while running:
@@ -88,8 +88,8 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: running = False
         if event.type == pygame.KEYDOWN:
-            if SCENE < Scenes.GAME.value and event.key == pygame.K_RETURN: SCENE += 1
-            if SCENE < Scenes.GAME.value: break
+            if SCREEN < Screens.GAME.value and event.key == pygame.K_RETURN: SCREEN += 1
+            if SCREEN < Screens.GAME.value: break
             if event.key == pygame.K_LEFT: player.set_x_velocity(-PLAYER_X_VELOCITY)
             if event.key == pygame.K_RIGHT: player.set_x_velocity(PLAYER_X_VELOCITY)
             if event.key == pygame.K_UP: player.set_y_velocity(-PLAYER_Y_VELOCITY)
@@ -102,11 +102,11 @@ while running:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: player.set_x_velocity(0)
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN: player.set_y_velocity(0)
 
-    # check which scene we're on
-    if SCENE < Scenes.GAME.value:
-        if SCENE == Scenes.SPLASH.value: splash_screen.draw(screen)
-        elif SCENE == Scenes.LORE.value: lore_screen.draw(screen)
-        elif SCENE == Scenes.DIRECTIONS.value: directions_screen.draw(screen)
+    # check which screen we're on
+    if SCREEN < Screens.GAME.value:
+        if SCREEN == Screens.SPLASH.value: splash_screen.draw(screen)
+        elif SCREEN == Screens.LORE.value: lore_screen.draw(screen)
+        elif SCREEN == Screens.DIRECTIONS.value: directions_screen.draw(screen)
         else: pass
         
         # immediately update display and continue if on starting few screens
