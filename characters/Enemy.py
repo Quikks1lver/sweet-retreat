@@ -3,7 +3,6 @@ import pygame
 import math
 import random
 
-
 from .Player import Player
 from text.Text import Text
 from weapons.Bullet import Bullet, Bullet_State
