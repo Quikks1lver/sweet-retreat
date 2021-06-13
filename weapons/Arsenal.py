@@ -7,6 +7,15 @@ class Arsenal():
     """
 
     @staticmethod
+    def desert_eagle(player: Player) -> Weapon:
+        """
+        Returns a desert eagle weapon
+        :param player:
+        :return:
+        """
+        return Weapon("Desert Eagle", "images/desert_eagle.png",  "sounds/desert_eagle.wav", "images/bullet.png", player, 7, 20, 30)
+
+    @staticmethod
     def ray_gun(player: Player) -> Weapon:
         """
         Returns a ray gun weapon
