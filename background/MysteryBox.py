@@ -60,8 +60,8 @@ class MysteryBox():
 
             screen.blit(self.image, (self.x_start, self.y_start))
 
-            Text.render(screen, "Press 'B' for Mystery Weapon", Text.Font.Dewangga, 24, (255, 255, 255), (self.x_start - 70, self.y_start - 55))
-            Text.render(screen, f"Cost: {cost} points", Text.Font.Dewangga, 24, (255, 255, 255), (self.x_start - 10, self.y_start - 30))
+            Text.render(screen, "Press 'B' for Mystery Weapon", Text.Font.Dewangga, 24, Text.Color.Neon_Cyan, (self.x_start - 70, self.y_start - 55))
+            Text.render(screen, f"Cost: {cost} points", Text.Font.Dewangga, 24, Text.Color.Neon_Cyan, (self.x_start - 10, self.y_start - 30))
 
             if trying_to_buy and player.points >= cost:
                 if self.__is_inbounds(player):
@@ -92,7 +92,7 @@ class MysteryBox():
             explosion_image = pygame.image.load("images/explosion.png")
             screen.blit(explosion_image, (self.x_start - 2 * weapon.image_width, self.y_start - 80))
 
-            Text.render(screen, f"Press 'C' for {weapon.name}", Text.Font.Dewangga, 24, (0, 255, 0), (self.x_start - weapon.image_width + 10, self.y_start - 35))            
+            Text.render(screen, f"Press 'C' for {weapon.name}", Text.Font.Dewangga, 24, Text.Color.Neon_Green, (self.x_start - weapon.image_width + 10, self.y_start - 35))            
             screen.blit(weapon.image, (self.x_start + 2.5 * weapon.image_width, self.y_start + 30))
 
             # give player weapon

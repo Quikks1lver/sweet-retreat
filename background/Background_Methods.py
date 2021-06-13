@@ -21,8 +21,8 @@ def draw_ammo_box(screen, player: Player, cost: int, ammo_gain: int, trying_to_b
         ammo_box_img = pygame.image.load("images/ammo_box.png")
         screen.blit(ammo_box_img, (x_start, y_start))
 
-        Text.render(screen, "Press 'B' for Ammo", Text.Font.Dewangga, 24, (255, 255, 255), (x_start, y_start - 55))
-        Text.render(screen, f"Cost: {cost} points", Text.Font.Dewangga, 24, (255, 255, 255), (x_start, y_start - 30))
+        Text.render(screen, "Press 'B' for Ammo", Text.Font.Dewangga, 24, Text.Color.Neon_Cyan, (x_start, y_start - 55))
+        Text.render(screen, f"Cost: {cost} points", Text.Font.Dewangga, 24, Text.Color.Neon_Cyan, (x_start, y_start - 30))
 
         if trying_to_buy and player.points >= cost:
             if player.x >= x_start and player.x <= (x_start + ammo_box_img.get_width()):
@@ -72,7 +72,7 @@ def display_points(screen, points: int) -> None:
     :param points:
     :return:
     """
-    Text.render(screen, f"Points: {str(points)}", Text.Font.Dewangga, 40, (255, 255, 255), (20, 20))
+    Text.render(screen, f"Points: {str(points)}", Text.Font.Dewangga, 40, Text.Color.Neon_Magenta, (20, 20))
 
 def display_ammo(screen, weapon: Weapon) -> None:
     """
@@ -84,8 +84,8 @@ def display_ammo(screen, weapon: Weapon) -> None:
     ammo_bar = ""
     for i in range(weapon.ammo): ammo_bar += "I"
 
-    weapon_name_width = Text.render(screen, f"{weapon.name} ", Text.Font.Dewangga, 25, (77, 255, 77), (20, 60))
-    Text.render(screen, f"ammo: {ammo_bar}", Text.Font.Dewangga, 25, (255, 255, 255), (20 + weapon_name_width, 60))
+    weapon_name_width = Text.render(screen, f"{weapon.name} ", Text.Font.Dewangga, 25, Text.Color.Neon_Green, (20, 60))
+    Text.render(screen, f"ammo: {ammo_bar}", Text.Font.Dewangga, 25, Text.Color.White, (20 + weapon_name_width, 60))
 
 def game_over(screen, score: int, game_width: int, game_height: int) -> None:
     """
@@ -100,5 +100,5 @@ def game_over(screen, score: int, game_width: int, game_height: int) -> None:
 
     screen.fill([0, 0, 0]) # black
 
-    Text.render(screen, "GAME OVER", Text.Font.Dewangga, 50, (255, 0, 0), (game_width / 2.75, game_height / 2.4))
-    Text.render(screen, f"Enemies Defeated: {score}", Text.Font.Dewangga, 35, (255, 0, 0), (game_width / 2.75, game_height / 2.4 + 50))
+    Text.render(screen, "GAME OVER", Text.Font.Dewangga, 50, Text.Color.Red, (game_width / 2.75, game_height / 2.4))
+    Text.render(screen, f"Enemies Defeated: {score}", Text.Font.Dewangga, 35, Text.Color.Red, (game_width / 2.75, game_height / 2.4 + 50))

@@ -130,7 +130,7 @@ while running:
     mystery_box.draw(screen, player, MYSTERY_BOX_COST, trying_to_buy_item, trying_to_pick_up_weapon)
     player.draw(screen)
     for e in enemies:
-        e.draw(screen, player)
+        e.draw(screen)
 
         collision_type = e.check_for_bullet_collision(player.get_current_weapon().bullet, COLLISION_THRESHOLD)
         if collision_type == Enemy_Collision.HIT:
