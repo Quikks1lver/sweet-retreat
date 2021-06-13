@@ -35,7 +35,7 @@ class EnemyFactory():
     
     def create_ice_cream_monster(self) -> Enemy:
         """
-        Returns a fast ice cream monster
+        Returns a fast ice cream enemy
         """
         damage = .1
         health = 40
@@ -44,5 +44,19 @@ class EnemyFactory():
         point_gain_on_hit, point_gain_on_defeat = 1, 25
 
         return Enemy(f"images/ice-cream.png", enemy_start, self.y_start, self.start_scrolling_pos_x,
+                     self.stage_width, self.game_width, self.y_top_threshold, self.y_bottom_threshold, health,
+                     x_velocity, y_velocity, damage, point_gain_on_hit, point_gain_on_defeat)
+    
+    def create_brownie_tank(self) -> Enemy:
+        """
+        Returns a tanky brownie enemy
+        """
+        damage = 1
+        health = 500
+        x_velocity, y_velocity = 0.2, 0.1
+        enemy_start = self.stage_width + 100 if random.randint(0, 1) == 0 else -100
+        point_gain_on_hit, point_gain_on_defeat = 5, 100
+
+        return Enemy(f"images/brownie.png", enemy_start, self.y_start, self.start_scrolling_pos_x,
                      self.stage_width, self.game_width, self.y_top_threshold, self.y_bottom_threshold, health,
                      x_velocity, y_velocity, damage, point_gain_on_hit, point_gain_on_defeat)
