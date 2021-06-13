@@ -25,7 +25,7 @@ class Arsenal():
         """
         Returns a ray gun weapon
         """
-        return Weapon("Ray Gun", "images/ray_gun.png",  "sounds/ray_gun.wav", "images/ray_gun_bullet.png", player, 2, 100, 25)
+        return Weapon("Ray Gun", "images/ray_gun.png",  "sounds/ray_gun.wav", "images/ray_gun_bullet.png", player, 2, 50, 25)
 
     @staticmethod
     def revolver(player: Player) -> Weapon:
