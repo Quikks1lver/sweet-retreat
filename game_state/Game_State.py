@@ -1,4 +1,3 @@
-import pygame
 from typing import List
 
 from characters.Enemy import Enemy

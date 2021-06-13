@@ -1,5 +1,3 @@
-import pygame
-import math
 import random
 
 from .Enemy import Enemy
