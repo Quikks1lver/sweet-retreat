@@ -56,6 +56,7 @@ player.add_weapon(Arsenal.revolver(player))
 
 enemy_factory = EnemyFactory(stage_width, WIDTH, PLAYER_Y_START, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, start_scrolling_pos_x)
 enemies: List[Enemy] = [enemy_factory.create_basic_enemy() for i in range(NUM_ENEMIES)]
+enemies.append(enemy_factory.create_ice_cream_monster())
 
 # init mystery box
 mystery_box = MysteryBox()
