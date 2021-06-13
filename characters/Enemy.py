@@ -40,18 +40,6 @@ class Enemy(Player):
         self.x_velocity = x_velocity
         self.y_velocity = y_velocity
 
-    def draw(self, screen, player: Player) -> None:
-        """
-        Draws enemy to screen, with associated metadata
-        :param screen:
-        :return:
-        """
-        super().draw(screen)
-
-        # print distance from player
-        Text.render(screen, str(int(abs(self.real_x_position - player.real_x_position))),
-                    Text.Font.Dewangga, 23, (255, 255, 255), (self.real_x_position + 21, self.y - 20))
-
     def move(self, player: Player) -> None:
         """
         Moves enemy according to current position and player's position
