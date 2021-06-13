@@ -24,10 +24,13 @@ class EnemyFactory():
         """
         Returns a random-looking basic enemy
         """
+        damage = .3
         health = 50
         x_velocity, y_velocity = 0.4, 0.1
         enemy_img = "gingerbread-man" if random.randint(0, 1) == 0 else "cupcake"
         enemy_start = self.stage_width + 200 if random.randint(0, 1) == 0 else -200
+        point_gain_on_hit, point_gain_on_defeat = 1, 11
 
         return Enemy(f"images/{enemy_img}.png", enemy_start, self.y_start, self.start_scrolling_pos_x,
-                     self.stage_width, self.game_width, self.y_top_threshold, self.y_bottom_threshold, health, x_velocity, y_velocity)
+                     self.stage_width, self.game_width, self.y_top_threshold, self.y_bottom_threshold, health,
+                     x_velocity, y_velocity, damage, point_gain_on_hit, point_gain_on_defeat)
