@@ -1,8 +1,8 @@
 from enum import Enum
 
-class Scenes(Enum):
+class Screens(Enum):
     """
-    Represents some game scenes
+    Represents some game screens
     """
 
     SPLASH = 1
