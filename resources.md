@@ -14,6 +14,7 @@
   - [player](https://www.flaticon.com/free-icon/ghost_93236?related_id=93236&origin=pack)
   - [gingerbread man](https://www.flaticon.com/free-icon/gingerbread-man_1669473?term=gingerbread%20man&related_id=1669473)
   - [cupcake monster](https://www.flaticon.com/free-icon/cupcake_3473934?term=cake%20monster&related_id=3473934)
+  - [ice cream](https://www.flaticon.com/free-icon/ice-cream_3198662?term=ice%20cream&related_id=3198662&k=1623602191824)
   - [revolver](https://www.flaticon.com/free-icon/revolver_942434?term=revolver&page=1&position=15&page=1&position=15&related_id=942434&origin=search)
   - [ray gun](https://www.flaticon.com/free-icon/space-gun_1816000?term=ray%20gun&page=1&position=19&page=1&position=19&related_id=1816000&origin=search)
   - [sniper](https://www.flaticon.com/free-icon/sniper_760303?term=sniper&related_id=760303)
