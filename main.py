@@ -19,9 +19,6 @@ from weapons.Arsenal import Arsenal
 WIDTH, HEIGHT = 800, 600
 
 NUM_ENEMIES = 5
-ENEMY_HIT = .5
-ENEMY_HIT_POINTS = 1
-ENEMY_DEFEATED_POINTS = 11
 
 PLAYER_HEALTH = 100
 PLAYER_X_START, PLAYER_Y_START = 50, 460
@@ -118,7 +115,7 @@ while running:
     for e in enemies:
         e.move(player)
         if e.has_collision_with_player(player, COLLISION_THRESHOLD):
-            player.take_damage(ENEMY_HIT)
+            player.take_damage(e.damage_amount())
             collision = True
 
     # move stage if need be
@@ -134,9 +131,9 @@ while running:
 
         collision_type = e.check_for_bullet_collision(player.get_current_weapon().bullet, COLLISION_THRESHOLD)
         if collision_type == Enemy_Collision.HIT:
-            player.add_points(ENEMY_HIT_POINTS)
+            player.add_points(e.get_point_gain_on_hit())
         elif collision_type == Enemy_Collision.DEFEATED:
-            player.add_points(ENEMY_DEFEATED_POINTS)
+            player.add_points(e.get_point_gain_on_defeat())
             explosion_sound.play()
             enemies_defeated += 1
 
