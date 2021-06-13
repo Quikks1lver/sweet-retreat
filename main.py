@@ -38,6 +38,9 @@ COLLISION_THRESHOLD = 25
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
+# game header/caption and logo
+pygame.display.set_caption("Sweet Retreat")
+
 # background and stage
 background = pygame.image.load("images/background.png").convert()
 background_width, background_height = background.get_rect().size
