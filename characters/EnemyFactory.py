@@ -37,11 +37,11 @@ class EnemyFactory():
     
     def create_ice_cream_monster(self) -> Enemy:
         """
-        Returns an ice cream monster
+        Returns a fast ice cream monster
         """
         damage = .1
-        health = 75
-        x_velocity, y_velocity = 1.5, 0.5
+        health = 40
+        x_velocity, y_velocity = 1.2, 0.5
         enemy_start = self.stage_width + 300 if random.randint(0, 1) == 0 else -300
         point_gain_on_hit, point_gain_on_defeat = 1, 25
 
