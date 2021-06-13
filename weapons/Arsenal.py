@@ -11,14 +11,14 @@ class Arsenal():
         """
         Returns a bow and arrow weapon
         """
-        return Weapon("Bow & Arrows", "images/bow.png",  "sounds/bow.wav", "images/arrow.png", player, 4, 20, 50)
+        return Weapon("Bow", "images/bow.png",  "sounds/bow.wav", "images/arrow.png", player, 4, 20, 50)
 
     @staticmethod
     def desert_eagle(player: Player) -> Weapon:
         """
         Returns a desert eagle weapon
         """
-        return Weapon("Desert Eagle", "images/desert_eagle.png",  "sounds/desert_eagle.wav", "images/bullet.png", player, 7, 20, 30)
+        return Weapon("D. Eagle", "images/desert_eagle.png",  "sounds/desert_eagle.wav", "images/bullet.png", player, 7, 20, 30)
 
     @staticmethod
     def ray_gun(player: Player) -> Weapon:
