@@ -9,6 +9,7 @@
 - Microsoft Word (for Splash Screen)
 
 ### Images
+
 - [FreePik](https://www.freepik.com/) & [FlatIcon](https://www.flaticon.com/)
   - [background](https://www.freepik.com/free-vector/tasty-candy-land-background-flat-style_2302585.htm#page=4&query=Candy+background&position=8)
   - [player](https://www.flaticon.com/free-icon/ghost_93236?related_id=93236&origin=pack)
@@ -34,8 +35,10 @@
 - [Image Resizing](https://www.img2go.com/)
 - [Online Image Tools](https://onlineimagetools.com/)
 - [Image Effects](https://pixlr.com/)
+- [Round Images](https://round-corner.imageonline.co/)
 
 ### Sounds
+
 - [FreeSound](https://freesound.org/)
   - [explosion](https://freesound.org/people/IdkMrGarcia/sounds/446624/)
   - [revolver](https://freesound.org/people/NoiseCollector/sounds/184130/)
@@ -48,5 +51,6 @@
   - [mystery box](https://freesound.org/people/skylarjulian/sounds/558416/)
 
 ### Fonts
+
 - [Dafont](https://www.dafont.com/)
   - [dewangga](https://www.dafont.com/new.php?page=12&text=dewangga)
