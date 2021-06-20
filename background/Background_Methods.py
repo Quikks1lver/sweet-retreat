@@ -101,4 +101,4 @@ def game_over(screen, score: int, game_width: int, game_height: int) -> None:
     screen.fill([0, 0, 0]) # black
 
     Text.render(screen, "GAME OVER", Text.Font.Dewangga, 50, Text.Color.Red, (game_width / 2.75, game_height / 2.4))
-    Text.render(screen, f"Enemies Defeated: {score}", Text.Font.Dewangga, 35, Text.Color.Red, (game_width / 2.75, game_height / 2.4 + 50))
+    Text.render(screen, f"Sweets Conquered: {score}", Text.Font.Dewangga, 35, Text.Color.Neon_Magenta, (game_width / 2.75, game_height / 2.4 + 50))
