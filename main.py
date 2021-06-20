@@ -81,28 +81,45 @@ while running:
 
     # event handlers
     for event in pygame.event.get():
-        if event.type == pygame.QUIT: running = False
+        if event.type == pygame.QUIT:
+            running = False
         if event.type == pygame.KEYDOWN:
-            if SCREEN < Screens.GAME.value and event.key == pygame.K_RETURN: SCREEN += 1
-            if SCREEN < Screens.GAME.value: break
-            if event.key == pygame.K_LEFT: player.set_x_velocity(-PLAYER_X_VELOCITY)
-            if event.key == pygame.K_RIGHT: player.set_x_velocity(PLAYER_X_VELOCITY)
-            if event.key == pygame.K_UP: player.set_y_velocity(-PLAYER_Y_VELOCITY)
-            if event.key == pygame.K_DOWN: player.set_y_velocity(PLAYER_Y_VELOCITY)
-            if event.key == pygame.K_SPACE: player.fire_current_weapon()
-            if event.key == pygame.K_b: trying_to_buy_item = True
-            if event.key == pygame.K_c: trying_to_pick_up_weapon = True
-            if event.key == pygame.K_v: player.switch_to_next_weapon()
+            if SCREEN < Screens.GAME.value and event.key == pygame.K_RETURN:
+                SCREEN += 1
+            if SCREEN < Screens.GAME.value:
+                break
+            if event.key == pygame.K_LEFT:
+                player.set_x_velocity(-PLAYER_X_VELOCITY)
+            if event.key == pygame.K_RIGHT:
+                player.set_x_velocity(PLAYER_X_VELOCITY)
+            if event.key == pygame.K_UP:
+                player.set_y_velocity(-PLAYER_Y_VELOCITY)
+            if event.key == pygame.K_DOWN:
+                player.set_y_velocity(PLAYER_Y_VELOCITY)
+            if event.key == pygame.K_SPACE:
+                player.fire_current_weapon()
+            if event.key == pygame.K_b:
+                trying_to_buy_item = True
+            if event.key == pygame.K_c:
+                trying_to_pick_up_weapon = True
+            if event.key == pygame.K_v:
+                player.switch_to_next_weapon()
         if event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: player.set_x_velocity(0)
-            if event.key == pygame.K_UP or event.key == pygame.K_DOWN: player.set_y_velocity(0)
+            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                player.set_x_velocity(0)
+            if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                player.set_y_velocity(0)
 
     # check which screen we're on
     if SCREEN < Screens.GAME.value:
-        if SCREEN == Screens.SPLASH.value: splash_screen.draw(screen)
-        elif SCREEN == Screens.LORE.value: lore_screen.draw(screen)
-        elif SCREEN == Screens.DIRECTIONS.value: directions_screen.draw(screen)
-        else: pass
+        if SCREEN == Screens.SPLASH.value:
+            splash_screen.draw(screen)
+        elif SCREEN == Screens.LORE.value:
+            lore_screen.draw(screen)
+        elif SCREEN == Screens.DIRECTIONS.value:
+            directions_screen.draw(screen)
+        else:
+            pass
 
         # immediately update display and continue if on starting few screens
         pygame.display.update()
