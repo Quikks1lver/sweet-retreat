@@ -3,7 +3,6 @@
 # My first pygame!
 
 import pygame
-import random
 from typing import List
 
 import background.Background_Methods as bg_methods
@@ -104,7 +103,7 @@ while running:
         elif SCREEN == Screens.LORE.value: lore_screen.draw(screen)
         elif SCREEN == Screens.DIRECTIONS.value: directions_screen.draw(screen)
         else: pass
-        
+
         # immediately update display and continue if on starting few screens
         pygame.display.update()
         continue
