@@ -114,4 +114,4 @@ def pause(screen, game_width: int, game_height: int) -> None:
     """
     screen.fill([0, 0, 0]) # black
 
-    Text.render(screen, "PAUSE ||", Text.Font.Dewangga, 50, Text.Color.Neon_Green, (game_width / 2.75, game_height / 2.4))
+    Text.render(screen, "PAUSE ||", Text.Font.Dewangga, 50, Text.Color.Neon_Green, (game_width / 2.6, game_height / 2.4))
