@@ -32,6 +32,7 @@
   - [explosion](https://www.flaticon.com/free-icon/explosion_599506?term=explosion&page=1&position=2&page=1&position=2&related_id=599506&origin=search)
   - [cookie](https://www.flaticon.com/free-icon/cookie_541803?term=cookie&related_id=541803)
   - [brownie](https://www.flaticon.com/free-icon/brownie_2255705?term=brownie&related_id=2255705)
+  - [enemy explosion](https://www.flaticon.com/free-icon/explosion_616666?term=explosion&page=1&position=18&page=1&position=18&related_id=616666&origin=search)
 - [Image Resizing](https://www.img2go.com/)
 - [Online Image Tools](https://onlineimagetools.com/)
 - [Image Effects](https://pixlr.com/)
