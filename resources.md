@@ -24,6 +24,8 @@
   - [smg](https://www.flaticon.com/free-icon/machine-gun_2761994?term=submachine%20gun&page=1&position=53&page=1&position=53&related_id=2761994&origin=search)
   - [bow](https://www.flaticon.com/free-icon/archer_4745704?term=bow%20and%20arrow&page=1&position=34&page=1&position=34&related_id=4745704&origin=search)
   - [arrow](https://www.flaticon.com/free-icon/arrow_909540?term=bow%20arrow&related_id=909540)
+  - [rpg](https://www.flaticon.com/free-icon/rpg_2761899?term=rpg&page=1&position=18&page=1&position=18&related_id=2761899&origin=search)
+  - [rpg rocket](https://www.flaticon.com/free-icon/bullet_1789179?term=bullet&page=1&position=43&page=1&position=43&related_id=1789179&origin=search)
   - [bullet](https://www.flaticon.com/free-icon/bullet_4004012?term=bullet&page=1&position=74&page=1&position=74&related_id=4004012&origin=search)
   - [ray gun bullet](https://www.flaticon.com/free-icon/bullet_942275?term=bullet&page=2&position=46&page=2&position=46&related_id=942275&origin=search)
   - [ammo box](https://www.flaticon.com/free-icon/box_4611487?term=ammo%20box&page=1&position=6&page=1&position=6&related_id=4611487&origin=search)
@@ -49,6 +51,7 @@
   - [desert eagle](https://freesound.org/people/vabadus/sounds/151071/)
   - [smg](https://freesound.org/people/CharlieWD100/sounds/440559/)
   - [bow](https://freesound.org/people/Lydmakeren/sounds/511490/)
+  - [rpg](https://freesound.org/people/northern87/sounds/88532/)
   - [mystery box](https://freesound.org/people/skylarjulian/sounds/558416/)
 
 ### Fonts
