@@ -68,6 +68,7 @@ directions_screen = Start_Screen("images/directions_screen.png")
 
 # important flags and variables for main game loop
 collision = False
+pause = False
 running = True
 died = False
 final_score = 0
@@ -94,6 +95,7 @@ while running:
             if event.key == pygame.K_b: trying_to_buy_item = True
             if event.key == pygame.K_c: trying_to_pick_up_weapon = True
             if event.key == pygame.K_v: player.switch_to_next_weapon()
+            if event.key == pygame.K_ESCAPE: pause = not pause
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: player.set_x_velocity(0)
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN: player.set_y_velocity(0)
@@ -106,6 +108,21 @@ while running:
         else: pass
         
         # immediately update display and continue if on starting few screens
+        pygame.display.update()
+        continue
+
+    # game over screen
+    if player.health <= 0:
+        if not died:
+            final_score = num_enemies_defeated
+            died = True
+        bg_methods.game_over(screen, num_enemies_defeated, WIDTH, HEIGHT)
+        pygame.display.update()
+        continue
+
+    # pause game
+    if pause:
+        bg_methods.pause(screen, WIDTH, HEIGHT)
         pygame.display.update()
         continue
 
@@ -139,13 +156,6 @@ while running:
     # draw score & ammo metadata
     bg_methods.display_points(screen, player.points)
     bg_methods.display_ammo(screen, player.get_current_weapon())
-
-    # game over screen
-    if player.health <= 0:
-        if not died:
-            final_score = num_enemies_defeated
-            died = True
-        bg_methods.game_over(screen, num_enemies_defeated, WIDTH, HEIGHT)
 
     # progress game
     Game_State.progress(enemies, enemy_factory, num_enemies_defeated)
