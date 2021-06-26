@@ -121,6 +121,7 @@ class MysteryBox():
         weapons.append(Arsenal.ray_gun(player))
         weapons.append(Arsenal.revolver(player))
         weapons.append(Arsenal.rifle(player))
+        weapons.append(Arsenal.rpg(player))
         weapons.append(Arsenal.smg(player))
         weapons.append(Arsenal.sniper(player))
 
