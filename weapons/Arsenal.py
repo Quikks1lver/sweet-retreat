@@ -46,7 +46,7 @@ class Arsenal():
         """
         Returns an RPG weapon
         """
-        return Weapon("RPG", "images/rpg.png", "sounds/rpg.wav", "images/rpg_bullet.png", player, 4, 75, 10)
+        return Weapon("RPG", "images/rpg.png", "sounds/rpg.wav", "images/rpg_bullet.png", player, 6, 40, 10)
 
     @staticmethod
     def smg(player: Player) -> Weapon:
