@@ -121,7 +121,7 @@ while running:
         if not died:
             final_score = num_enemies_defeated
             died = True
-        bg_methods.game_over(screen, num_enemies_defeated, WIDTH, HEIGHT)
+        bg_methods.game_over(screen, final_score, WIDTH, HEIGHT)
         pygame.display.update()
         continue
 
