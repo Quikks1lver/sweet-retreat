@@ -103,7 +103,7 @@ def game_over(screen, score: int, time_survived: int, game_width: int, game_heig
 
     Text.render(screen, "There is no Escape", Text.Font.Dewangga, 50, Text.Color.Red, (game_width / 3.5, game_height / 2.4))
     Text.render(screen, f"Sweets Conquered: {score}", Text.Font.Dewangga, 35, Text.Color.Neon_Magenta, (game_width / 3.5, game_height / 2.4 + 50))
-    Text.render(screen, f"Time Survived: {time_survived} s", Text.Font.Dewangga, 35, Text.Color.Neon_Magenta, (game_width / 3.5, game_height / 2.4 + 85))
+    Text.render(screen, f"Time Elapsed: {time_survived} s", Text.Font.Dewangga, 35, Text.Color.Neon_Magenta, (game_width / 3.5, game_height / 2.4 + 85))
 
 def pause(screen, game_width: int, game_height: int) -> None:
     """
