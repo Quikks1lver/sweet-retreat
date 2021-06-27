@@ -87,11 +87,12 @@ def display_ammo(screen, weapon: Weapon) -> None:
     weapon_name_width = Text.render(screen, f"{weapon.name} ", Text.Font.Dewangga, 25, Text.Color.Neon_Green, (20, 60))
     Text.render(screen, f"{ammo_bar}", Text.Font.Dewangga, 25, Text.Color.White, (20 + weapon_name_width, 60))
 
-def game_over(screen, score: int, game_width: int, game_height: int) -> None:
+def game_over(screen, score: int, time_survived: int, game_width: int, game_height: int) -> None:
     """
     Displays game over screen
     :param screen:
     :param score:
+    :param time_survived: in seconds
     :param game_width:
     :param game_height:
     :return:
@@ -100,8 +101,9 @@ def game_over(screen, score: int, game_width: int, game_height: int) -> None:
 
     screen.fill([0, 0, 0]) # black
 
-    Text.render(screen, "GAME OVER", Text.Font.Dewangga, 50, Text.Color.Red, (game_width / 2.75, game_height / 2.4))
-    Text.render(screen, f"Sweets Conquered: {score}", Text.Font.Dewangga, 35, Text.Color.Neon_Magenta, (game_width / 2.75, game_height / 2.4 + 50))
+    Text.render(screen, "There is no Escape", Text.Font.Dewangga, 50, Text.Color.Red, (game_width / 3.5, game_height / 2.4))
+    Text.render(screen, f"Sweets Conquered: {score}", Text.Font.Dewangga, 35, Text.Color.Neon_Magenta, (game_width / 3.5, game_height / 2.4 + 50))
+    Text.render(screen, f"Time Survived: {time_survived} s", Text.Font.Dewangga, 35, Text.Color.Neon_Magenta, (game_width / 3.5, game_height / 2.4 + 85))
 
 def pause(screen, game_width: int, game_height: int) -> None:
     """
