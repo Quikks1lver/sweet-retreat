@@ -56,6 +56,7 @@
   - [rpg](https://freesound.org/people/northern87/sounds/88532/)
   - [mystery box](https://freesound.org/people/skylarjulian/sounds/558416/)
   - [background music](https://freesound.org/people/onderwish/sounds/468407/)
+  - [victory music](https://freesound.org/people/pinkinblue/sounds/425971/)
 
 ### Fonts
 
