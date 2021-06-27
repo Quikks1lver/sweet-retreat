@@ -32,6 +32,8 @@ MYSTERY_BOX_COST = 100
 Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD = 440, 530
 COLLISION_THRESHOLD = 25
 
+NUM_ENEMIES_DEFEATED_FOR_VICTORY = 0
+
 # initialize the pygame & create screen
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -77,6 +79,7 @@ collision: bool = False
 pause: bool = False
 running: bool = True
 died: bool = False
+victory: bool = False
 final_score: int = 0
 time_survived: float = 0
 num_enemies_defeated: int = 0
@@ -115,6 +118,17 @@ while running:
         else: pass
         
         # immediately update display and continue if on starting few screens
+        pygame.display.update()
+        continue
+
+    # victory screen; play victory music, too
+    if num_enemies_defeated > NUM_ENEMIES_DEFEATED_FOR_VICTORY:
+        if not victory:
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load("sounds/victory_music.wav")
+            pygame.mixer.music.play(-1)
+            victory = True
+        bg_methods.victory(screen, WIDTH, HEIGHT)
         pygame.display.update()
         continue
 
