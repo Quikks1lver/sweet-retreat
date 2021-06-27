@@ -14,6 +14,7 @@ from characters.Player import Player
 from characters.Enemy import Enemy, Enemy_Collision
 from characters.EnemyFactory import EnemyFactory
 from game_state.Game_State import Game_State
+from timing.Clock_Methods import Clock_Methods
 from weapons.Arsenal import Arsenal
 
 # constants
@@ -77,6 +78,7 @@ pause = False
 running = True
 died = False
 final_score = 0
+time_survived = 0
 num_enemies_defeated = 0
 SCREEN = 1
 
@@ -120,8 +122,9 @@ while running:
     if player.health <= 0:
         if not died:
             final_score = num_enemies_defeated
+            time_survived = round((Clock_Methods.get_current_time() / 1000), 2)
             died = True
-        bg_methods.game_over(screen, final_score, WIDTH, HEIGHT)
+        bg_methods.game_over(screen, final_score, time_survived, WIDTH, HEIGHT)
         pygame.display.update()
         continue
 
