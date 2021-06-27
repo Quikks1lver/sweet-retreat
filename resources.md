@@ -7,6 +7,8 @@
   - [Player Movement](https://www.youtube.com/watch?v=AX8YU2hLBUg)
   - [Background Scrolling](https://www.youtube.com/watch?v=US3HSusUBeI)
 - Microsoft Word (for Splash Screen)
+- [Cloud Convert](https://cloudconvert.com/)
+- [Pygame docs](https://www.pygame.org/docs/)
 
 ### Images
 
@@ -53,6 +55,7 @@
   - [bow](https://freesound.org/people/Lydmakeren/sounds/511490/)
   - [rpg](https://freesound.org/people/northern87/sounds/88532/)
   - [mystery box](https://freesound.org/people/skylarjulian/sounds/558416/)
+  - [background music](https://freesound.org/people/onderwish/sounds/468407/)
 
 ### Fonts
 
