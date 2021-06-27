@@ -87,7 +87,7 @@ def display_ammo(screen, weapon: Weapon) -> None:
     weapon_name_width = Text.render(screen, f"{weapon.name} ", Text.Font.Dewangga, 25, Text.Color.Neon_Green, (20, 60))
     Text.render(screen, f"{ammo_bar}", Text.Font.Dewangga, 25, Text.Color.White, (20 + weapon_name_width, 60))
 
-def game_over(screen, score: int, time_survived: int, game_width: int, game_height: int) -> None:
+def game_over(screen, score: int, time_survived: float, game_width: int, game_height: int) -> None:
     """
     Displays game over screen
     :param screen:

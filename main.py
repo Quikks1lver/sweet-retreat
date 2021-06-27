@@ -73,14 +73,14 @@ lore_screen = Start_Screen("images/lore_screen.png")
 directions_screen = Start_Screen("images/directions_screen.png")
 
 # important flags and variables for main game loop
-collision = False
-pause = False
-running = True
-died = False
-final_score = 0
-time_survived = 0
-num_enemies_defeated = 0
-SCREEN = 1
+collision: bool = False
+pause: bool = False
+running: bool = True
+died: bool = False
+final_score: int = 0
+time_survived: float = 0
+num_enemies_defeated: int = 0
+SCREEN: int = 1
 
 # game loop
 while running:
