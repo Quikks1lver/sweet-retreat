@@ -48,6 +48,10 @@ start_scrolling_pos_x = WIDTH / 2
 background_collision = pygame.image.load("images/background_collision.png").convert()
 enemy_explosion = pygame.image.load("images/enemy_explosion.png")
 
+# background music
+pygame.mixer.music.load("sounds/background_music.wav")
+pygame.mixer.music.play(-1)
+
 # sounds
 explosion_sound = pygame.mixer.Sound("sounds/explosion.wav")
 
