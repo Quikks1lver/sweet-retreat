@@ -21,3 +21,11 @@ class Clock_Methods():
         :return:
         """
         return pygame.time.get_ticks()
+
+    @staticmethod
+    def get_current_time_in_seconds(decimal_place: int) -> float:
+        """
+        Gets current time in seconds, with desired decimal precision
+        :param decimal_place: how many decimal places you want in end result
+        """
+        return round((Clock_Methods.get_current_time() / 1000), decimal_place)
