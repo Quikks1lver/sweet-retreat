@@ -127,8 +127,9 @@ while running:
             pygame.mixer.music.stop()
             pygame.mixer.music.load("sounds/victory_music.wav")
             pygame.mixer.music.play(-1)
+            time_survived = Clock_Methods.get_current_time_in_seconds(2)
             victory = True
-        bg_methods.victory(screen, WIDTH, HEIGHT)
+        bg_methods.victory(screen, time_survived, WIDTH, HEIGHT)
         pygame.display.update()
         continue
 
@@ -136,7 +137,7 @@ while running:
     if player.health <= 0:
         if not died:
             final_score = num_enemies_defeated
-            time_survived = round((Clock_Methods.get_current_time() / 1000), 2)
+            time_survived = Clock_Methods.get_current_time_in_seconds(2)
             died = True
         bg_methods.game_over(screen, final_score, time_survived, WIDTH, HEIGHT)
         pygame.display.update()
