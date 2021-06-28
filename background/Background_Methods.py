@@ -117,16 +117,17 @@ def pause(screen, game_width: int, game_height: int) -> None:
 
     Text.render(screen, "PAUSE ||", Text.Font.Dewangga, 50, Text.Color.Neon_Green, (game_width / 2.6, game_height / 2.4))
 
-def victory(screen, game_width: int, game_height: int) -> None:
+def victory(screen, time_survived: float, game_width: int, game_height: int) -> None:
     """
     Displays victory screen
     :param screen:
+    :param time_survived: in seconds
     :param game_width:
     :param game_height:
     :return:
     """
     screen.fill([106, 90, 205]) # medium purple
 
-    Text.render(screen, "Victory. Well Done!", Text.Font.Dewangga, 50, Text.Color.Neon_Cyan, (game_width / 3.5, game_height / 2.4))
+    Text.render(screen, f"Victory! ({time_survived} s)", Text.Font.Dewangga, 50, Text.Color.Neon_Cyan, (game_width / 3.5, game_height / 2.4))
     Text.render(screen, "You have conquered your vices.", Text.Font.Dewangga, 35, Text.Color.Neon_Green, (game_width / 3.5, game_height / 2.4 + 50))
-    Text.render(screen, "Welcome to the Oasis . . .", Text.Font.Dewangga, 35, Text.Color.Neon_Magenta, (game_width / 3.5, game_height / 2.4 + 85))
+    Text.render(screen, "Welcome to the Oasis . . .", Text.Font.Dewangga, 35, Text.Color.White, (game_width / 3.5, game_height / 2.4 + 85))
