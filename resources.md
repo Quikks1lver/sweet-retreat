@@ -9,6 +9,7 @@
 - Microsoft Word (for Splash Screen)
 - [Cloud Convert](https://cloudconvert.com/)
 - [Pygame docs](https://www.pygame.org/docs/)
+- [Pygame efficiently check whether a key key is held down](https://stackoverflow.com/questions/22093662/how-to-efficiently-hold-a-key-in-pygame)
 
 ### Images
 
