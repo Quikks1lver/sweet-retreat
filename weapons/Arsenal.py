@@ -39,7 +39,7 @@ class Arsenal():
         """
         Returns a rifle weapon
         """
-        return Weapon("Rifle", "images/rifle.png", "sounds/rifle.wav", "images/bullet.png", player, 30, 15, 75)
+        return Weapon("Rifle", "images/rifle.png", "sounds/rifle.wav", "images/bullet.png", player, 10, 7, 75, True)
     
     @staticmethod
     def rpg(player: Player) -> Weapon:
@@ -53,7 +53,7 @@ class Arsenal():
         """
         Returns a smg weapon
         """
-        return Weapon("SMG", "images/smg.png", "sounds/smg.wav", "images/bullet.png", player, 50, 12, 100)
+        return Weapon("SMG", "images/smg.png", "sounds/smg.wav", "images/bullet.png", player, 8, 5, 100, True)
 
     @staticmethod
     def sniper(player: Player) -> Weapon:

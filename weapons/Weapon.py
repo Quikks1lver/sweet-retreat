@@ -7,7 +7,7 @@ class Weapon():
     Represents a (typically ranged) weapon that either a character uses
     """
 
-    def __init__(self, name: str, image_path: str, sound_path: str, bullet_image: str, character: Player, projectile_x_velocity: float, damage: float, ammo: int):
+    def __init__(self, name: str, image_path: str, sound_path: str, bullet_image: str, character: Player, projectile_x_velocity: float, damage: float, ammo: int, full_auto: bool = False):
         """
         Initializes a new weapon
         :param name: name of weapon
@@ -17,6 +17,7 @@ class Weapon():
         :param projectile_x_velocity: how fast the bullet/projectile travels
         :param damage: damage hit
         :param ammo: how much ammunition the weapon holds
+        :param full_auto: (optional) full auto capability
         """
         self.name = name
 
@@ -32,6 +33,8 @@ class Weapon():
         self.ammo = ammo
 
         self.bullet = Bullet(bullet_image, projectile_x_velocity, damage, self.character.stage_width)
+
+        self.full_auto = full_auto
 
     def draw(self, screen) -> None:
         """
@@ -79,3 +82,10 @@ class Weapon():
         :return: True if bullet is in motion, False otherwise
         """
         return self.bullet.state == Bullet_State.MOVING
+
+    def is_full_auto(self) -> bool:
+        """
+        Returns whether the weapon can fire full auto
+        :return: True if full auto, False otherwise
+        """
+        return self.full_auto

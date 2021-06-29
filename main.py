@@ -109,6 +109,7 @@ while running:
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: player.set_x_velocity(0)
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN: player.set_y_velocity(0)
+    if pygame.key.get_pressed()[pygame.K_SPACE] and player.get_current_weapon().is_full_auto(): player.fire_current_weapon() # full auto
 
     # check which screen we're on
     if SCREEN < Screens.GAME.value:
