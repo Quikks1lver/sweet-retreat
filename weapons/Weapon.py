@@ -95,6 +95,7 @@ class Weapon():
     def __build_ammo_string(ammo: int) -> str:
         """
         Builds string representation of ammo
+        Efficient string concat in python => list comprehension (see resources)
         :return: ammo string
         """
         return "".join("I" for i in range(ammo))
@@ -102,6 +103,7 @@ class Weapon():
     def get_ammo_string(self) -> str:
         """
         Returns string representation of the ammo
+        Helps game performance by memoization
         :return: ammo string
         """
         if len(self.ammo_string) == self.ammo:
