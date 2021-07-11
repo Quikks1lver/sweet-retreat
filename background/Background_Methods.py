@@ -80,11 +80,9 @@ def display_ammo(screen, weapon: Weapon) -> None:
     :param screen:
     :param weapon:
     :return:
-    """
-    ammo_bar = "".join("I" for i in range(weapon.ammo))
-    
+    """    
     weapon_name_width = Text.render(screen, f"{weapon.name} ", Text.Font.Dewangga, 25, Text.Color.Neon_Green, (20, 60))
-    Text.render(screen, f"{ammo_bar}", Text.Font.Dewangga, 25, Text.Color.White, (20 + weapon_name_width, 60))
+    Text.render(screen, f"{weapon.get_ammo_string()}", Text.Font.Dewangga, 25, Text.Color.White, (20 + weapon_name_width, 60))
 
 def game_over(screen, score: int, time_survived: float, game_width: int, game_height: int) -> None:
     """
