@@ -81,9 +81,8 @@ def display_ammo(screen, weapon: Weapon) -> None:
     :param weapon:
     :return:
     """
-    ammo_bar = ""
-    for i in range(weapon.ammo): ammo_bar += "I"
-
+    ammo_bar = "".join("I" for i in range(weapon.ammo))
+    
     weapon_name_width = Text.render(screen, f"{weapon.name} ", Text.Font.Dewangga, 25, Text.Color.Neon_Green, (20, 60))
     Text.render(screen, f"{ammo_bar}", Text.Font.Dewangga, 25, Text.Color.White, (20 + weapon_name_width, 60))
 
