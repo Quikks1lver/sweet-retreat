@@ -31,6 +31,7 @@ class Weapon():
         self.image_width = self.image.get_width()
 
         self.ammo = ammo
+        self.ammo_string = Weapon.__build_ammo_string(ammo)
 
         self.bullet = Bullet(bullet_image, projectile_x_velocity, damage, self.character.stage_width)
 
@@ -89,3 +90,24 @@ class Weapon():
         :return: True if full auto, False otherwise
         """
         return self.full_auto
+
+    @staticmethod
+    def __build_ammo_string(ammo: int) -> str:
+        """
+        Builds string representation of ammo
+        Efficient string concat in python => list comprehension (see resources)
+        :return: ammo string
+        """
+        return "".join("I" for i in range(ammo))
+
+    def get_ammo_string(self) -> str:
+        """
+        Returns string representation of the ammo
+        Helps game performance by memoization
+        :return: ammo string
+        """
+        if len(self.ammo_string) == self.ammo:
+            return self.ammo_string
+        
+        self.ammo_string = Weapon.__build_ammo_string(self.ammo)
+        return self.ammo_string
