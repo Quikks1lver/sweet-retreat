@@ -34,6 +34,8 @@ COLLISION_THRESHOLD = 25
 
 NUM_ENEMIES_DEFEATED_FOR_VICTORY = 200
 
+PAUSE_START_FLAG = -1
+
 # initialize the pygame & create screen
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -80,9 +82,11 @@ pause: bool = False
 running: bool = True
 game_has_started = False
 died: bool = False
+pause_started: bool = False
 victory: bool = False
 final_score: int = 0
 uncounted_time: float = 0
+pause_time_start: float = PAUSE_START_FLAG
 time_survived: float = 0
 num_enemies_defeated: int = 0
 SCREEN: int = 1
@@ -151,11 +155,20 @@ while running:
         pygame.display.update()
         continue
 
-    # pause game
+    # pause game & log how much time is spent in pause screen to uncounted time
     if pause:
+        if not pause_started:
+            pause_started = True
+            pause_time_start = Clock_Methods.get_current_time_in_seconds(2)
         bg_methods.pause(screen, WIDTH, HEIGHT)
         pygame.display.update()
         continue
+    else:
+        pause_started = False
+        if pause_time_start != PAUSE_START_FLAG:
+            pause_time_delta = Clock_Methods.get_current_time_in_seconds(2) - pause_time_start
+            uncounted_time += pause_time_delta
+            pause_time_start = PAUSE_START_FLAG
 
     # move all characters
     player.move()
