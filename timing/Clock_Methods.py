@@ -27,5 +27,16 @@ class Clock_Methods():
         """
         Gets current time in seconds, with desired decimal precision
         :param decimal_place: how many decimal places you want in end result
+        :return:
         """
         return round((Clock_Methods.get_current_time() / 1000), decimal_place)
+    
+    @staticmethod
+    def get_time_survived(uncounted_time: float, decimal_place: int) -> float:
+        """
+        Returns the amount of time the player character has survived
+        :param uncounted_time: time that does not factor into the time survived (time in first few screens, pause, etc.)
+        :param decimal_place: floating point precision
+        :return:
+        """
+        return round(Clock_Methods.get_current_time_in_seconds(decimal_place) - uncounted_time, decimal_place)
