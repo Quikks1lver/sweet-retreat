@@ -19,22 +19,17 @@ from weapons.Arsenal import Arsenal
 
 # constants
 WIDTH, HEIGHT = 800, 600
-
 NUM_ENEMIES = 5
-
 PLAYER_HEALTH = 100
 PLAYER_X_START, PLAYER_Y_START = 50, 460
 PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 5, 2
-
 AMMO_COST, AMMO_GAIN = 50, 25
 MYSTERY_BOX_COST = 100
-
 Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD = 440, 530
 COLLISION_THRESHOLD = 25
-
 NUM_ENEMIES_DEFEATED_FOR_VICTORY = 200
-
 PAUSE_START_FLAG = -1
+SCREEN = 1
 
 # initialize the pygame & create screen
 pygame.init()
@@ -89,7 +84,6 @@ uncounted_time: float = 0
 pause_time_start: float = PAUSE_START_FLAG
 time_survived: float = 0
 num_enemies_defeated: int = 0
-SCREEN: int = 1
 
 # game loop
 while running:
