@@ -19,22 +19,17 @@ from weapons.Arsenal import Arsenal
 
 # constants
 WIDTH, HEIGHT = 800, 600
-
 NUM_ENEMIES = 5
-
 PLAYER_HEALTH = 100
 PLAYER_X_START, PLAYER_Y_START = 50, 460
 PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 5, 2
-
 AMMO_COST, AMMO_GAIN = 50, 25
 MYSTERY_BOX_COST = 100
-
 Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD = 440, 530
 COLLISION_THRESHOLD = 25
-
 NUM_ENEMIES_DEFEATED_FOR_VICTORY = 200
-
 PAUSE_START_FLAG = -1
+SCREEN = 1
 
 # initialize the pygame & create screen
 pygame.init()
@@ -77,29 +72,29 @@ lore_screen = Start_Screen("images/lore_screen.png")
 directions_screen = Start_Screen("images/directions_screen.png")
 
 # important flags and variables for main game loop
-collision: bool = False
-pause: bool = False
-running: bool = True
-game_has_started = False
-died: bool = False
-pause_started: bool = False
+has_collision_occurred: bool = False
+is_game_paused: bool = False
+is_game_running: bool = True
+has_game_started = False
+has_player_died: bool = False
+has_pause_started: bool = False
 victory: bool = False
+
 final_score: int = 0
 uncounted_time: float = 0
 pause_time_start: float = PAUSE_START_FLAG
 time_survived: float = 0
 num_enemies_defeated: int = 0
-SCREEN: int = 1
 
 # game loop
-while running:
-    collision = False
+while is_game_running:
+    has_collision_occurred = False
     trying_to_buy_item = False
     trying_to_pick_up_weapon = False
 
     # event handlers
     for event in pygame.event.get():
-        if event.type == pygame.QUIT: running = False
+        if event.type == pygame.QUIT: is_game_running = False
         if event.type == pygame.KEYDOWN:
             if SCREEN < Screens.GAME.value and event.key == pygame.K_RETURN: SCREEN += 1
             if SCREEN < Screens.GAME.value: break
@@ -111,7 +106,7 @@ while running:
             if event.key == pygame.K_b: trying_to_buy_item = True
             if event.key == pygame.K_c: trying_to_pick_up_weapon = True
             if event.key == pygame.K_v: player.switch_to_next_weapon()
-            if event.key == pygame.K_ESCAPE: pause = not pause
+            if event.key == pygame.K_ESCAPE: is_game_paused = not is_game_paused
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT: player.set_x_velocity(0)
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN: player.set_y_velocity(0)
@@ -129,8 +124,8 @@ while running:
         continue
 
     # log the exact time the player actually begins the game
-    if not game_has_started and SCREEN == Screens.GAME.value:
-        game_has_started = True
+    if not has_game_started and SCREEN == Screens.GAME.value:
+        has_game_started = True
         uncounted_time = Clock_Methods.get_current_time_in_seconds(2)
 
     # victory screen; play victory music, too
@@ -147,24 +142,24 @@ while running:
 
     # game over screen
     if player.health <= 0:
-        if not died:
+        if not has_player_died:
             final_score = num_enemies_defeated
             time_survived = Clock_Methods.get_time_survived(uncounted_time, 2)
-            died = True
+            has_player_died = True
         bg_methods.game_over(screen, final_score, time_survived, WIDTH, HEIGHT)
         pygame.display.update()
         continue
 
     # pause game & log how much time is spent in pause screen to uncounted time
-    if pause:
-        if not pause_started:
-            pause_started = True
+    if is_game_paused:
+        if not has_pause_started:
+            has_pause_started = True
             pause_time_start = Clock_Methods.get_current_time_in_seconds(2)
         bg_methods.pause(screen, WIDTH, HEIGHT)
         pygame.display.update()
         continue
     else:
-        pause_started = False
+        has_pause_started = False
         if pause_time_start != PAUSE_START_FLAG:
             pause_time_delta = Clock_Methods.get_current_time_in_seconds(2) - pause_time_start
             uncounted_time += pause_time_delta
@@ -176,13 +171,13 @@ while running:
         e.move(player)
         if e.has_collision_with_player(player, COLLISION_THRESHOLD):
             player.take_damage(e.damage_amount())
-            collision = True
+            has_collision_occurred = True
 
     # move stage if need be
     stage_pos_x += bg_methods.determine_stage_change(player)
 
     # draw everything to screen; also, check for bullet collisions here
-    bg_methods.draw_background(screen, background_collision if collision else background, stage_pos_x, background_width, WIDTH)
+    bg_methods.draw_background(screen, background_collision if has_collision_occurred else background, stage_pos_x, background_width, WIDTH)
     bg_methods.draw_ammo_box(screen, player, AMMO_COST, AMMO_GAIN, trying_to_buy_item)
     mystery_box.draw(screen, player, MYSTERY_BOX_COST, trying_to_buy_item, trying_to_pick_up_weapon)
     player.draw(screen)
