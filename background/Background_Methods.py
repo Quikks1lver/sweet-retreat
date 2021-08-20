@@ -97,7 +97,7 @@ def game_over(screen, score: int, time_survived: float, game_width: int, game_he
     """
     pygame.mixer.stop()
 
-    screen.fill([0, 0, 0]) # black
+    screen.fill(Colors.Black)
 
     Text.render(screen, "There is no Escape", Text.Font.Dewangga, 50, Colors.Red, (game_width / 3.5, game_height / 2.4))
     Text.render(screen, f"Sweets Conquered: {score}", Text.Font.Dewangga, 35, Colors.Neon_Magenta, (game_width / 3.5, game_height / 2.4 + 50))
@@ -111,7 +111,7 @@ def pause(screen, game_width: int, game_height: int) -> None:
     :param game_height:
     :return:
     """
-    screen.fill([0, 0, 0]) # black
+    screen.fill(Colors.Black)
 
     Text.render(screen, "PAUSE ||", Text.Font.Dewangga, 50, Colors.Neon_Green, (game_width / 2.6, game_height / 2.4))
 
@@ -124,7 +124,7 @@ def victory(screen, time_survived: float, game_width: int, game_height: int) -> 
     :param game_height:
     :return:
     """
-    screen.fill([106, 90, 205]) # medium purple
+    screen.fill(Colors.Medium_Purple)
 
     Text.render(screen, f"Victory! ({time_survived} s)", Text.Font.Dewangga, 50, Colors.Neon_Cyan, (game_width / 3.5, game_height / 2.4))
     Text.render(screen, "You have conquered your vices.", Text.Font.Dewangga, 35, Colors.Neon_Green, (game_width / 3.5, game_height / 2.4 + 50))
