@@ -1,6 +1,7 @@
 import math
 import pygame
 
+from color.Colors import Colors
 from text.Text import Text
 from typing import List, Union
 from weapons.Weapon import Weapon
@@ -59,7 +60,7 @@ class Player():
         else: screen.blit(pygame.transform.flip(self.image, True, False), (self.real_x_position, self.y))
 
         # print health
-        Text.render(screen, str(int(self.health)), Text.Font.Dewangga, 23, Text.Color.Red, (self.real_x_position + 20, self.y + 70))
+        Text.render(screen, str(int(self.health)), Text.Font.Dewangga, 23, Colors.Red, (self.real_x_position + 20, self.y + 70))
 
         # print weapon
         if len(self.weapons) > 0: self.get_current_weapon().draw(screen)

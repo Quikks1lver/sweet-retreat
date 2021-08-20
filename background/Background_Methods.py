@@ -1,6 +1,7 @@
 import pygame
 
 from characters.Player import Player
+from color.Colors import Colors
 from text.Text import Text
 from weapons.Weapon import Weapon
 
@@ -21,8 +22,8 @@ def draw_ammo_box(screen, player: Player, cost: int, ammo_gain: int, trying_to_b
         ammo_box_img = pygame.image.load("images/ammo_box.png")
         screen.blit(ammo_box_img, (x_start, y_start))
 
-        Text.render(screen, "Press 'B' for Ammo", Text.Font.Dewangga, 24, Text.Color.Neon_Cyan, (x_start, y_start - 55))
-        Text.render(screen, f"Cost: {cost} points", Text.Font.Dewangga, 24, Text.Color.Neon_Cyan, (x_start, y_start - 30))
+        Text.render(screen, "Press 'B' for Ammo", Text.Font.Dewangga, 24, Colors.Neon_Cyan, (x_start, y_start - 55))
+        Text.render(screen, f"Cost: {cost} points", Text.Font.Dewangga, 24, Colors.Neon_Cyan, (x_start, y_start - 30))
 
         if trying_to_buy and player.points >= cost:
             if player.x >= x_start and player.x <= (x_start + ammo_box_img.get_width()):
@@ -72,7 +73,7 @@ def display_points(screen, points: int) -> None:
     :param points:
     :return:
     """
-    Text.render(screen, f"Points: {str(points)}", Text.Font.Dewangga, 40, Text.Color.Neon_Magenta, (20, 20))
+    Text.render(screen, f"Points: {str(points)}", Text.Font.Dewangga, 40, Colors.Neon_Magenta, (20, 20))
 
 def display_ammo(screen, weapon: Weapon) -> None:
     """
@@ -81,8 +82,8 @@ def display_ammo(screen, weapon: Weapon) -> None:
     :param weapon:
     :return:
     """    
-    weapon_name_width = Text.render(screen, f"{weapon.name} ", Text.Font.Dewangga, 25, Text.Color.Neon_Green, (20, 60))
-    Text.render(screen, f"{weapon.get_ammo_string()}", Text.Font.Dewangga, 25, Text.Color.White, (20 + weapon_name_width, 60))
+    weapon_name_width = Text.render(screen, f"{weapon.name} ", Text.Font.Dewangga, 25, Colors.Neon_Green, (20, 60))
+    Text.render(screen, f"{weapon.get_ammo_string()}", Text.Font.Dewangga, 25, Colors.White, (20 + weapon_name_width, 60))
 
 def game_over(screen, score: int, time_survived: float, game_width: int, game_height: int) -> None:
     """
@@ -98,9 +99,9 @@ def game_over(screen, score: int, time_survived: float, game_width: int, game_he
 
     screen.fill([0, 0, 0]) # black
 
-    Text.render(screen, "There is no Escape", Text.Font.Dewangga, 50, Text.Color.Red, (game_width / 3.5, game_height / 2.4))
-    Text.render(screen, f"Sweets Conquered: {score}", Text.Font.Dewangga, 35, Text.Color.Neon_Magenta, (game_width / 3.5, game_height / 2.4 + 50))
-    Text.render(screen, f"Time Elapsed: {time_survived} s", Text.Font.Dewangga, 35, Text.Color.Neon_Magenta, (game_width / 3.5, game_height / 2.4 + 85))
+    Text.render(screen, "There is no Escape", Text.Font.Dewangga, 50, Colors.Red, (game_width / 3.5, game_height / 2.4))
+    Text.render(screen, f"Sweets Conquered: {score}", Text.Font.Dewangga, 35, Colors.Neon_Magenta, (game_width / 3.5, game_height / 2.4 + 50))
+    Text.render(screen, f"Time Elapsed: {time_survived} s", Text.Font.Dewangga, 35, Colors.Neon_Magenta, (game_width / 3.5, game_height / 2.4 + 85))
 
 def pause(screen, game_width: int, game_height: int) -> None:
     """
@@ -112,7 +113,7 @@ def pause(screen, game_width: int, game_height: int) -> None:
     """
     screen.fill([0, 0, 0]) # black
 
-    Text.render(screen, "PAUSE ||", Text.Font.Dewangga, 50, Text.Color.Neon_Green, (game_width / 2.6, game_height / 2.4))
+    Text.render(screen, "PAUSE ||", Text.Font.Dewangga, 50, Colors.Neon_Green, (game_width / 2.6, game_height / 2.4))
 
 def victory(screen, time_survived: float, game_width: int, game_height: int) -> None:
     """
@@ -125,6 +126,6 @@ def victory(screen, time_survived: float, game_width: int, game_height: int) -> 
     """
     screen.fill([106, 90, 205]) # medium purple
 
-    Text.render(screen, f"Victory! ({time_survived} s)", Text.Font.Dewangga, 50, Text.Color.Neon_Cyan, (game_width / 3.5, game_height / 2.4))
-    Text.render(screen, "You have conquered your vices.", Text.Font.Dewangga, 35, Text.Color.Neon_Green, (game_width / 3.5, game_height / 2.4 + 50))
-    Text.render(screen, "Welcome to the Oasis . . .", Text.Font.Dewangga, 35, Text.Color.White, (game_width / 3.5, game_height / 2.4 + 85))
+    Text.render(screen, f"Victory! ({time_survived} s)", Text.Font.Dewangga, 50, Colors.Neon_Cyan, (game_width / 3.5, game_height / 2.4))
+    Text.render(screen, "You have conquered your vices.", Text.Font.Dewangga, 35, Colors.Neon_Green, (game_width / 3.5, game_height / 2.4 + 50))
+    Text.render(screen, "Welcome to the Oasis . . .", Text.Font.Dewangga, 35, Colors.White, (game_width / 3.5, game_height / 2.4 + 85))
