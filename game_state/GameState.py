@@ -16,7 +16,7 @@ class Game_State():
     
     # for text running on a timer
     timed_text_helper: Timed_Text = Timed_Text()
-    TIMED_TEXT_AMOUNT_SEC = 3
+    TIMED_TEXT_AMOUNT_SEC = 5
 
     # for adding new enemies to the game
     enemy_addition_cooldown = 0
