@@ -5,7 +5,7 @@ from typing import Tuple, Union
 
 class Text():
     """
-    Helpers for rendering text
+    (Static) helpers for rendering text
     """
     
     class Font(Enum):
