@@ -10,8 +10,17 @@ class Game_State():
     """
     Deals with game progression
     """
-    cooldown = 0
-    COOLDOWN_AMOUNT = 15000 # 15 seconds
+
+    class Enemy_Names():
+        """
+        Holds names for enemies
+        """
+        Brownie_Tank = "Brownie Tank"
+        Ice_Cream_Monster = "Ice Cream Monster"
+    
+    # variables for adding new enemies to the game
+    enemy_addition_cooldown = 0
+    ENEMY_ADDITION_COOLDOWN_AMOUNT = 15000 # 15 seconds
 
     @staticmethod
     def progress(enemies: List[Enemy], enemy_factory: EnemyFactory, num_enemies_defeated: int) -> None:
@@ -19,17 +28,17 @@ class Game_State():
         Makes the game harder as more enemies are defeated
         """
         if num_enemies_defeated == 0: return
-        if not Clock_Methods.is_past_this_time(Game_State.cooldown): return
+        if not Clock_Methods.is_past_this_time(Game_State.enemy_addition_cooldown): return
 
         if num_enemies_defeated % 25 == 0: Game_State.__add_ice_cream_monster(enemies, enemy_factory)
         if num_enemies_defeated % 50 == 0: Game_State.__add_brownie_tank(enemies, enemy_factory)
-        
+
     @staticmethod
     def __set_cooldown() -> None:
         """
         Sets a cooldown period after the creation of each new enemy
         """
-        Game_State.cooldown = Clock_Methods.get_current_time() + Game_State.COOLDOWN_AMOUNT
+        Game_State.enemy_addition_cooldown = Clock_Methods.get_current_time() + Game_State.ENEMY_ADDITION_COOLDOWN_AMOUNT
 
     @staticmethod
     def __add_brownie_tank(enemies: List[Enemy], enemy_factory: EnemyFactory) -> None:
