@@ -54,6 +54,7 @@ pygame.mixer.music.play(-1)
 
 # sounds
 explosion_sound = pygame.mixer.Sound("sounds/explosion.wav")
+explosion_sound.set_volume(.20)
 
 # init player and starting enemy characters
 player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,

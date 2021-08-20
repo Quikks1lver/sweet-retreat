@@ -26,6 +26,7 @@ class Weapon():
         self.y = 0
 
         self.sound = pygame.mixer.Sound(sound_path)
+        self.sound.set_volume(.2)
 
         self.image = pygame.image.load(image_path)
         self.image_width = self.image.get_width()
