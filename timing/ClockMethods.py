@@ -8,22 +8,31 @@ class Clock_Methods():
     @staticmethod
     def is_past_this_time(time: int) -> bool:
         """
-        Returns true if current time is past target, false otherwise
+        Returns true if current time (milliseconds) is past target, false otherwise
         :param time: target time
         :return:
         """
         return True if Clock_Methods.get_current_time() > time else False
 
     @staticmethod
+    def is_past_this_time_in_seconds(time: int) -> bool:
+        """
+        Returns true if current time (seconds) is past target, false otherwise
+        :param time: target time
+        :return:
+        """
+        return True if Clock_Methods.get_current_time_in_seconds() > time else False
+
+    @staticmethod
     def get_current_time() -> int:
         """
-        Returns current time
+        Returns current time in milliseconds
         :return:
         """
         return pygame.time.get_ticks()
 
     @staticmethod
-    def get_current_time_in_seconds(decimal_place: int) -> float:
+    def get_current_time_in_seconds(decimal_place: int = 10) -> float:
         """
         Gets current time in seconds, with desired decimal precision
         :param decimal_place: how many decimal places you want in end result

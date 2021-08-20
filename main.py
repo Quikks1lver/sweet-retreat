@@ -200,7 +200,7 @@ while is_game_running:
     bg_methods.display_ammo(screen, player.get_current_weapon())
 
     # progress game
-    Game_State.progress(enemies, enemy_factory, num_enemies_defeated)
+    Game_State.progress(screen, enemies, enemy_factory, num_enemies_defeated)
 
     # update display
     pygame.display.update()

@@ -10,6 +10,7 @@ class Text():
     
     class Font(Enum):
         Dewangga = "dewangga.otf"
+        Euro_Horror = "euro_horror.ttf"
 
     @staticmethod
     def render(screen, text: str, font, font_size: int, color: Union[Colors, Tuple[int, int, int]], location: Tuple[int, int]) -> int:
