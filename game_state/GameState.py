@@ -1,4 +1,4 @@
-
+import pygame
 from sys import maxsize
 from typing import List
 
@@ -32,8 +32,20 @@ class Game_State():
         if num_enemies_defeated == 0: return
         if not Clock_Methods.is_past_this_time(Game_State.enemy_addition_cooldown): return
 
-        if num_enemies_defeated % 25 == 0: Game_State.__add_ice_cream_monster(enemies, enemy_factory)
-        if num_enemies_defeated % 50 == 0: Game_State.__add_brownie_tank(enemies, enemy_factory)
+        if num_enemies_defeated % 25 == 0:
+            Game_State.__add_ice_cream_monster(enemies, enemy_factory)
+            Game_State.__play_incoming_enemy_sound()
+        if num_enemies_defeated % 50 == 0:
+            Game_State.__add_brownie_tank(enemies, enemy_factory)
+
+    @staticmethod
+    def __play_incoming_enemy_sound() -> None:
+        """
+        Plays sound/alert of an incoming enemy
+        """
+        incoming_enemy_sound = pygame.mixer.Sound("sounds/enemy_incoming.wav")
+        incoming_enemy_sound.set_volume(1)
+        incoming_enemy_sound.play()
 
     @staticmethod
     def __set_cooldown() -> None:
