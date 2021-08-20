@@ -8,5 +8,6 @@ class Colors():
     Neon_Cyan = (8, 247, 254)
     Neon_Green = (57, 255, 20)
     Neon_Magenta = (255, 29, 206)
+    Neon_Orange = (252, 76, 2)
     Red = (255, 0, 0)
     White = (255, 255, 255)
