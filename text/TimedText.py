@@ -44,7 +44,7 @@ class Timed_Text():
       self.time_interval = time_interval
       self.upper_threshold = Clock_Methods.get_current_time_in_seconds() + time_interval
 
-   def run(self, screen):
+   def run(self, screen) -> None:
       """
       This function needs to be called inside the main game loop in order for the text to be blit
       """
