@@ -23,7 +23,7 @@ class Text():
         :param color: Colors.Color value or RGB tuple
         :param location: x, y tuple
         """
-        font = pygame.font.Font(f"./text/{font.value}", font_size)
+        font = pygame.font.Font(f"./text/fonts/{font.value}", font_size)
         text = font.render(text, True, color)
         screen.blit(text, location)
 
