@@ -13,8 +13,8 @@ from background.StartScreen import Start_Screen
 from characters.Player import Player
 from characters.Enemy import Enemy, Enemy_Collision
 from characters.EnemyFactory import EnemyFactory
-from game_state.Game_State import Game_State
-from timing.Clock_Methods import Clock_Methods
+from game_state.GameState import Game_State
+from timing.ClockMethods import Clock_Methods
 from weapons.Arsenal import Arsenal
 
 # constants
@@ -200,7 +200,7 @@ while is_game_running:
     bg_methods.display_ammo(screen, player.get_current_weapon())
 
     # progress game
-    Game_State.progress(enemies, enemy_factory, num_enemies_defeated)
+    Game_State.progress(screen, enemies, enemy_factory, num_enemies_defeated)
 
     # update display
     pygame.display.update()

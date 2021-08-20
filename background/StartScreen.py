@@ -2,7 +2,7 @@ import pygame
 
 from color.Colors import Colors
 from text.Text import Text
-from timing.Clock_Methods import Clock_Methods
+from timing.ClockMethods import Clock_Methods
 
 class Start_Screen():
     """

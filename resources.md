@@ -64,3 +64,4 @@
 
 - [Dafont](https://www.dafont.com/)
   - [dewangga](https://www.dafont.com/new.php?page=12&text=dewangga)
+  - [euro horror](https://www.dafont.com/eurohorror.font)

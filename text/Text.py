@@ -5,11 +5,12 @@ from typing import Tuple, Union
 
 class Text():
     """
-    Helpers for rendering text
+    (Static) helpers for rendering text
     """
     
     class Font(Enum):
         Dewangga = "dewangga.otf"
+        Euro_Horror = "euro_horror.ttf"
 
     @staticmethod
     def render(screen, text: str, font, font_size: int, color: Union[Colors, Tuple[int, int, int]], location: Tuple[int, int]) -> int:
