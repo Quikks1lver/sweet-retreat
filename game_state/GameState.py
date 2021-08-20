@@ -4,7 +4,7 @@ from typing import List
 
 from characters.Enemy import Enemy
 from characters.EnemyFactory import EnemyFactory
-from timing.Clock_Methods import Clock_Methods
+from timing.ClockMethods import Clock_Methods
 
 class Game_State():
     """

@@ -14,7 +14,7 @@ from characters.Player import Player
 from characters.Enemy import Enemy, Enemy_Collision
 from characters.EnemyFactory import EnemyFactory
 from game_state.GameState import Game_State
-from timing.Clock_Methods import Clock_Methods
+from timing.ClockMethods import Clock_Methods
 from weapons.Arsenal import Arsenal
 
 # constants
