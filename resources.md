@@ -60,6 +60,7 @@
   - [background music](https://freesound.org/people/onderwish/sounds/468407/)
   - [victory music](https://freesound.org/people/pinkinblue/sounds/425971/)
   - [enemy incoming sound](https://freesound.org/people/Timpan/sounds/170593/)
+  - [final boss music](https://freesound.org/people/Migfus20/sounds/560449/)
 
 ### Fonts
 
