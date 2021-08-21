@@ -39,6 +39,7 @@
   - [cookie](https://www.flaticon.com/free-icon/cookie_541803?term=cookie&related_id=541803)
   - [brownie](https://www.flaticon.com/free-icon/brownie_2255705?term=brownie&related_id=2255705)
   - [enemy explosion](https://www.flaticon.com/free-icon/explosion_616666?term=explosion&page=1&position=18&page=1&position=18&related_id=616666&origin=search)
+  - [wedding cake/final boss](https://www.flaticon.com/free-icon/cake_5020040?term=wedding%20cake&page=1&position=62&page=1&position=62&related_id=5020040&origin=search)
 - [Image Resizing](https://www.img2go.com/)
 - [Online Image Tools](https://onlineimagetools.com/)
 - [Image Effects](https://pixlr.com/)
@@ -60,6 +61,7 @@
   - [background music](https://freesound.org/people/onderwish/sounds/468407/)
   - [victory music](https://freesound.org/people/pinkinblue/sounds/425971/)
   - [enemy incoming sound](https://freesound.org/people/Timpan/sounds/170593/)
+  - [final boss music](https://freesound.org/people/Migfus20/sounds/560449/)
 
 ### Fonts
 

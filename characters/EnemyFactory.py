@@ -60,3 +60,19 @@ class EnemyFactory():
         return Enemy(f"images/brownie.png", enemy_start, self.y_start, self.start_scrolling_pos_x,
                      self.stage_width, self.game_width, self.y_top_threshold, self.y_bottom_threshold, health,
                      x_velocity, y_velocity, damage, point_gain_on_hit, point_gain_on_defeat)
+
+    def create_final_boss(self) -> Enemy:
+        """
+        Returns the final boss enemy
+        """
+        damage = 3
+        health = 2000
+        x_velocity, y_velocity = .7, .1
+        enemy_start = self.stage_width + 100 if random.randint(0, 1) == 0 else -100
+        point_gain_on_hit, point_gain_on_defeat = 10, 1000
+        blitted_health_offset_x, blitted_health_offset_y = 40, 120
+
+        return Enemy(f"images/wedding_cake.png", enemy_start, self.y_start, self.start_scrolling_pos_x,
+                     self.stage_width, self.game_width, self.y_top_threshold, self.y_bottom_threshold, health,
+                     x_velocity, y_velocity, damage, point_gain_on_hit, point_gain_on_defeat,
+                     blitted_health_offset_x, blitted_health_offset_y)

@@ -9,5 +9,6 @@ class Colors():
     Neon_Green = (57, 255, 20)
     Neon_Magenta = (255, 29, 206)
     Neon_Orange = (252, 76, 2)
+    Neon_Yellow = (255, 239, 0)
     Red = (255, 0, 0)
     White = (255, 255, 255)
