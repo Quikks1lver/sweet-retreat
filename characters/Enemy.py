@@ -3,6 +3,7 @@ import pygame
 import math
 import random
 
+from color.Colors import Colors
 from .Player import Player
 from text.Text import Text
 from weapons.Bullet import Bullet, Bullet_State
@@ -19,7 +20,8 @@ class Enemy(Player):
 
     def __init__(self, image_path: str, x_start: int, y_start: int, start_scrolling_pos_x: int, stage_width: int,
                  game_width: int, y_top_threshold: int, y_bottom_threshold: int, health: int, x_velocity: float,
-                 y_velocity: float, damage: int, point_gain_on_hit: int, point_gain_on_defeat: int):
+                 y_velocity: float, damage: int, point_gain_on_hit: int, point_gain_on_defeat: int,
+                 blitted_health_offset_x: int = 20, blitted_health_offset_y: int = 70):
         """
         Initialize an enemy character
         :param image_path: file path of player image
@@ -35,7 +37,9 @@ class Enemy(Player):
         :param y_velocity:
         :param damage: how much damage the enemy deals
         :param point_gain_on_hit: how many points the player gains by hitting this enemy
-        :param point_gain_on_defeat:  how many points the player gains by defeating this enemy
+        :param point_gain_on_defeat: how many points the player gains by defeating this enemy
+        :param blitted_health_offset_x: (optional) offset for where to blit health bar relative to enemy, x
+        :param blitted_health_offset_y: (optional) offset for where to blit health bar relative to enemy, y
         """
         super().__init__(image_path, x_start, y_start, start_scrolling_pos_x, stage_width,
                          game_width, y_top_threshold, y_bottom_threshold, health)
@@ -46,6 +50,19 @@ class Enemy(Player):
         self.damage = damage
         self.point_gain_on_hit = point_gain_on_hit
         self.point_gain_on_defeat = point_gain_on_defeat
+        self.blitted_health_offset_x = blitted_health_offset_x
+        self.blitted_health_offset_y = blitted_health_offset_y
+
+    def draw(self, screen) -> None:
+        """
+        draws enemy and metadata onto the pygame window, changing orientation if necessary
+        """
+        # print enemy
+        if self.is_left_facing: screen.blit(self.image, (self.real_x_position, self.y))
+        else: screen.blit(pygame.transform.flip(self.image, True, False), (self.real_x_position, self.y))
+
+        # print health
+        Text.render(screen, str(int(self.health)), Text.Font.Dewangga, 23, Colors.Red, (self.real_x_position + self.blitted_health_offset_x, self.y + self.blitted_health_offset_y))
 
     def move(self, player: Player) -> None:
         """
@@ -131,3 +148,6 @@ class Enemy(Player):
         Returns how many points the player gains by defeating this enemy
         """
         return self.point_gain_on_defeat
+
+    def __repr__(self):
+        return f"{self.health} {self.damage} ||"
