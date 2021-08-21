@@ -11,6 +11,7 @@
 - [Pygame docs](https://www.pygame.org/docs/)
 - [Pygame efficiently check whether a key key is held down](https://stackoverflow.com/questions/22093662/how-to-efficiently-hold-a-key-in-pygame)
 - [Efficient String Concat Methods in Python](https://waymoot.org/home/python_string/)
+- [Removing pycaches in a directory](https://stackoverflow.com/questions/28991015/python3-project-remove-pycache-folders-and-pyc-files)
 
 ### Images
 
