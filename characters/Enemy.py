@@ -148,6 +148,3 @@ class Enemy(Player):
         Returns how many points the player gains by defeating this enemy
         """
         return self.point_gain_on_defeat
-
-    def __repr__(self):
-        return f"{self.health} {self.damage} ||"
