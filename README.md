@@ -10,6 +10,6 @@
 ### How to Play
 
 1. [Install python3](https://www.python.org/downloads/)
-2. `git clone` the repo, or download a `.zip` file
+2. [Download the latest release of the videogame](https://github.com/Quikks1lver/sweet-retreat/releases)
 3. In the `sweet-retreat/` directory, run `pip install -r requirements.txt`
 4. Run `python3 main.py`
