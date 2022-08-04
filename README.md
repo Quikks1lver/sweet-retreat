@@ -5,7 +5,7 @@
 
 #### My first videogame: A 2-D action sidescroller, powered by Pygame
 
-<img src="images/readme_img.png" width="400" height="250">
+<img src="images/misc/readme_img.png" width="400" height="250">
 
 ### How to Play
 

@@ -37,7 +37,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # game header/caption and icon
 pygame.display.set_caption("Sweet Retreat")
-pygame.display.set_icon(pygame.image.load("images/cookie.png"))
+pygame.display.set_icon(pygame.image.load("images/misc/cookie.png"))
 
 # background and stage
 background = pygame.image.load("images/stage/background.png").convert()
