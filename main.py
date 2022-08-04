@@ -68,9 +68,9 @@ enemies: List[Enemy] = [enemy_factory.create_basic_enemy() for i in range(NUM_EN
 mystery_box = MysteryBox()
 
 # init starting screens
-splash_screen = Start_Screen("images/splash_screen.png")
-lore_screen = Start_Screen("images/lore_screen.png")
-directions_screen = Start_Screen("images/directions_screen.png")
+splash_screen = Start_Screen("images/screens/splash_screen.png")
+lore_screen = Start_Screen("images/screens/lore_screen.png")
+directions_screen = Start_Screen("images/screens/directions_screen.png")
 
 # important flags and variables for main game loop
 has_collision_occurred: bool = False
