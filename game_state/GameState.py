@@ -51,7 +51,7 @@ class Game_State():
         """
         Plays sound/alert of an incoming enemy
         """
-        incoming_enemy_sound = pygame.mixer.Sound("sounds/enemy_incoming.wav")
+        incoming_enemy_sound = pygame.mixer.Sound("sounds/enemies/enemy_incoming.wav")
         incoming_enemy_sound.set_volume(1)
         incoming_enemy_sound.play()
 
@@ -60,7 +60,7 @@ class Game_State():
         """
         Plays sound/alert of the final boss
         """
-        incoming_enemy_sound = pygame.mixer.Sound("sounds/final_boss_incoming.wav")
+        incoming_enemy_sound = pygame.mixer.Sound("sounds/enemies/final_boss_incoming.wav")
         incoming_enemy_sound.set_volume(1)
         incoming_enemy_sound.play()
 

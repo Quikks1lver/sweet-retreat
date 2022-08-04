@@ -53,7 +53,7 @@ pygame.mixer.music.load("sounds/background/background_music.wav")
 pygame.mixer.music.play(-1)
 
 # sounds
-explosion_sound = pygame.mixer.Sound("sounds/explosion.wav")
+explosion_sound = pygame.mixer.Sound("sounds/enemies/explosion.wav")
 explosion_sound.set_volume(.20)
 
 # init player and starting enemy characters
