@@ -46,7 +46,7 @@ stage_width = background_width * 2
 stage_pos_x = 0
 start_scrolling_pos_x = WIDTH / 2
 background_collision = pygame.image.load("images/background_collision.png").convert()
-enemy_explosion = pygame.image.load("images/enemy_explosion.png")
+enemy_explosion = pygame.image.load("images/characters/enemy_explosion.png")
 
 # background music
 pygame.mixer.music.load("sounds/background_music.wav")
@@ -57,7 +57,7 @@ explosion_sound = pygame.mixer.Sound("sounds/explosion.wav")
 explosion_sound.set_volume(.20)
 
 # init player and starting enemy characters
-player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
+player = Player("images/characters/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
                 stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, PLAYER_HEALTH)
 player.add_weapon(Arsenal.revolver(player))
 
