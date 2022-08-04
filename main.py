@@ -49,7 +49,7 @@ background_collision = pygame.image.load("images/stage/background_collision.png"
 enemy_explosion = pygame.image.load("images/characters/enemy_explosion.png")
 
 # background music
-pygame.mixer.music.load("sounds/background_music.wav")
+pygame.mixer.music.load("sounds/background/background_music.wav")
 pygame.mixer.music.play(-1)
 
 # sounds
@@ -133,7 +133,7 @@ while is_game_running:
     if num_enemies_defeated > NUM_ENEMIES_DEFEATED_FOR_VICTORY:
         if not victory:
             pygame.mixer.music.stop()
-            pygame.mixer.music.load("sounds/victory_music.wav")
+            pygame.mixer.music.load("sounds/background/victory_music.wav")
             pygame.mixer.music.play(-1)
             time_survived = Clock_Methods.get_time_survived(uncounted_time, 2)
             victory = True
