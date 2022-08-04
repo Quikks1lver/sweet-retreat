@@ -22,7 +22,7 @@ class MysteryBox():
         self.target_time = 0
         self.TIMER_DELAY = 5000
 
-        self.image = pygame.image.load("images/mystery_box.png")
+        self.image = pygame.image.load("images/stage/mystery_box.png")
 
         self.sparkles_threshold = 0
 
@@ -76,7 +76,7 @@ class MysteryBox():
 
         # draw sparkles when approaching mystery box from left
         if player.x > self.sparkles_threshold - 10 and player.x < self.sparkles_threshold:
-            sparkles_img = pygame.image.load("images/sparkles.png")
+            sparkles_img = pygame.image.load("images/stage/sparkles.png")
             screen.blit(sparkles_img, (self.x_start, self.y_start))
 
     def __draw_weapon(self, screen, player: Player, trying_to_pick_up_weapon: bool, weapon: Weapon) -> None:
@@ -90,7 +90,7 @@ class MysteryBox():
         """
         # only display when on right side of screen
         if player.x >= self.sparkles_threshold:
-            explosion_image = pygame.image.load("images/explosion.png")
+            explosion_image = pygame.image.load("images/stage/explosion.png")
             screen.blit(explosion_image, (self.x_start - 2 * weapon.image_width, self.y_start - 80))
 
             Text.render(screen, f"Press 'C' for {weapon.name}", Text.Font.Dewangga, 24, Colors.Neon_Green, (self.x_start - weapon.image_width + 10, self.y_start - 35))            

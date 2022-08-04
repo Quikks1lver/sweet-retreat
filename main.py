@@ -40,12 +40,12 @@ pygame.display.set_caption("Sweet Retreat")
 pygame.display.set_icon(pygame.image.load("images/cookie.png"))
 
 # background and stage
-background = pygame.image.load("images/background.png").convert()
+background = pygame.image.load("images/stage/background.png").convert()
 background_width, background_height = background.get_rect().size
 stage_width = background_width * 2
 stage_pos_x = 0
 start_scrolling_pos_x = WIDTH / 2
-background_collision = pygame.image.load("images/background_collision.png").convert()
+background_collision = pygame.image.load("images/stage/background_collision.png").convert()
 enemy_explosion = pygame.image.load("images/characters/enemy_explosion.png")
 
 # background music
