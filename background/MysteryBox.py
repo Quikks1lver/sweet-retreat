@@ -71,7 +71,7 @@ class MysteryBox():
 
                     self.mystery_weapon = MysteryBox.__choose_mystery_weapon(player)
 
-                    pygame.mixer.Sound("sounds/mystery_box.wav").play()
+                    pygame.mixer.Sound("sounds/special/mystery_box.wav").play()
                     player.remove_points(cost)
 
         # draw sparkles when approaching mystery box from left
