@@ -5,7 +5,7 @@ from typing import List
 from characters import Player
 from color.Colors import Colors
 from text.Text import Text
-from timing.ClockMethods import Clock_Methods
+from timing.ClockMethods import ClockMethods
 from weapons.Arsenal import Arsenal
 from weapons.Weapon import Weapon
 
@@ -38,7 +38,7 @@ class MysteryBox():
         :param trying_to_pick_up_weapon: whether player is trying to pick up the weapon
         :return:
         """
-        if self.show_box or Clock_Methods.get_current_time() > self.target_time:
+        if self.show_box or ClockMethods.get_current_time() > self.target_time:
             self.__draw_mystery_box(screen, player, cost, trying_to_buy)
         else:
             self.__draw_weapon(screen, player, trying_to_pick_up_weapon, self.mystery_weapon)
@@ -67,7 +67,7 @@ class MysteryBox():
             if trying_to_buy and player.points >= cost:
                 if self.__is_inbounds(player):
                     self.show_box = False
-                    self.target_time = Clock_Methods.get_current_time() + self.TIMER_DELAY
+                    self.target_time = ClockMethods.get_current_time() + self.TIMER_DELAY
 
                     self.mystery_weapon = MysteryBox.__choose_mystery_weapon(player)
 

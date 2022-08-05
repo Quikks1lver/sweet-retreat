@@ -2,9 +2,9 @@ from typing import Union, Tuple
 
 from color.Colors import Colors
 from .Text import Text
-from timing.ClockMethods import Clock_Methods
+from timing.ClockMethods import ClockMethods
 
-class Timed_Text():
+class TimedText():
    """
    Class w/state in order to render text for a given time span
    Each object can render one text chunk at a time
@@ -42,11 +42,11 @@ class Timed_Text():
       self.location = location
 
       self.time_interval = time_interval
-      self.upper_threshold = Clock_Methods.get_current_time_in_seconds() + time_interval
+      self.upper_threshold = ClockMethods.get_current_time_in_seconds() + time_interval
 
    def run(self, screen) -> None:
       """
       This function needs to be called inside the main game loop in order for the text to be blit
       """
-      if not Clock_Methods.is_past_this_time_in_seconds(self.upper_threshold):
+      if not ClockMethods.is_past_this_time_in_seconds(self.upper_threshold):
          Text.render(screen, self.text, self.font, self.font_size, self.color, self.location)

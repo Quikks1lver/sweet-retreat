@@ -1,5 +1,4 @@
 import pygame
-from sys import maxsize
 from typing import List
 
 from characters.Enemy import Enemy
@@ -9,7 +8,7 @@ from text.Text import Text
 from text.TimedText import Timed_Text
 from timing.ClockMethods import Clock_Methods
 
-class Game_State():
+class GameState():
     """
     Deals with game progression
     """
@@ -28,23 +27,23 @@ class Game_State():
         """
         Makes the game harder as more enemies are defeated
         """
-        Game_State.timed_text_helper.run(screen)
+        GameState.timed_text_helper.run(screen)
         
         if len(enemies) == 1: return # final boss
 
         if len(enemies) != 1 and num_enemies_defeated == num_enemies_defeated_for_victory:
-            Game_State.__add_final_boss(enemies, enemy_factory)
-            Game_State.__play_final_boss_sound()
+            GameState.__add_final_boss(enemies, enemy_factory)
+            GameState.__play_final_boss_sound()
             return
 
         if num_enemies_defeated == 0: return
-        if not Clock_Methods.is_past_this_time(Game_State.enemy_addition_cooldown): return
+        if not Clock_Methods.is_past_this_time(GameState.enemy_addition_cooldown): return
 
         if num_enemies_defeated % 25 == 0:
-            Game_State.__add_ice_cream_monster(enemies, enemy_factory)
-            Game_State.__play_incoming_enemy_sound()
+            GameState.__add_ice_cream_monster(enemies, enemy_factory)
+            GameState.__play_incoming_enemy_sound()
         if num_enemies_defeated % 50 == 0:
-            Game_State.__add_brownie_tank(enemies, enemy_factory)
+            GameState.__add_brownie_tank(enemies, enemy_factory)
 
     @staticmethod
     def __play_incoming_enemy_sound() -> None:
@@ -69,7 +68,7 @@ class Game_State():
         """
         Sets a cooldown period after the creation of each new enemy
         """
-        Game_State.enemy_addition_cooldown = Clock_Methods.get_current_time() + Game_State.ENEMY_ADDITION_COOLDOWN_AMOUNT_MS
+        GameState.enemy_addition_cooldown = Clock_Methods.get_current_time() + GameState.ENEMY_ADDITION_COOLDOWN_AMOUNT_MS
 
     @staticmethod
     def __add_brownie_tank(enemies: List[Enemy], enemy_factory: EnemyFactory) -> None:
@@ -77,10 +76,10 @@ class Game_State():
         Adds a brownie tank to the game
         """
         enemies.append(enemy_factory.create_brownie_tank())
-        Game_State.__set_cooldown()
-        Game_State.timed_text_helper.populate_timed_text_parameters("Brownie Tank Incoming",
+        GameState.__set_cooldown()
+        GameState.timed_text_helper.populate_timed_text_parameters("Brownie Tank Incoming",
                                                                     Text.Font.Euro_Horror, 30, Colors.Neon_Orange,
-                                                                    (260, 100), Game_State.NORMAL_ENEMY_TIMED_TEXT_AMOUNT_SEC)
+                                                                    (260, 100), GameState.NORMAL_ENEMY_TIMED_TEXT_AMOUNT_SEC)
 
     @staticmethod
     def __add_final_boss(enemies: List[Enemy], enemy_factory: EnemyFactory) -> None:
@@ -89,10 +88,10 @@ class Game_State():
         """
         enemies.clear()
         enemies.append(enemy_factory.create_final_boss())
-        Game_State.__set_cooldown()
-        Game_State.timed_text_helper.populate_timed_text_parameters("Harrys own Wedding Cake Incoming",
+        GameState.__set_cooldown()
+        GameState.timed_text_helper.populate_timed_text_parameters("Harrys own Wedding Cake Incoming",
                                                                     Text.Font.Euro_Horror, 40, Colors.Neon_Yellow,
-                                                                    (67, 110), Game_State.FINAL_BOSS_TIMED_TEXT_AMOUNT_SEC)
+                                                                    (67, 110), GameState.FINAL_BOSS_TIMED_TEXT_AMOUNT_SEC)
 
     @staticmethod
     def __add_ice_cream_monster(enemies: List[Enemy], enemy_factory: EnemyFactory) -> None:
@@ -100,7 +99,7 @@ class Game_State():
         Adds an ice cream monster to the game
         """
         enemies.append(enemy_factory.create_ice_cream_monster())
-        Game_State.__set_cooldown()
-        Game_State.timed_text_helper.populate_timed_text_parameters("Ice Cream Monster Incoming",
+        GameState.__set_cooldown()
+        GameState.timed_text_helper.populate_timed_text_parameters("Ice Cream Monster Incoming",
                                                                     Text.Font.Euro_Horror, 30, Colors.Neon_Orange,
-                                                                    (210, 100), Game_State.NORMAL_ENEMY_TIMED_TEXT_AMOUNT_SEC)
+                                                                    (210, 100), GameState.NORMAL_ENEMY_TIMED_TEXT_AMOUNT_SEC)

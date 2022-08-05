@@ -3,18 +3,17 @@
 # My first pygame!
 
 import pygame
-import random
 from typing import List
 
-import background.Background_Methods as bg_methods
+import background.BackgroundMethods as bg_methods
 from background.MysteryBox import MysteryBox
 from background.Screens import Screens
-from background.StartScreen import Start_Screen
+from background.StartScreen import StartScreen
 from characters.Player import Player
 from characters.Enemy import Enemy, Enemy_Collision
 from characters.EnemyFactory import EnemyFactory
-from game_state.GameState import Game_State
-from timing.ClockMethods import Clock_Methods
+from game_state.GameState import GameState
+from timing.ClockMethods import ClockMethods
 from weapons.Arsenal import Arsenal
 
 # constants
@@ -68,9 +67,9 @@ enemies: List[Enemy] = [enemy_factory.create_basic_enemy() for i in range(NUM_EN
 mystery_box = MysteryBox()
 
 # init starting screens
-splash_screen = Start_Screen("images/screens/splash_screen.png")
-lore_screen = Start_Screen("images/screens/lore_screen.png")
-directions_screen = Start_Screen("images/screens/directions_screen.png")
+splash_screen = StartScreen("images/screens/splash_screen.png")
+lore_screen = StartScreen("images/screens/lore_screen.png")
+directions_screen = StartScreen("images/screens/directions_screen.png")
 
 # important flags and variables for main game loop
 has_collision_occurred: bool = False
@@ -127,7 +126,7 @@ while is_game_running:
     # log the exact time the player actually begins the game
     if not has_game_started and SCREEN == Screens.GAME.value:
         has_game_started = True
-        uncounted_time = Clock_Methods.get_current_time_in_seconds(2)
+        uncounted_time = ClockMethods.get_current_time_in_seconds(2)
 
     # victory screen; play victory music, too
     if num_enemies_defeated > NUM_ENEMIES_DEFEATED_FOR_VICTORY:
@@ -135,7 +134,7 @@ while is_game_running:
             pygame.mixer.music.stop()
             pygame.mixer.music.load("sounds/background/victory_music.wav")
             pygame.mixer.music.play(-1)
-            time_survived = Clock_Methods.get_time_survived(uncounted_time, 2)
+            time_survived = ClockMethods.get_time_survived(uncounted_time, 2)
             victory = True
         bg_methods.victory(screen, time_survived, WIDTH, HEIGHT)
         pygame.display.update()
@@ -145,7 +144,7 @@ while is_game_running:
     if player.health <= 0:
         if not has_player_died:
             final_score = num_enemies_defeated
-            time_survived = Clock_Methods.get_time_survived(uncounted_time, 2)
+            time_survived = ClockMethods.get_time_survived(uncounted_time, 2)
             has_player_died = True
         bg_methods.game_over(screen, final_score, time_survived, WIDTH, HEIGHT)
         pygame.display.update()
@@ -155,14 +154,14 @@ while is_game_running:
     if is_game_paused:
         if not has_pause_started:
             has_pause_started = True
-            pause_time_start = Clock_Methods.get_current_time_in_seconds(2)
+            pause_time_start = ClockMethods.get_current_time_in_seconds(2)
         bg_methods.pause(screen, WIDTH, HEIGHT)
         pygame.display.update()
         continue
     else:
         has_pause_started = False
         if pause_time_start != PAUSE_START_FLAG:
-            pause_time_delta = Clock_Methods.get_current_time_in_seconds(2) - pause_time_start
+            pause_time_delta = ClockMethods.get_current_time_in_seconds(2) - pause_time_start
             uncounted_time += pause_time_delta
             pause_time_start = PAUSE_START_FLAG
 
@@ -201,7 +200,7 @@ while is_game_running:
     bg_methods.display_ammo(screen, player.get_current_weapon())
 
     # progress game
-    Game_State.progress(screen, enemies, enemy_factory, num_enemies_defeated, NUM_ENEMIES_DEFEATED_FOR_VICTORY)
+    GameState.progress(screen, enemies, enemy_factory, num_enemies_defeated, NUM_ENEMIES_DEFEATED_FOR_VICTORY)
 
     # update display
     pygame.display.update()
