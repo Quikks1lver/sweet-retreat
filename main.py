@@ -10,7 +10,7 @@ from background.MysteryBox import MysteryBox
 from background.Screens import Screens
 from background.StartScreen import StartScreen
 from characters.Player import Player
-from characters.Enemy import Enemy, Enemy_Collision
+from characters.Enemy import Enemy, EnemyCollision
 from characters.EnemyFactory import EnemyFactory
 from game_state.GameState import GameState
 from timing.ClockMethods import ClockMethods
@@ -187,9 +187,9 @@ while is_game_running:
         enemy_pos_x, enemy_pos_y = e.real_x_position, e.y
 
         collision_type = e.check_for_bullet_collision(player.get_current_weapon().bullet, COLLISION_THRESHOLD)
-        if collision_type == Enemy_Collision.HIT:
+        if collision_type == EnemyCollision.HIT:
             player.add_points(e.get_point_gain_on_hit())
-        elif collision_type == Enemy_Collision.DEFEATED:
+        elif collision_type == EnemyCollision.DEFEATED:
             player.add_points(e.get_point_gain_on_defeat())
             explosion_sound.play()
             screen.blit(enemy_explosion, (enemy_pos_x - 5, enemy_pos_y - 10))

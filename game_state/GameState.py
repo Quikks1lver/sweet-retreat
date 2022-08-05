@@ -5,8 +5,8 @@ from characters.Enemy import Enemy
 from characters.EnemyFactory import EnemyFactory
 from color.Colors import Colors
 from text.Text import Text
-from text.TimedText import Timed_Text
-from timing.ClockMethods import Clock_Methods
+from text.TimedText import TimedText
+from timing.ClockMethods import ClockMethods
 
 class GameState():
     """
@@ -14,7 +14,7 @@ class GameState():
     """
     
     # for text running on a timer
-    timed_text_helper: Timed_Text = Timed_Text()
+    timed_text_helper: TimedText = TimedText()
     NORMAL_ENEMY_TIMED_TEXT_AMOUNT_SEC = 5
     FINAL_BOSS_TIMED_TEXT_AMOUNT_SEC = 10
 
@@ -37,7 +37,7 @@ class GameState():
             return
 
         if num_enemies_defeated == 0: return
-        if not Clock_Methods.is_past_this_time(GameState.enemy_addition_cooldown): return
+        if not ClockMethods.is_past_this_time(GameState.enemy_addition_cooldown): return
 
         if num_enemies_defeated % 25 == 0:
             GameState.__add_ice_cream_monster(enemies, enemy_factory)
@@ -68,7 +68,7 @@ class GameState():
         """
         Sets a cooldown period after the creation of each new enemy
         """
-        GameState.enemy_addition_cooldown = Clock_Methods.get_current_time() + GameState.ENEMY_ADDITION_COOLDOWN_AMOUNT_MS
+        GameState.enemy_addition_cooldown = ClockMethods.get_current_time() + GameState.ENEMY_ADDITION_COOLDOWN_AMOUNT_MS
 
     @staticmethod
     def __add_brownie_tank(enemies: List[Enemy], enemy_factory: EnemyFactory) -> None:
