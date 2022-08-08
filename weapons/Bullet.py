@@ -1,11 +1,11 @@
 import pygame
 from enum import Enum
 
-class Bullet_State(Enum):
+class BulletState(Enum):
     READY = 0
     MOVING = 1
 
-class Bullet_Direction(Enum):
+class BulletDirection(Enum):
     LEFT = 0
     RIGHT = 1
 
@@ -31,8 +31,8 @@ class Bullet():
         self.x_velocity = x_velocity
         self.damage = damage
 
-        self.direction: Bullet_Direction = Bullet_Direction.LEFT
-        self.state: Bullet_State = Bullet_State.READY
+        self.direction: BulletDirection = BulletDirection.LEFT
+        self.state: BulletState = BulletState.READY
 
         self.stage_width = stage_width
 
@@ -43,7 +43,7 @@ class Bullet():
         :param y: y coord
         :return:
         """
-        self.state = Bullet_State.READY
+        self.state = BulletState.READY
         self.x, self.y = x, y
 
     def move(self):
@@ -51,11 +51,11 @@ class Bullet():
         Move bullet
         :return:
         """
-        if self.state == Bullet_State.MOVING:
-            self.x += abs(self.x_velocity) if self.direction == Bullet_Direction.RIGHT else -abs(self.x_velocity)
+        if self.state == BulletState.MOVING:
+            self.x += abs(self.x_velocity) if self.direction == BulletDirection.RIGHT else -abs(self.x_velocity)
 
         # check out of bounds; bullet travels 1/2 of stage width
-        if self.x < 0 or self.x > (self.stage_width/2) - self.image_width: self.state = Bullet_State.READY
+        if self.x < 0 or self.x > (self.stage_width/2) - self.image_width: self.state = BulletState.READY
 
     def draw(self, screen) -> None:
         """
@@ -65,6 +65,6 @@ class Bullet():
         """
         self.move()
 
-        if self.state == Bullet_State.MOVING:
-            if self.direction == Bullet_Direction.LEFT: screen.blit(self.image, (self.x, self.y))
+        if self.state == BulletState.MOVING:
+            if self.direction == BulletDirection.LEFT: screen.blit(self.image, (self.x, self.y))
             else: screen.blit(pygame.transform.flip(self.image, True, False), (self.x, self.y))

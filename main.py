@@ -3,18 +3,17 @@
 # My first pygame!
 
 import pygame
-import random
 from typing import List
 
-import background.Background_Methods as bg_methods
+import background.BackgroundMethods as bg_methods
 from background.MysteryBox import MysteryBox
 from background.Screens import Screens
-from background.StartScreen import Start_Screen
+from background.StartScreen import StartScreen
 from characters.Player import Player
-from characters.Enemy import Enemy, Enemy_Collision
+from characters.Enemy import Enemy, EnemyCollision
 from characters.EnemyFactory import EnemyFactory
-from game_state.GameState import Game_State
-from timing.ClockMethods import Clock_Methods
+from game_state.GameState import GameState
+from timing.ClockMethods import ClockMethods
 from weapons.Arsenal import Arsenal
 
 # constants
@@ -37,27 +36,27 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # game header/caption and icon
 pygame.display.set_caption("Sweet Retreat")
-pygame.display.set_icon(pygame.image.load("images/cookie.png"))
+pygame.display.set_icon(pygame.image.load("images/misc/cookie.png"))
 
 # background and stage
-background = pygame.image.load("images/background.png").convert()
+background = pygame.image.load("images/stage/background.png").convert()
 background_width, background_height = background.get_rect().size
 stage_width = background_width * 2
 stage_pos_x = 0
 start_scrolling_pos_x = WIDTH / 2
-background_collision = pygame.image.load("images/background_collision.png").convert()
-enemy_explosion = pygame.image.load("images/enemy_explosion.png")
+background_collision = pygame.image.load("images/stage/background_collision.png").convert()
+enemy_explosion = pygame.image.load("images/characters/enemy_explosion.png")
 
 # background music
-pygame.mixer.music.load("sounds/background_music.wav")
+pygame.mixer.music.load("sounds/background/background_music.wav")
 pygame.mixer.music.play(-1)
 
 # sounds
-explosion_sound = pygame.mixer.Sound("sounds/explosion.wav")
+explosion_sound = pygame.mixer.Sound("sounds/enemies/explosion.wav")
 explosion_sound.set_volume(.20)
 
 # init player and starting enemy characters
-player = Player("images/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
+player = Player("images/characters/ghost.png", PLAYER_X_START, PLAYER_Y_START, start_scrolling_pos_x,
                 stage_width, WIDTH, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, PLAYER_HEALTH)
 player.add_weapon(Arsenal.revolver(player))
 
@@ -68,9 +67,9 @@ enemies: List[Enemy] = [enemy_factory.create_basic_enemy() for i in range(NUM_EN
 mystery_box = MysteryBox()
 
 # init starting screens
-splash_screen = Start_Screen("images/splash_screen.png")
-lore_screen = Start_Screen("images/lore_screen.png")
-directions_screen = Start_Screen("images/directions_screen.png")
+splash_screen = StartScreen("images/screens/splash_screen.png")
+lore_screen = StartScreen("images/screens/lore_screen.png")
+directions_screen = StartScreen("images/screens/directions_screen.png")
 
 # important flags and variables for main game loop
 has_collision_occurred: bool = False
@@ -127,15 +126,15 @@ while is_game_running:
     # log the exact time the player actually begins the game
     if not has_game_started and SCREEN == Screens.GAME.value:
         has_game_started = True
-        uncounted_time = Clock_Methods.get_current_time_in_seconds(2)
+        uncounted_time = ClockMethods.get_current_time_in_seconds(2)
 
     # victory screen; play victory music, too
     if num_enemies_defeated > NUM_ENEMIES_DEFEATED_FOR_VICTORY:
         if not victory:
             pygame.mixer.music.stop()
-            pygame.mixer.music.load("sounds/victory_music.wav")
+            pygame.mixer.music.load("sounds/background/victory_music.wav")
             pygame.mixer.music.play(-1)
-            time_survived = Clock_Methods.get_time_survived(uncounted_time, 2)
+            time_survived = ClockMethods.get_time_survived(uncounted_time, 2)
             victory = True
         bg_methods.victory(screen, time_survived, WIDTH, HEIGHT)
         pygame.display.update()
@@ -145,7 +144,7 @@ while is_game_running:
     if player.health <= 0:
         if not has_player_died:
             final_score = num_enemies_defeated
-            time_survived = Clock_Methods.get_time_survived(uncounted_time, 2)
+            time_survived = ClockMethods.get_time_survived(uncounted_time, 2)
             has_player_died = True
         bg_methods.game_over(screen, final_score, time_survived, WIDTH, HEIGHT)
         pygame.display.update()
@@ -155,14 +154,14 @@ while is_game_running:
     if is_game_paused:
         if not has_pause_started:
             has_pause_started = True
-            pause_time_start = Clock_Methods.get_current_time_in_seconds(2)
+            pause_time_start = ClockMethods.get_current_time_in_seconds(2)
         bg_methods.pause(screen, WIDTH, HEIGHT)
         pygame.display.update()
         continue
     else:
         has_pause_started = False
         if pause_time_start != PAUSE_START_FLAG:
-            pause_time_delta = Clock_Methods.get_current_time_in_seconds(2) - pause_time_start
+            pause_time_delta = ClockMethods.get_current_time_in_seconds(2) - pause_time_start
             uncounted_time += pause_time_delta
             pause_time_start = PAUSE_START_FLAG
 
@@ -188,9 +187,9 @@ while is_game_running:
         enemy_pos_x, enemy_pos_y = e.real_x_position, e.y
 
         collision_type = e.check_for_bullet_collision(player.get_current_weapon().bullet, COLLISION_THRESHOLD)
-        if collision_type == Enemy_Collision.HIT:
+        if collision_type == EnemyCollision.HIT:
             player.add_points(e.get_point_gain_on_hit())
-        elif collision_type == Enemy_Collision.DEFEATED:
+        elif collision_type == EnemyCollision.DEFEATED:
             player.add_points(e.get_point_gain_on_defeat())
             explosion_sound.play()
             screen.blit(enemy_explosion, (enemy_pos_x - 5, enemy_pos_y - 10))
@@ -201,7 +200,7 @@ while is_game_running:
     bg_methods.display_ammo(screen, player.get_current_weapon())
 
     # progress game
-    Game_State.progress(screen, enemies, enemy_factory, num_enemies_defeated, NUM_ENEMIES_DEFEATED_FOR_VICTORY)
+    GameState.progress(screen, enemies, enemy_factory, num_enemies_defeated, NUM_ENEMIES_DEFEATED_FOR_VICTORY)
 
     # update display
     pygame.display.update()

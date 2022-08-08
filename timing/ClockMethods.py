@@ -1,6 +1,6 @@
 import pygame
 
-class Clock_Methods():
+class ClockMethods():
     """
     Helps with timing
     """
@@ -12,7 +12,7 @@ class Clock_Methods():
         :param time: target time
         :return:
         """
-        return True if Clock_Methods.get_current_time() > time else False
+        return True if ClockMethods.get_current_time() > time else False
 
     @staticmethod
     def is_past_this_time_in_seconds(time: int) -> bool:
@@ -21,7 +21,7 @@ class Clock_Methods():
         :param time: target time
         :return:
         """
-        return True if Clock_Methods.get_current_time_in_seconds() > time else False
+        return True if ClockMethods.get_current_time_in_seconds() > time else False
 
     @staticmethod
     def get_current_time() -> int:
@@ -38,7 +38,7 @@ class Clock_Methods():
         :param decimal_place: how many decimal places you want in end result
         :return:
         """
-        return round((Clock_Methods.get_current_time() / 1000), decimal_place)
+        return round((ClockMethods.get_current_time() / 1000), decimal_place)
     
     @staticmethod
     def get_time_survived(uncounted_time: float, decimal_place: int) -> float:
@@ -48,4 +48,4 @@ class Clock_Methods():
         :param decimal_place: floating point precision
         :return:
         """
-        return round(Clock_Methods.get_current_time_in_seconds(decimal_place) - uncounted_time, decimal_place)
+        return round(ClockMethods.get_current_time_in_seconds(decimal_place) - uncounted_time, decimal_place)

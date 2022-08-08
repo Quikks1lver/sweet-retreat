@@ -6,9 +6,9 @@ import random
 from color.Colors import Colors
 from .Player import Player
 from text.Text import Text
-from weapons.Bullet import Bullet, Bullet_State
+from weapons.Bullet import Bullet, BulletState
 
-class Enemy_Collision(Enum):
+class EnemyCollision(Enum):
     NO_HIT = 0
     HIT = 1
     DEFEATED = 2
@@ -106,7 +106,7 @@ class Enemy(Player):
         """
         return True if math.dist([self.x, self.y], [player.x, player.y]) <= threshold else False
 
-    def check_for_bullet_collision(self, bullet: Bullet, threshold: float) -> Enemy_Collision:
+    def check_for_bullet_collision(self, bullet: Bullet, threshold: float) -> EnemyCollision:
         """
         Checks whether bullet has hit enemy and updates health and bullet status
         :param bullet:
@@ -114,14 +114,14 @@ class Enemy(Player):
         :return: what kind of collision occurred
         """
 
-        if bullet.state == Bullet_State.MOVING and math.dist([self.real_x_position, self.y], [bullet.x, bullet.y]) <= threshold:
-            bullet.state = Bullet_State.READY
+        if bullet.state == BulletState.MOVING and math.dist([self.real_x_position, self.y], [bullet.x, bullet.y]) <= threshold:
+            bullet.state = BulletState.READY
             self.take_damage(bullet.damage)
             if self.health <= 0:
                 self.respawn()
-                return Enemy_Collision.DEFEATED
-            return Enemy_Collision.HIT
-        return Enemy_Collision.NO_HIT
+                return EnemyCollision.DEFEATED
+            return EnemyCollision.HIT
+        return EnemyCollision.NO_HIT
 
     def respawn(self):
         """

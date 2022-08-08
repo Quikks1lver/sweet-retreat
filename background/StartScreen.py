@@ -2,16 +2,16 @@ import pygame
 
 from color.Colors import Colors
 from text.Text import Text
-from timing.ClockMethods import Clock_Methods
+from timing.ClockMethods import ClockMethods
 
-class Start_Screen():
+class StartScreen():
     """
     Represents a (starting) game screen
     """
     TIMER_DELAY = 500
 
     def __init__(self, image_path: str) -> None:
-        self.TARGET_TIME = Clock_Methods.get_current_time() + Start_Screen.TIMER_DELAY
+        self.TARGET_TIME = ClockMethods.get_current_time() + StartScreen.TIMER_DELAY
         self.image = pygame.image.load(image_path).convert()
 
     def draw(self, screen) -> None:
@@ -22,8 +22,8 @@ class Start_Screen():
         screen.blit(self.image, (0, 0))
 
         # text appears/disappears every few seconds, like a blinking light
-        if Clock_Methods.is_past_this_time(self.TARGET_TIME):
+        if ClockMethods.is_past_this_time(self.TARGET_TIME):
             Text.render(screen, "Press 'ENTER' to continue", Text.Font.Dewangga, 30, Colors.White, (250, 20))
             
-            if Clock_Methods.is_past_this_time(self.TARGET_TIME + 1750):
-                self.TARGET_TIME = Clock_Methods.get_current_time() + Start_Screen.TIMER_DELAY
+            if ClockMethods.is_past_this_time(self.TARGET_TIME + 1750):
+                self.TARGET_TIME = ClockMethods.get_current_time() + StartScreen.TIMER_DELAY

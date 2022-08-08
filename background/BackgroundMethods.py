@@ -19,7 +19,7 @@ def draw_ammo_box(screen, player: Player, cost: int, ammo_gain: int, trying_to_b
 
     # draw ammo box and description of cost on left side of screen
     if player.x < player.start_scrolling_pos_x:
-        ammo_box_img = pygame.image.load("images/ammo_box.png")
+        ammo_box_img = pygame.image.load("images/stage/ammo_box.png")
         screen.blit(ammo_box_img, (x_start, y_start))
 
         Text.render(screen, "Press 'B' for Ammo", Text.Font.Dewangga, 24, Colors.Neon_Cyan, (x_start, y_start - 55))
@@ -32,7 +32,7 @@ def draw_ammo_box(screen, player: Player, cost: int, ammo_gain: int, trying_to_b
 
     # draw sparkles when approaching ammo box from right
     if player.x >= player.start_scrolling_pos_x and player.x <= player.start_scrolling_pos_x + 10:
-        sparkles_img = pygame.image.load("images/sparkles.png")
+        sparkles_img = pygame.image.load("images/stage/sparkles.png")
         screen.blit(sparkles_img, (x_start, y_start))
 
 def draw_background(screen, background_img, stage_pos_x: int, background_width: int, game_width: int) -> None:

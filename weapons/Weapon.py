@@ -1,6 +1,6 @@
 import pygame
 from characters import Player
-from .Bullet import Bullet, Bullet_State, Bullet_Direction
+from .Bullet import Bullet, BulletState, BulletDirection
 
 class Weapon():
     """
@@ -51,14 +51,14 @@ class Weapon():
         if self.character.is_left_facing: screen.blit(self.image, (self.x, self.y))
         else: screen.blit(pygame.transform.flip(self.image, True, False), (self.x, self.y))
 
-        if self.bullet.state == Bullet_State.MOVING: self.bullet.draw(screen)
+        if self.bullet.state == BulletState.MOVING: self.bullet.draw(screen)
 
     def fire(self) -> None:
         """
         Fires weapon
         :return:
         """
-        if self.bullet.state == Bullet_State.READY and self.ammo > 0:
+        if self.bullet.state == BulletState.READY and self.ammo > 0:
             # sound
             self.sound.play()
 
@@ -66,8 +66,8 @@ class Weapon():
             dx = -10 if self.character.is_left_facing else 10
             dy = -5
             self.bullet.reset(self.x + dx, self.y + dy)
-            self.bullet.state = Bullet_State.MOVING
-            self.bullet.direction = Bullet_Direction.LEFT if self.character.is_left_facing else Bullet_Direction.RIGHT
+            self.bullet.state = BulletState.MOVING
+            self.bullet.direction = BulletDirection.LEFT if self.character.is_left_facing else BulletDirection.RIGHT
             self.ammo -= 1
 
     def add_ammo(self, amount: int) -> None:
@@ -83,7 +83,7 @@ class Weapon():
         Returns whether the current weapon is being used (whether a bullet is in motion or not)
         :return: True if bullet is in motion, False otherwise
         """
-        return self.bullet.state == Bullet_State.MOVING
+        return self.bullet.state == BulletState.MOVING
 
     def is_full_auto(self) -> bool:
         """
