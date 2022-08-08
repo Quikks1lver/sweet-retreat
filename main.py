@@ -197,7 +197,7 @@ while is_game_running:
 
     # draw score & ammo metadata
     bg_methods.display_points(screen, player.points)
-    bg_methods.display_ammo(screen, player.get_current_weapon())
+    bg_methods.display_ammo(screen, player.get_current_weapon(), WIDTH)
 
     # progress game
     GameState.progress(screen, enemies, enemy_factory, num_enemies_defeated, NUM_ENEMIES_DEFEATED_FOR_VICTORY)
