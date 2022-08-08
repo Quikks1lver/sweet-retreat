@@ -75,15 +75,21 @@ def display_points(screen, points: int) -> None:
     """
     Text.render(screen, f"Points: {str(points)}", Text.Font.Dewangga, 40, Colors.Neon_Magenta, (20, 20))
 
-def display_ammo(screen, weapon: Weapon) -> None:
+def display_ammo(screen, weapon: Weapon, width: int) -> None:
     """
     Displays ammo to the screen
     :param screen:
     :param weapon:
+    :param width: width of screen
     :return:
-    """    
+    """
+    cushion = 20
+    width_of_i = 7
+
     weapon_name_width = Text.render(screen, f"{weapon.name} ", Text.Font.Dewangga, 25, Colors.Neon_Green, (20, 60))
-    Text.render(screen, f"{weapon.get_ammo_string()}", Text.Font.Dewangga, 25, Colors.White, (20 + weapon_name_width, 60))
+    threshold = width - cushion - weapon_name_width
+    weapon_text = weapon.ammo if width_of_i * weapon.ammo >= threshold else weapon.get_ammo_string()
+    Text.render(screen, f"{weapon_text}", Text.Font.Dewangga, 25, Colors.White, (cushion + weapon_name_width, 60))
 
 def game_over(screen, score: int, time_survived: float, game_width: int, game_height: int) -> None:
     """
