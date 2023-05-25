@@ -22,11 +22,13 @@ def draw_ammo_box(screen, player: Player, cost: int, ammo_gain: int, trying_to_b
         ammo_box_img = pygame.image.load("images/stage/ammo_box.png")
         screen.blit(ammo_box_img, (x_start, y_start))
 
-        Text.render(screen, "Press 'B' for Ammo", Text.Font.Dewangga, 24, Colors.Neon_Cyan, (x_start, y_start - 55))
-        Text.render(screen, f"Cost: {cost} points", Text.Font.Dewangga, 24, Colors.Neon_Cyan, (x_start, y_start - 30))
+        Text.render(screen, "Press B for Ammo", Text.Font.Euro_Horror, 18, Colors.Neon_Cyan, (x_start, y_start - 55))
+        Text.render(screen, f"Costs {cost} points", Text.Font.Euro_Horror, 18, Colors.Neon_Cyan, (x_start, y_start - 30))
 
+        # if player has enough points and is in bounds of box, allow them to buy
         if trying_to_buy and player.points >= cost:
-            if player.x >= x_start and player.x <= (x_start + ammo_box_img.get_width()):
+            if player.x >= x_start and player.x <= (x_start + ammo_box_img.get_width()) \
+               and player.y >= y_start and player.y <= (y_start + ammo_box_img.get_height()):
                 player.get_current_weapon().add_ammo(ammo_gain)
                 player.remove_points(cost)
 
