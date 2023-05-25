@@ -75,7 +75,7 @@ def display_points(screen, points: int) -> None:
     :param points:
     :return:
     """
-    Text.render(screen, f"Points: {str(points)}", Text.Font.Dewangga, 40, Colors.Neon_Magenta, (20, 20))
+    Text.render(screen, f"Points: {str(points)}", Text.Font.Dewangga, 40, Colors.Neon_Green, (20, 20))
 
 def display_ammo(screen, weapon: Weapon, width: int) -> None:
     """
@@ -88,7 +88,12 @@ def display_ammo(screen, weapon: Weapon, width: int) -> None:
     cushion = 20
     width_of_i = 7
 
-    weapon_name_width = Text.render(screen, f"{weapon.name} ", Text.Font.Dewangga, 25, Colors.Neon_Green, (20, 60))
+    if weapon is None:
+        return
+
+    weapon_name_color = Colors.Neon_Magenta if weapon.is_upgraded else Colors.Neon_Yellow
+
+    weapon_name_width = Text.render(screen, f"{weapon.name} ", Text.Font.Euro_Horror, 20, weapon_name_color, (20, 60))
     threshold = width - cushion - weapon_name_width
     weapon_text = weapon.ammo if width_of_i * weapon.ammo >= threshold else weapon.get_ammo_string()
     Text.render(screen, f"{weapon_text}", Text.Font.Dewangga, 25, Colors.White, (cushion + weapon_name_width, 60))
