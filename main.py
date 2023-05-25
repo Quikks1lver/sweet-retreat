@@ -66,7 +66,7 @@ enemy_factory = EnemyFactory(stage_width, WIDTH, PLAYER_Y_START, Y_TOP_THRESHOLD
 enemies: List[Enemy] = [enemy_factory.create_basic_enemy() for i in range(NUM_ENEMIES)]
 
 # init boxes
-mystery_box = MysteryBox(player)
+mystery_box = MysteryBox()
 pack_a_punch_box = PackAPunch()
 
 # init starting screens
