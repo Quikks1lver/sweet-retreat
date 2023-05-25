@@ -125,5 +125,6 @@ class MysteryBox():
         weapons.append(Arsenal.rpg(player))
         weapons.append(Arsenal.smg(player))
         weapons.append(Arsenal.sniper(player))
+        weapons.append(Arsenal.lightsaber(player))
 
         return weapons[random.randint(0, len(weapons) - 1)]
