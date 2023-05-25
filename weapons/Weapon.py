@@ -39,6 +39,8 @@ class Weapon():
 
         self.full_auto = full_auto
 
+        self.is_upgraded = False
+
     def draw(self, screen) -> None:
         """
         Draws weapon to the screen
