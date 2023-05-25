@@ -60,7 +60,7 @@ class Player():
         else: screen.blit(pygame.transform.flip(self.image, True, False), (self.real_x_position, self.y))
 
         # print health
-        Text.render(screen, str(int(self.health)), Text.Font.Dewangga, 23, Colors.Red, (self.real_x_position + 20, self.y + 70))
+        Text.render(screen, str(int(self.health)) + " HP", Text.Font.Euro_Horror, 15, Colors.Red, (self.real_x_position + 20, self.y + 70))
 
         # print weapon
         if len(self.weapons) > 0: self.get_current_weapon().draw(screen)

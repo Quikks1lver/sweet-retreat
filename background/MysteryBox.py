@@ -14,7 +14,7 @@ class MysteryBox():
     Represents a mystery box object
     """
 
-    def __init__(self):
+    def __init__(self, player: Player):
         self.x_start, self.y_start = 600, 370
 
         self.show_box = True
@@ -27,6 +27,17 @@ class MysteryBox():
         self.sparkles_threshold = 0
 
         self.mystery_weapon: Weapon = None
+
+        self.__possible_mystery_weapons: List[Weapon] = []
+        self.__possible_mystery_weapons.append(Arsenal.bow_and_arrows(player))
+        self.__possible_mystery_weapons.append(Arsenal.desert_eagle(player))
+        self.__possible_mystery_weapons.append(Arsenal.ray_gun(player))
+        self.__possible_mystery_weapons.append(Arsenal.revolver(player))
+        self.__possible_mystery_weapons.append(Arsenal.rifle(player))
+        self.__possible_mystery_weapons.append(Arsenal.rpg(player))
+        self.__possible_mystery_weapons.append(Arsenal.smg(player))
+        self.__possible_mystery_weapons.append(Arsenal.sniper(player))
+        self.__possible_mystery_weapons.append(Arsenal.lightsaber(player))
 
     def draw(self, screen, player: Player, cost: int, trying_to_buy: bool, trying_to_pick_up_weapon: bool) -> None:
         """
@@ -61,15 +72,15 @@ class MysteryBox():
 
             screen.blit(self.image, (self.x_start, self.y_start))
 
-            Text.render(screen, "Press 'B' for Mystery Weapon", Text.Font.Dewangga, 24, Colors.Neon_Cyan, (self.x_start - 70, self.y_start - 55))
-            Text.render(screen, f"Cost: {cost} points", Text.Font.Dewangga, 24, Colors.Neon_Cyan, (self.x_start - 10, self.y_start - 30))
+            Text.render(screen, "Press B for Mystery Weapon", Text.Font.Euro_Horror, 18, Colors.Neon_Cyan, (self.x_start - 70, self.y_start - 55))
+            Text.render(screen, f"Costs {cost} points", Text.Font.Euro_Horror, 18, Colors.Neon_Cyan, (self.x_start - 10, self.y_start - 30))
 
             if trying_to_buy and player.points >= cost:
                 if self.__is_inbounds(player):
                     self.show_box = False
                     self.target_time = ClockMethods.get_current_time() + self.TIMER_DELAY
 
-                    self.mystery_weapon = MysteryBox.__choose_mystery_weapon(player)
+                    self.mystery_weapon = self.__choose_mystery_weapon()
 
                     pygame.mixer.Sound("sounds/special/mystery_box.wav").play()
                     player.remove_points(cost)
@@ -93,7 +104,7 @@ class MysteryBox():
             explosion_image = pygame.image.load("images/stage/explosion.png")
             screen.blit(explosion_image, (self.x_start - 2 * weapon.image_width, self.y_start - 80))
 
-            Text.render(screen, f"Press 'C' for {weapon.name}", Text.Font.Dewangga, 24, Colors.Neon_Green, (self.x_start - weapon.image_width + 10, self.y_start - 35))            
+            Text.render(screen, f"Press C for {weapon.name}", Text.Font.Euro_Horror, 18, Colors.Red, (self.x_start - weapon.image_width + 10, self.y_start - 35))            
             screen.blit(weapon.image, (self.x_start + 2.5 * weapon.image_width, self.y_start + 30))
 
             # give player weapon
@@ -107,24 +118,11 @@ class MysteryBox():
         :param player:
         :return:
         """
-        return True if player.real_x_position >= self.x_start and player.real_x_position <= (self.x_start + self.image.get_width()) else False
+        return True if player.real_x_position >= self.x_start and player.real_x_position <= (self.x_start + self.image.get_width()) \
+            and player.y >= self.y_start and player.y <= (self.y_start + self.image.get_height()) else False
 
-    @staticmethod
-    def __choose_mystery_weapon(player: Player) -> Weapon:
+    def __choose_mystery_weapon(self) -> Weapon:
         """
         Randomly choose and return a mystery weapon
-        :param player:
-        :return:
         """
-        weapons: List[Weapon] = []
-        weapons.append(Arsenal.bow_and_arrows(player))
-        weapons.append(Arsenal.desert_eagle(player))
-        weapons.append(Arsenal.ray_gun(player))
-        weapons.append(Arsenal.revolver(player))
-        weapons.append(Arsenal.rifle(player))
-        weapons.append(Arsenal.rpg(player))
-        weapons.append(Arsenal.smg(player))
-        weapons.append(Arsenal.sniper(player))
-        weapons.append(Arsenal.lightsaber(player))
-
-        return weapons[random.randint(0, len(weapons) - 1)]
+        return self.__possible_mystery_weapons[random.randint(0, len(self.__possible_mystery_weapons) - 1)]
