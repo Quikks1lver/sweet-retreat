@@ -14,7 +14,7 @@ class MysteryBox():
     Represents a mystery box object
     """
 
-    def __init__(self, player: Player):
+    def __init__(self):
         self.x_start, self.y_start = 600, 370
 
         self.show_box = True
@@ -27,17 +27,6 @@ class MysteryBox():
         self.sparkles_threshold = 0
 
         self.mystery_weapon: Weapon = None
-
-        self.__possible_mystery_weapons: List[Weapon] = []
-        self.__possible_mystery_weapons.append(Arsenal.bow_and_arrows(player))
-        self.__possible_mystery_weapons.append(Arsenal.desert_eagle(player))
-        self.__possible_mystery_weapons.append(Arsenal.ray_gun(player))
-        self.__possible_mystery_weapons.append(Arsenal.revolver(player))
-        self.__possible_mystery_weapons.append(Arsenal.rifle(player))
-        self.__possible_mystery_weapons.append(Arsenal.rpg(player))
-        self.__possible_mystery_weapons.append(Arsenal.smg(player))
-        self.__possible_mystery_weapons.append(Arsenal.sniper(player))
-        self.__possible_mystery_weapons.append(Arsenal.lightsaber(player))
 
     def draw(self, screen, player: Player, cost: int, trying_to_buy: bool, trying_to_pick_up_weapon: bool) -> None:
         """
@@ -80,7 +69,7 @@ class MysteryBox():
                     self.show_box = False
                     self.target_time = ClockMethods.get_current_time() + self.TIMER_DELAY
 
-                    self.mystery_weapon = self.__choose_mystery_weapon()
+                    self.mystery_weapon = self.__choose_mystery_weapon(player)
 
                     pygame.mixer.Sound("sounds/special/mystery_box.wav").play()
                     player.remove_points(cost)
@@ -121,8 +110,19 @@ class MysteryBox():
         return True if player.real_x_position >= self.x_start and player.real_x_position <= (self.x_start + self.image.get_width()) \
             and player.y >= self.y_start and player.y <= (self.y_start + self.image.get_height()) else False
 
-    def __choose_mystery_weapon(self) -> Weapon:
+    def __choose_mystery_weapon(self, player: Player) -> Weapon:
         """
         Randomly choose and return a mystery weapon
         """
-        return self.__possible_mystery_weapons[random.randint(0, len(self.__possible_mystery_weapons) - 1)]
+        possible_weapons: List[Weapon] = []
+        possible_weapons.append(Arsenal.bow_and_arrows(player))
+        possible_weapons.append(Arsenal.desert_eagle(player))
+        possible_weapons.append(Arsenal.ray_gun(player))
+        possible_weapons.append(Arsenal.revolver(player))
+        possible_weapons.append(Arsenal.rifle(player))
+        possible_weapons.append(Arsenal.rpg(player))
+        possible_weapons.append(Arsenal.smg(player))
+        possible_weapons.append(Arsenal.sniper(player))
+        possible_weapons.append(Arsenal.lightsaber(player))
+
+        return possible_weapons[random.randint(0, len(possible_weapons) - 1)]
