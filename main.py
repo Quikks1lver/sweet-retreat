@@ -21,10 +21,10 @@ WIDTH, HEIGHT = 800, 600
 NUM_ENEMIES = 5
 PLAYER_HEALTH = 100
 PLAYER_X_START, PLAYER_Y_START = 50, 460
-PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 5, 2
+PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 5, 1.75
 AMMO_COST, AMMO_GAIN = 50, 25
 MYSTERY_BOX_COST = 100
-Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD = 440, 530
+Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD = 100, 530
 COLLISION_THRESHOLD = 25
 NUM_ENEMIES_DEFEATED_FOR_VICTORY = 200
 PAUSE_START_FLAG = -1
@@ -64,7 +64,7 @@ enemy_factory = EnemyFactory(stage_width, WIDTH, PLAYER_Y_START, Y_TOP_THRESHOLD
 enemies: List[Enemy] = [enemy_factory.create_basic_enemy() for i in range(NUM_ENEMIES)]
 
 # init mystery box
-mystery_box = MysteryBox()
+mystery_box = MysteryBox(player)
 
 # init starting screens
 splash_screen = StartScreen("images/screens/splash_screen.png")
