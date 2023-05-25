@@ -41,12 +41,14 @@
   - [brownie](https://www.flaticon.com/free-icon/brownie_2255705?term=brownie&related_id=2255705)
   - [enemy explosion](https://www.flaticon.com/free-icon/explosion_616666?term=explosion&page=1&position=18&page=1&position=18&related_id=616666&origin=search)
   - [wedding cake/final boss](https://www.flaticon.com/free-icon/cake_5020040?term=wedding%20cake&page=1&position=62&page=1&position=62&related_id=5020040&origin=search)
+  - [lightsaber](https://www.flaticon.com/free-icon/lightsaber_389066)
+  - [lightsaber sparks](https://www.flaticon.com/free-icon/shine_4614922)
+  - [PaP](https://www.flaticon.com/free-icon/power-transformer_8653191)
+  - [PaP effect](https://www.flaticon.com/free-icon/technological_4457368)
 - [Image Resizing](https://www.img2go.com/)
 - [Online Image Tools](https://onlineimagetools.com/)
 - [Image Effects](https://pixlr.com/)
 - [Round Images](https://round-corner.imageonline.co/)
-- [lightsaber](https://www.flaticon.com/free-icon/lightsaber_389066)
-- [lightsaber sparks](https://www.flaticon.com/free-icon/shine_4614922)
 
 ### Sounds
 
@@ -66,6 +68,9 @@
   - [enemy incoming sound](https://freesound.org/people/Timpan/sounds/170593/)
   - [final boss music](https://freesound.org/people/Migfus20/sounds/560449/)
   - [lightsaber](https://freesound.org/people/joe93barlow/sounds/78674/)
+  - [PaP gun noise](https://freesound.org/people/nlux/sounds/620842/)
+  - [PaP machine noise](https://freesound.org/people/IanM32/sounds/210081/)
+  - [PaP melee](https://freesound.org/people/ejfortin/sounds/49670/)
 
 ### Fonts
 

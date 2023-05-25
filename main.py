@@ -7,6 +7,7 @@ from typing import List
 
 import background.BackgroundMethods as bg_methods
 from background.MysteryBox import MysteryBox
+from background.PackAPunch import PackAPunch
 from background.Screens import Screens
 from background.StartScreen import StartScreen
 from characters.Player import Player
@@ -21,9 +22,10 @@ WIDTH, HEIGHT = 800, 600
 NUM_ENEMIES = 5
 PLAYER_HEALTH = 100
 PLAYER_X_START, PLAYER_Y_START = 50, 460
-PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 5, 1.75
+PLAYER_X_VELOCITY, PLAYER_Y_VELOCITY = 5, 4
 AMMO_COST, AMMO_GAIN = 50, 25
 MYSTERY_BOX_COST = 100
+PACK_A_PUNCH_COST = 300
 Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD = 100, 530
 COLLISION_THRESHOLD = 25
 NUM_ENEMIES_DEFEATED_FOR_VICTORY = 200
@@ -63,8 +65,9 @@ player.add_weapon(Arsenal.revolver(player))
 enemy_factory = EnemyFactory(stage_width, WIDTH, PLAYER_Y_START, Y_TOP_THRESHOLD, Y_BOTTOM_THRESHOLD, start_scrolling_pos_x)
 enemies: List[Enemy] = [enemy_factory.create_basic_enemy() for i in range(NUM_ENEMIES)]
 
-# init mystery box
+# init boxes
 mystery_box = MysteryBox(player)
+pack_a_punch_box = PackAPunch()
 
 # init starting screens
 splash_screen = StartScreen("images/screens/splash_screen.png")
@@ -180,20 +183,22 @@ while is_game_running:
     bg_methods.draw_background(screen, background_collision if has_collision_occurred else background, stage_pos_x, background_width, WIDTH)
     bg_methods.draw_ammo_box(screen, player, AMMO_COST, AMMO_GAIN, trying_to_buy_item)
     mystery_box.draw(screen, player, MYSTERY_BOX_COST, trying_to_buy_item, trying_to_pick_up_weapon)
+    pack_a_punch_box.draw(screen, player, PACK_A_PUNCH_COST, trying_to_buy_item, trying_to_pick_up_weapon)
     player.draw(screen)
     for e in enemies:
         e.draw(screen)
 
         enemy_pos_x, enemy_pos_y = e.real_x_position, e.y
 
-        collision_type = e.check_for_bullet_collision(player.get_current_weapon().bullet, COLLISION_THRESHOLD)
-        if collision_type == EnemyCollision.HIT:
-            player.add_points(e.get_point_gain_on_hit())
-        elif collision_type == EnemyCollision.DEFEATED:
-            player.add_points(e.get_point_gain_on_defeat())
-            explosion_sound.play()
-            screen.blit(enemy_explosion, (enemy_pos_x - 5, enemy_pos_y - 10))
-            num_enemies_defeated += 1
+        if player.get_current_weapon() is not None:
+            collision_type = e.check_for_bullet_collision(player.get_current_weapon().bullet, COLLISION_THRESHOLD)
+            if collision_type == EnemyCollision.HIT:
+                player.add_points(e.get_point_gain_on_hit())
+            elif collision_type == EnemyCollision.DEFEATED:
+                player.add_points(e.get_point_gain_on_defeat())
+                explosion_sound.play()
+                screen.blit(enemy_explosion, (enemy_pos_x - 5, enemy_pos_y - 10))
+                num_enemies_defeated += 1
 
     # draw score & ammo metadata
     bg_methods.display_points(screen, player.points)

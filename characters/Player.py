@@ -136,7 +136,7 @@ class Player():
         :param weapon: weapon to be added
         :return:
         """
-        if len(self.weapons) == 1:
+        if len(self.weapons) <= 1:
             self.add_weapon(weapon)
             self.switch_to_next_weapon()
         else:
@@ -147,10 +147,13 @@ class Player():
         Switches to the next weapon in inventory, if available and current weapon isn't being used
         :return:
         """
+        if len(self.weapons) == 0:
+            self.current_weapon = 0
+            return
+        
         if not self.get_current_weapon().is_being_used():
             self.current_weapon += 1
             self.current_weapon %= len(self.weapons)
-            if len(self.weapons) == 0: self.current_weapon = 0
 
     def get_current_weapon(self) -> Union[Weapon, None]:
         """
@@ -158,7 +161,18 @@ class Player():
         :return: Weapon
         """
         if len(self.weapons) == 0: return None
+
+        if self.current_weapon >= len(self.weapons):
+            self.current_weapon = 0
+
         return self.weapons[self.current_weapon]
+    
+    def remove_current_weapon(self):
+        """
+        Removes current weapon from player's hands
+        """
+        del self.weapons[self.current_weapon]
+        self.switch_to_next_weapon()
 
     def fire_current_weapon(self) -> None:
         """
