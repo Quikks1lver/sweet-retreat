@@ -4,10 +4,10 @@ from .Bullet import Bullet, BulletState, BulletDirection
 
 class Weapon():
     """
-    Represents a (typically ranged) weapon that either a character uses
+    Represents a ranged or melee weapon
     """
 
-    def __init__(self, name: str, image_path: str, sound_path: str, bullet_image: str, character: Player, projectile_x_velocity: float, damage: float, ammo: int, full_auto: bool = False):
+    def __init__(self, name: str, image_path: str, sound_path: str, bullet_image: str, character: Player, projectile_x_velocity: float, damage: float, ammo: int, full_auto: bool = False, max_bullet_dist: int = None):
         """
         Initializes a new weapon
         :param name: name of weapon
@@ -18,6 +18,7 @@ class Weapon():
         :param damage: damage hit
         :param ammo: how much ammunition the weapon holds
         :param full_auto: (optional) full auto capability
+        :param max_bullet_dist: used for melee weapons: how much 'distance' the 'bullet' travels
         """
         self.name = name
 
@@ -34,7 +35,7 @@ class Weapon():
         self.ammo = ammo
         self.ammo_string = Weapon.__build_ammo_string(ammo)
 
-        self.bullet = Bullet(bullet_image, projectile_x_velocity, damage, self.character.stage_width)
+        self.bullet = Bullet(bullet_image, projectile_x_velocity, damage, self.character.stage_width, max_bullet_dist)
 
         self.full_auto = full_auto
 

@@ -12,12 +12,12 @@ class Arsenal():
 
     @staticmethod
     def __weapon_builder(name: str, image_filename: str, sound_filename: str, bullet_filename: str, \
-        character: Player.Player, projectile_x_velocity: float, damage: float, ammo: int, full_auto: bool = False) -> Weapon:
+        character: Player.Player, projectile_x_velocity: float, damage: float, ammo: int, full_auto: bool = False, max_bullet_dist: int = None) -> Weapon:
         """
         Returns a weapon object, with some metadata for filepaths filled in
         """
         return Weapon(name, f"{Arsenal.IMG_WEAPONS_FILEPATH}/{image_filename}", f"{Arsenal.SOUND_WEAPONS_FILEPATH}/{sound_filename}", \
-            f"{Arsenal.IMG_BULLETS_FILEPATH}/{bullet_filename}", character, projectile_x_velocity, damage, ammo, full_auto)
+            f"{Arsenal.IMG_BULLETS_FILEPATH}/{bullet_filename}", character, projectile_x_velocity, damage, ammo, full_auto, max_bullet_dist)
 
     @staticmethod
     def bow_and_arrows(player: Player) -> Weapon:
@@ -74,3 +74,10 @@ class Arsenal():
         Returns a sniper rifle weapon
         """
         return Arsenal.__weapon_builder("Sniper", "sniper.png", "sniper.wav", "bullet.png", player, 10, 25, 30)
+    
+    @staticmethod
+    def lightsaber(player: Player) -> Weapon:
+        """
+        Returns a lightsaber weapon
+        """
+        return Arsenal.__weapon_builder("Lightsaber", "lightsaber.png", "lightsaber.wav", "lightsaber_shine.png", player, 10, 75, 35, max_bullet_dist=30)

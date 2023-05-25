@@ -45,6 +45,8 @@
 - [Online Image Tools](https://onlineimagetools.com/)
 - [Image Effects](https://pixlr.com/)
 - [Round Images](https://round-corner.imageonline.co/)
+- [lightsaber](https://www.flaticon.com/free-icon/lightsaber_389066)
+- [lightsaber sparks](https://www.flaticon.com/free-icon/shine_4614922)
 
 ### Sounds
 
@@ -63,6 +65,7 @@
   - [victory music](https://freesound.org/people/pinkinblue/sounds/425971/)
   - [enemy incoming sound](https://freesound.org/people/Timpan/sounds/170593/)
   - [final boss music](https://freesound.org/people/Migfus20/sounds/560449/)
+  - [lightsaber](https://freesound.org/people/joe93barlow/sounds/78674/)
 
 ### Fonts
 
