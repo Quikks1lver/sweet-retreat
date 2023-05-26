@@ -72,6 +72,8 @@
   - [PaP gun noise](https://freesound.org/people/nlux/sounds/620842/)
   - [PaP machine noise](https://freesound.org/people/IanM32/sounds/210081/)
   - [PaP melee](https://freesound.org/people/ejfortin/sounds/49670/)
+  - [swap weapon](https://freesound.org/people/duckduckpony/sounds/204050/)
+  - [ammo box](https://freesound.org/people/SamsterBirdies/sounds/363167/)
 
 ### Fonts
 

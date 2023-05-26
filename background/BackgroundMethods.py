@@ -1,5 +1,6 @@
 import pygame
 
+from .Sound import play_sound
 from characters.Player import Player
 from color.Colors import Colors
 from text.Text import Text
@@ -31,6 +32,7 @@ def draw_ammo_box(screen, player: Player, cost: int, ammo_gain: int, trying_to_b
                and player.y >= y_start and player.y <= (y_start + ammo_box_img.get_height()):
                 player.get_current_weapon().add_ammo(ammo_gain)
                 player.remove_points(cost)
+                play_sound("background/ammo_box.wav")
 
     # draw sparkles when approaching ammo box from right
     if player.x >= player.start_scrolling_pos_x and player.x <= player.start_scrolling_pos_x + 10:

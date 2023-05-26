@@ -1,6 +1,7 @@
 import math
 import pygame
 
+from background.Sound import play_sound
 from color.Colors import Colors
 from text.Text import Text
 from typing import List, Union
@@ -151,9 +152,12 @@ class Player():
             self.current_weapon = 0
             return
         
+        old_curr = self.current_weapon
         if not self.get_current_weapon().is_being_used():
             self.current_weapon += 1
             self.current_weapon %= len(self.weapons)
+            if old_curr != self.current_weapon:
+                play_sound("background/swap_weapon.wav")
 
     def get_current_weapon(self) -> Union[Weapon, None]:
         """
