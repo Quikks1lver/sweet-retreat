@@ -115,6 +115,13 @@ class PackAPunch:
 
         pap_weapon.is_upgraded = True
         
+        # change weapon color (snippet from SO)
+        pap_color = pygame.Color('deeppink')
+        for x in range(pap_weapon.image.get_width()):
+            for y in range(pap_weapon.image.get_height()):
+                pap_color.a = pap_weapon.image.get_at((x, y)).a
+                pap_weapon.image.set_at((x, y), pap_color)
+
         pap_weapon.name = pap_weapon.name + " v2"
         pap_weapon.bullet.damage *= 2
         pap_weapon.ammo = 100

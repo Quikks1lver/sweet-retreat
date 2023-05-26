@@ -12,6 +12,7 @@
 - [Pygame efficiently check whether a key key is held down](https://stackoverflow.com/questions/22093662/how-to-efficiently-hold-a-key-in-pygame)
 - [Efficient String Concat Methods in Python](https://waymoot.org/home/python_string/)
 - [Removing pycaches in a directory](https://stackoverflow.com/questions/28991015/python3-project-remove-pycache-folders-and-pyc-files)
+- [Change image color](https://stackoverflow.com/questions/53904788/how-can-i-change-an-images-color-in-pygame)
 
 ### Images
 
@@ -71,6 +72,8 @@
   - [PaP gun noise](https://freesound.org/people/nlux/sounds/620842/)
   - [PaP machine noise](https://freesound.org/people/IanM32/sounds/210081/)
   - [PaP melee](https://freesound.org/people/ejfortin/sounds/49670/)
+  - [swap weapon](https://freesound.org/people/duckduckpony/sounds/204050/)
+  - [ammo box](https://freesound.org/people/SamsterBirdies/sounds/363167/)
 
 ### Fonts
 
