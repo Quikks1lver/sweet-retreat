@@ -1,4 +1,4 @@
-class Colors():
+class Colors:
     """
     Colors which boil down to RGB tuples
     """

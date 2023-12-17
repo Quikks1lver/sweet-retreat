@@ -6,7 +6,10 @@ from color.Colors import Colors
 from text.Text import Text
 from weapons.Weapon import Weapon
 
-def draw_ammo_box(screen, player: Player, cost: int, ammo_gain: int, trying_to_buy: bool) -> None:
+
+def draw_ammo_box(
+    screen, player: Player, cost: int, ammo_gain: int, trying_to_buy: bool
+) -> None:
     """
     Draws ammo box onto the screen
     :param screen:
@@ -23,23 +26,47 @@ def draw_ammo_box(screen, player: Player, cost: int, ammo_gain: int, trying_to_b
         ammo_box_img = pygame.image.load("images/stage/ammo_box.png")
         screen.blit(ammo_box_img, (x_start, y_start))
 
-        Text.render(screen, "Press B for Ammo", Text.Font.Euro_Horror, 18, Colors.Neon_Cyan, (x_start, y_start - 55))
-        Text.render(screen, f"Costs {cost} points", Text.Font.Euro_Horror, 18, Colors.Neon_Cyan, (x_start, y_start - 30))
+        Text.render(
+            screen,
+            "Press B for Ammo",
+            Text.Font.Euro_Horror,
+            18,
+            Colors.Neon_Cyan,
+            (x_start, y_start - 55),
+        )
+        Text.render(
+            screen,
+            f"Costs {cost} points",
+            Text.Font.Euro_Horror,
+            18,
+            Colors.Neon_Cyan,
+            (x_start, y_start - 30),
+        )
 
         # if player has enough points and is in bounds of box, allow them to buy
         if trying_to_buy and player.points >= cost:
-            if player.x >= x_start and player.x <= (x_start + ammo_box_img.get_width()) \
-               and player.y >= y_start and player.y <= (y_start + ammo_box_img.get_height()):
+            if (
+                player.x >= x_start
+                and player.x <= (x_start + ammo_box_img.get_width())
+                and player.y >= y_start
+                and player.y <= (y_start + ammo_box_img.get_height())
+            ):
                 player.get_current_weapon().add_ammo(ammo_gain)
                 player.remove_points(cost)
                 play_sound("background/ammo_box.wav")
 
     # draw sparkles when approaching ammo box from right
-    if player.x >= player.start_scrolling_pos_x and player.x <= player.start_scrolling_pos_x + 10:
+    if (
+        player.x >= player.start_scrolling_pos_x
+        and player.x <= player.start_scrolling_pos_x + 10
+    ):
         sparkles_img = pygame.image.load("images/stage/sparkles.png")
         screen.blit(sparkles_img, (x_start, y_start))
 
-def draw_background(screen, background_img, stage_pos_x: int, background_width: int, game_width: int) -> None:
+
+def draw_background(
+    screen, background_img, stage_pos_x: int, background_width: int, game_width: int
+) -> None:
     """
     Draws background onto screen, scrolling if necessary
     This was super helpful: https://www.youtube.com/watch?v=US3HSusUBeI
@@ -58,6 +85,7 @@ def draw_background(screen, background_img, stage_pos_x: int, background_width: 
     if rel_x < game_width:
         screen.blit(background_img, (rel_x, 0))
 
+
 def determine_stage_change(player: Player) -> int:
     """
     Determines what the change in stage position is (for scrolling the background)
@@ -65,10 +93,14 @@ def determine_stage_change(player: Player) -> int:
     :return:
     """
     # move stage itself when player is in "middle" portion of display
-    if not player.x < player.start_scrolling_pos_x and not player.x > player.stage_width - player.start_scrolling_pos_x:
+    if (
+        not player.x < player.start_scrolling_pos_x
+        and not player.x > player.stage_width - player.start_scrolling_pos_x
+    ):
         return -player.x_velocity
     else:
         return 0
+
 
 def display_points(screen, points: int) -> None:
     """
@@ -77,7 +109,15 @@ def display_points(screen, points: int) -> None:
     :param points:
     :return:
     """
-    Text.render(screen, f"Points: {str(points)}", Text.Font.Dewangga, 40, Colors.Neon_Green, (20, 20))
+    Text.render(
+        screen,
+        f"Points: {str(points)}",
+        Text.Font.Dewangga,
+        40,
+        Colors.Neon_Green,
+        (20, 20),
+    )
+
 
 def display_ammo(screen, weapon: Weapon, width: int) -> None:
     """
@@ -93,14 +133,37 @@ def display_ammo(screen, weapon: Weapon, width: int) -> None:
     if weapon is None:
         return
 
-    weapon_name_color = Colors.Neon_Magenta if weapon.is_upgraded else Colors.Neon_Yellow
+    weapon_name_color = (
+        Colors.Neon_Magenta if weapon.is_upgraded else Colors.Neon_Yellow
+    )
 
-    weapon_name_width = Text.render(screen, f"{weapon.name} ", Text.Font.Euro_Horror, 20, weapon_name_color, (20, 60))
+    weapon_name_width = Text.render(
+        screen,
+        f"{weapon.name} ",
+        Text.Font.Euro_Horror,
+        20,
+        weapon_name_color,
+        (20, 60),
+    )
     threshold = width - cushion - weapon_name_width
-    weapon_text = weapon.ammo if width_of_i * weapon.ammo >= threshold else weapon.get_ammo_string()
-    Text.render(screen, f"{weapon_text}", Text.Font.Dewangga, 25, Colors.White, (cushion + weapon_name_width, 60))
+    weapon_text = (
+        weapon.ammo
+        if width_of_i * weapon.ammo >= threshold
+        else weapon.get_ammo_string()
+    )
+    Text.render(
+        screen,
+        f"{weapon_text}",
+        Text.Font.Dewangga,
+        25,
+        Colors.White,
+        (cushion + weapon_name_width, 60),
+    )
 
-def game_over(screen, score: int, time_survived: float, game_width: int, game_height: int) -> None:
+
+def game_over(
+    screen, score: int, time_survived: float, game_width: int, game_height: int
+) -> None:
     """
     Displays game over screen
     :param screen:
@@ -114,9 +177,31 @@ def game_over(screen, score: int, time_survived: float, game_width: int, game_he
 
     screen.fill(Colors.Black)
 
-    Text.render(screen, "There is no Escape", Text.Font.Dewangga, 50, Colors.Red, (game_width / 3.5, game_height / 2.4))
-    Text.render(screen, f"Sweets Conquered: {score}", Text.Font.Dewangga, 35, Colors.Neon_Magenta, (game_width / 3.5, game_height / 2.4 + 50))
-    Text.render(screen, f"Time Elapsed: {time_survived} s", Text.Font.Dewangga, 35, Colors.Neon_Magenta, (game_width / 3.5, game_height / 2.4 + 85))
+    Text.render(
+        screen,
+        "There is no Escape",
+        Text.Font.Dewangga,
+        50,
+        Colors.Red,
+        (game_width / 3.5, game_height / 2.4),
+    )
+    Text.render(
+        screen,
+        f"Sweets Conquered: {score}",
+        Text.Font.Dewangga,
+        35,
+        Colors.Neon_Magenta,
+        (game_width / 3.5, game_height / 2.4 + 50),
+    )
+    Text.render(
+        screen,
+        f"Time Elapsed: {time_survived} s",
+        Text.Font.Dewangga,
+        35,
+        Colors.Neon_Magenta,
+        (game_width / 3.5, game_height / 2.4 + 85),
+    )
+
 
 def pause(screen, game_width: int, game_height: int) -> None:
     """
@@ -128,7 +213,15 @@ def pause(screen, game_width: int, game_height: int) -> None:
     """
     screen.fill(Colors.Black)
 
-    Text.render(screen, "PAUSE ||", Text.Font.Dewangga, 50, Colors.Neon_Green, (game_width / 2.6, game_height / 2.4))
+    Text.render(
+        screen,
+        "PAUSE ||",
+        Text.Font.Dewangga,
+        50,
+        Colors.Neon_Green,
+        (game_width / 2.6, game_height / 2.4),
+    )
+
 
 def victory(screen, time_survived: float, game_width: int, game_height: int) -> None:
     """
@@ -141,6 +234,27 @@ def victory(screen, time_survived: float, game_width: int, game_height: int) -> 
     """
     screen.fill(Colors.Medium_Purple)
 
-    Text.render(screen, f"Victory! ({time_survived} s)", Text.Font.Dewangga, 50, Colors.Neon_Cyan, (game_width / 3.5, game_height / 2.4))
-    Text.render(screen, "You have conquered your vices.", Text.Font.Dewangga, 35, Colors.Neon_Green, (game_width / 3.5, game_height / 2.4 + 50))
-    Text.render(screen, "Welcome to the Oasis . . .", Text.Font.Dewangga, 35, Colors.White, (game_width / 3.5, game_height / 2.4 + 85))
+    Text.render(
+        screen,
+        f"Victory! ({time_survived} s)",
+        Text.Font.Dewangga,
+        50,
+        Colors.Neon_Cyan,
+        (game_width / 3.5, game_height / 2.4),
+    )
+    Text.render(
+        screen,
+        "You have conquered your vices.",
+        Text.Font.Dewangga,
+        35,
+        Colors.Neon_Green,
+        (game_width / 3.5, game_height / 2.4 + 50),
+    )
+    Text.render(
+        screen,
+        "Welcome to the Oasis . . .",
+        Text.Font.Dewangga,
+        35,
+        Colors.White,
+        (game_width / 3.5, game_height / 2.4 + 85),
+    )

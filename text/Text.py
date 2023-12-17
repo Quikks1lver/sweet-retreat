@@ -3,17 +3,25 @@ from color.Colors import Colors
 from enum import Enum
 from typing import Tuple, Union
 
-class Text():
+
+class Text:
     """
     (Static) helpers for rendering text
     """
-    
+
     class Font(Enum):
         Dewangga = "dewangga.otf"
         Euro_Horror = "euro_horror.ttf"
 
     @staticmethod
-    def render(screen, text: str, font, font_size: int, color: Union[Colors, Tuple[int, int, int]], location: Tuple[int, int]) -> int:
+    def render(
+        screen,
+        text: str,
+        font,
+        font_size: int,
+        color: Union[Colors, Tuple[int, int, int]],
+        location: Tuple[int, int],
+    ) -> int:
         """
         Renders text to the screen, returns width of text
         :param screen:

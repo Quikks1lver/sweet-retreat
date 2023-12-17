@@ -8,20 +8,37 @@ from .Player import Player
 from text.Text import Text
 from weapons.Bullet import Bullet, BulletState
 
+
 class EnemyCollision(Enum):
     NO_HIT = 0
     HIT = 1
     DEFEATED = 2
+
 
 class Enemy(Player):
     """
     Represents an enemy character in the pygame
     """
 
-    def __init__(self, image_path: str, x_start: int, y_start: int, start_scrolling_pos_x: int, stage_width: int,
-                 game_width: int, y_top_threshold: int, y_bottom_threshold: int, health: int, x_velocity: float,
-                 y_velocity: float, damage: int, point_gain_on_hit: int, point_gain_on_defeat: int,
-                 blitted_health_offset_x: int = 20, blitted_health_offset_y: int = 70):
+    def __init__(
+        self,
+        image_path: str,
+        x_start: int,
+        y_start: int,
+        start_scrolling_pos_x: int,
+        stage_width: int,
+        game_width: int,
+        y_top_threshold: int,
+        y_bottom_threshold: int,
+        health: int,
+        x_velocity: float,
+        y_velocity: float,
+        damage: int,
+        point_gain_on_hit: int,
+        point_gain_on_defeat: int,
+        blitted_health_offset_x: int = 20,
+        blitted_health_offset_y: int = 70,
+    ):
         """
         Initialize an enemy character
         :param image_path: file path of player image
@@ -41,8 +58,17 @@ class Enemy(Player):
         :param blitted_health_offset_x: (optional) offset for where to blit health bar relative to enemy, x
         :param blitted_health_offset_y: (optional) offset for where to blit health bar relative to enemy, y
         """
-        super().__init__(image_path, x_start, y_start, start_scrolling_pos_x, stage_width,
-                         game_width, y_top_threshold, y_bottom_threshold, health)
+        super().__init__(
+            image_path,
+            x_start,
+            y_start,
+            start_scrolling_pos_x,
+            stage_width,
+            game_width,
+            y_top_threshold,
+            y_bottom_threshold,
+            health,
+        )
 
         self.max_health = health
         self.x_velocity = x_velocity
@@ -58,11 +84,26 @@ class Enemy(Player):
         draws enemy and metadata onto the pygame window, changing orientation if necessary
         """
         # print enemy
-        if self.is_left_facing: screen.blit(self.image, (self.real_x_position, self.y))
-        else: screen.blit(pygame.transform.flip(self.image, True, False), (self.real_x_position, self.y))
+        if self.is_left_facing:
+            screen.blit(self.image, (self.real_x_position, self.y))
+        else:
+            screen.blit(
+                pygame.transform.flip(self.image, True, False),
+                (self.real_x_position, self.y),
+            )
 
         # print health
-        Text.render(screen, str(int(self.health)) + " HP", Text.Font.Euro_Horror, 15, Colors.Red, (self.real_x_position + self.blitted_health_offset_x, self.y + self.blitted_health_offset_y))
+        Text.render(
+            screen,
+            str(int(self.health)) + " HP",
+            Text.Font.Euro_Horror,
+            15,
+            Colors.Red,
+            (
+                self.real_x_position + self.blitted_health_offset_x,
+                self.y + self.blitted_health_offset_y,
+            ),
+        )
 
     def move(self, player: Player) -> None:
         """
@@ -76,18 +117,26 @@ class Enemy(Player):
         self.y += random.randint(-1, 1)
 
         # track player's x position
-        if self.x > player.x: self.x -= self.x_velocity
-        elif self.x < player.x: self.x += self.x_velocity
-        else: pass
+        if self.x > player.x:
+            self.x -= self.x_velocity
+        elif self.x < player.x:
+            self.x += self.x_velocity
+        else:
+            pass
 
         # track player's y position
-        if self.y > player.y: self.y -= self.y_velocity
-        elif self.y < player.y: self.y += self.y_velocity
-        else: pass
+        if self.y > player.y:
+            self.y -= self.y_velocity
+        elif self.y < player.y:
+            self.y += self.y_velocity
+        else:
+            pass
 
         # make sure enemy doesn't go above y thresholds; it can go past x-thresholds, though
-        if self.y < self.y_top_threshold: self.y = self.y_top_threshold
-        if self.y > self.y_bottom_threshold: self.y = self.y_bottom_threshold
+        if self.y < self.y_top_threshold:
+            self.y = self.y_top_threshold
+        if self.y > self.y_bottom_threshold:
+            self.y = self.y_bottom_threshold
 
         # refer to Player file for comments on these lines
         if self.x < self.start_scrolling_pos_x:
@@ -104,9 +153,15 @@ class Enemy(Player):
         :param threshold: below or equal to which is considered a collision
         :return:
         """
-        return True if math.dist([self.x, self.y], [player.x, player.y]) <= threshold else False
+        return (
+            True
+            if math.dist([self.x, self.y], [player.x, player.y]) <= threshold
+            else False
+        )
 
-    def check_for_bullet_collision(self, bullet: Bullet, threshold: float) -> EnemyCollision:
+    def check_for_bullet_collision(
+        self, bullet: Bullet, threshold: float
+    ) -> EnemyCollision:
         """
         Checks whether bullet has hit enemy and updates health and bullet status
         :param bullet:
@@ -114,7 +169,11 @@ class Enemy(Player):
         :return: what kind of collision occurred
         """
 
-        if bullet.state == BulletState.MOVING and math.dist([self.real_x_position, self.y], [bullet.x, bullet.y]) <= threshold:
+        if (
+            bullet.state == BulletState.MOVING
+            and math.dist([self.real_x_position, self.y], [bullet.x, bullet.y])
+            <= threshold
+        ):
             bullet.state = BulletState.READY
             self.take_damage(bullet.damage)
             if self.health <= 0:
@@ -129,7 +188,7 @@ class Enemy(Player):
         :return:
         """
         self.health = self.max_health
-        self.x = self.stage_width + 200 if random.randint (0, 1) == 0 else -200
+        self.x = self.stage_width + 200 if random.randint(0, 1) == 0 else -200
 
     def damage_amount(self) -> int:
         """

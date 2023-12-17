@@ -7,12 +7,24 @@ from text.Text import Text
 from typing import List, Union
 from weapons.Weapon import Weapon
 
-class Player():
+
+class Player:
     """
     Represents a player character in the pygame
     """
 
-    def __init__(self, image_path: str, x_start: int, y_start: int, start_scrolling_pos_x: int, stage_width: int, game_width: int, y_top_threshold: int, y_bottom_threshold: int, health: int):
+    def __init__(
+        self,
+        image_path: str,
+        x_start: int,
+        y_start: int,
+        start_scrolling_pos_x: int,
+        stage_width: int,
+        game_width: int,
+        y_top_threshold: int,
+        y_bottom_threshold: int,
+        health: int,
+    ):
         """
         Initialize a player character
         :param image_path: file path of player image
@@ -57,14 +69,27 @@ class Player():
         :return: None
         """
         # print character
-        if self.is_left_facing: screen.blit(self.image, (self.real_x_position, self.y))
-        else: screen.blit(pygame.transform.flip(self.image, True, False), (self.real_x_position, self.y))
+        if self.is_left_facing:
+            screen.blit(self.image, (self.real_x_position, self.y))
+        else:
+            screen.blit(
+                pygame.transform.flip(self.image, True, False),
+                (self.real_x_position, self.y),
+            )
 
         # print health
-        Text.render(screen, str(int(self.health)) + " HP", Text.Font.Euro_Horror, 15, Colors.Red, (self.real_x_position + 20, self.y + 70))
+        Text.render(
+            screen,
+            str(int(self.health)) + " HP",
+            Text.Font.Euro_Horror,
+            15,
+            Colors.Red,
+            (self.real_x_position + 20, self.y + 70),
+        )
 
         # print weapon
-        if len(self.weapons) > 0: self.get_current_weapon().draw(screen)
+        if len(self.weapons) > 0:
+            self.get_current_weapon().draw(screen)
 
     def set_x_velocity(self, new_velocity: float) -> None:
         """
@@ -73,10 +98,12 @@ class Player():
         :return:
         """
         self.x_velocity = new_velocity
-        
+
         # change player's orientation/direction
-        if self.x_velocity == 0: return
-        else: self.is_left_facing = False if self.x_velocity > 0 else True
+        if self.x_velocity == 0:
+            return
+        else:
+            self.is_left_facing = False if self.x_velocity > 0 else True
 
     def set_y_velocity(self, new_velocity: float) -> None:
         """
@@ -96,14 +123,17 @@ class Player():
         self.y += self.y_velocity
 
         # makes sure player doesn't go beyond stage to the right
-        if self.x > self.stage_width - self.image_width: self.x = self.stage_width - self.image_width
+        if self.x > self.stage_width - self.image_width:
+            self.x = self.stage_width - self.image_width
         # makes sure player doesn't go beyond stage to the left
-        if self.x < 0: self.x = 0
+        if self.x < 0:
+            self.x = 0
         # makes sure player doesn't go above top threshold
-        if self.y < self.y_top_threshold: self.y = self.y_top_threshold
+        if self.y < self.y_top_threshold:
+            self.y = self.y_top_threshold
         # makes sure player doesn't go below bottom threshold
-        if self.y > self.y_bottom_threshold: self.y = self.y_bottom_threshold
-
+        if self.y > self.y_bottom_threshold:
+            self.y = self.y_bottom_threshold
 
         # where x position of player is less than scrolling threshold
         if self.x < self.start_scrolling_pos_x:
@@ -151,7 +181,7 @@ class Player():
         if len(self.weapons) == 0:
             self.current_weapon = 0
             return
-        
+
         old_curr = self.current_weapon
         if not self.get_current_weapon().is_being_used():
             self.current_weapon += 1
@@ -164,13 +194,14 @@ class Player():
         Gets current weapon from weapons list
         :return: Weapon
         """
-        if len(self.weapons) == 0: return None
+        if len(self.weapons) == 0:
+            return None
 
         if self.current_weapon >= len(self.weapons):
             self.current_weapon = 0
 
         return self.weapons[self.current_weapon]
-    
+
     def remove_current_weapon(self):
         """
         Removes current weapon from player's hands
@@ -183,8 +214,10 @@ class Player():
         Fires current weapon, if able to
         :return:
         """
-        if self.get_current_weapon() == None: return
-        else: self.get_current_weapon().fire()
+        if self.get_current_weapon() == None:
+            return
+        else:
+            self.get_current_weapon().fire()
 
     def add_points(self, amount: int) -> None:
         """

@@ -1,20 +1,30 @@
 import pygame
 from enum import Enum
 
+
 class BulletState(Enum):
     READY = 0
     MOVING = 1
+
 
 class BulletDirection(Enum):
     LEFT = 0
     RIGHT = 1
 
-class Bullet():
+
+class Bullet:
     """
     Represents a weapon's bullet
     """
 
-    def __init__(self, image_path, x_velocity, damage: int, stage_width: int, max_bullet_dist: int = None):
+    def __init__(
+        self,
+        image_path,
+        x_velocity,
+        damage: int,
+        stage_width: int,
+        max_bullet_dist: int = None,
+    ):
         """
         Initializes a bullet object
         :param image_path:
@@ -62,13 +72,17 @@ class Bullet():
         if self.max_bullet_dist is not None:
             if abs(self.orig_reset_x - self.x) >= self.max_bullet_dist:
                 self.state = BulletState.READY
-        
+
         if self.state == BulletState.MOVING:
-            self.x += abs(self.x_velocity) if self.direction == BulletDirection.RIGHT else -abs(self.x_velocity)
+            self.x += (
+                abs(self.x_velocity)
+                if self.direction == BulletDirection.RIGHT
+                else -abs(self.x_velocity)
+            )
 
         # check out of bounds; bullet travels 1/2 of stage width
-        if self.x < 0 or self.x > (self.stage_width/2) - self.image_width: self.state = BulletState.READY
-
+        if self.x < 0 or self.x > (self.stage_width / 2) - self.image_width:
+            self.state = BulletState.READY
 
     def draw(self, screen) -> None:
         """
@@ -79,5 +93,9 @@ class Bullet():
         self.move()
 
         if self.state == BulletState.MOVING:
-            if self.direction == BulletDirection.LEFT: screen.blit(self.image, (self.x, self.y))
-            else: screen.blit(pygame.transform.flip(self.image, True, False), (self.x, self.y))
+            if self.direction == BulletDirection.LEFT:
+                screen.blit(self.image, (self.x, self.y))
+            else:
+                screen.blit(
+                    pygame.transform.flip(self.image, True, False), (self.x, self.y)
+                )
