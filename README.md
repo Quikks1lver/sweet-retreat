@@ -11,5 +11,6 @@
 
 1. [Install python3](https://www.python.org/downloads/)
 2. [Download the latest release of the videogame](https://github.com/Quikks1lver/sweet-retreat/releases)
-3. In the `sweet-retreat/` directory, run `pip install -r requirements.txt`
-4. Run `python3 main.py`
+3. Create a python virtual environment: `python3 -m venv venv`
+4. Install modules: `pip install -r requirements.txt`
+5. Run `python3 main.py`

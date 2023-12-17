@@ -13,6 +13,7 @@
 - [Efficient String Concat Methods in Python](https://waymoot.org/home/python_string/)
 - [Removing pycaches in a directory](https://stackoverflow.com/questions/28991015/python3-project-remove-pycache-folders-and-pyc-files)
 - [Change image color](https://stackoverflow.com/questions/53904788/how-can-i-change-an-images-color-in-pygame)
+- [Black pipeline](https://github.com/psf/black/blob/main/docs/integrations/github_actions.md)
 
 ### Images
 
