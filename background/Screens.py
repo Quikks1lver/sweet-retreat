@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Screens(Enum):
     """
     Represents some game screens

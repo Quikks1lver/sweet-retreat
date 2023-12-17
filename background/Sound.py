@@ -1,5 +1,6 @@
 import pygame
 
+
 def play_sound(filepath: str):
     """
     Plays sound from designated file within sounds directory
