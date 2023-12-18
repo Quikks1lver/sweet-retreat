@@ -14,6 +14,8 @@
 - [Removing pycaches in a directory](https://stackoverflow.com/questions/28991015/python3-project-remove-pycache-folders-and-pyc-files)
 - [Change image color](https://stackoverflow.com/questions/53904788/how-can-i-change-an-images-color-in-pygame)
 - [Black pipeline](https://github.com/psf/black/blob/main/docs/integrations/github_actions.md)
+- [Audacity](https://www.audacityteam.org/)
+- [Pygame error with loading .wav files](https://stackoverflow.com/questions/32862110/pygame-error-not-able-to-open-wav-file)
 
 ### Images
 
@@ -65,10 +67,10 @@
   - [bow](https://freesound.org/people/Lydmakeren/sounds/511490/)
   - [rpg](https://freesound.org/people/northern87/sounds/88532/)
   - [mystery box](https://freesound.org/people/skylarjulian/sounds/558416/)
-  - [background music](https://freesound.org/people/onderwish/sounds/468407/)
-  - [victory music](https://freesound.org/people/pinkinblue/sounds/425971/)
-  - [enemy incoming sound](https://freesound.org/people/Timpan/sounds/170593/)
-  - [final boss music](https://freesound.org/people/Migfus20/sounds/560449/)
+  - [background music](https://freesound.org/people/szegvari/sounds/595714/)
+  - [victory music](https://freesound.org/people/humanoide9000/sounds/466133/)
+  - [enemy incoming sound](https://freesound.org/people/Audio_Dread/sounds/528883/)
+  - [final boss music](https://freesound.org/people/Sirkoto51/sounds/443128/)
   - [lightsaber](https://freesound.org/people/joe93barlow/sounds/78674/)
   - [PaP gun noise](https://freesound.org/people/nlux/sounds/620842/)
   - [PaP machine noise](https://freesound.org/people/IanM32/sounds/210081/)
