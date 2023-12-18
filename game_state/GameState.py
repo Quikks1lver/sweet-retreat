@@ -72,11 +72,9 @@ class GameState:
         """
         Plays sound/alert of the final boss
         """
-        incoming_enemy_sound = pygame.mixer.Sound(
-            "sounds/enemies/final_boss_incoming.wav"
-        )
-        incoming_enemy_sound.set_volume(1)
-        incoming_enemy_sound.play()
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load("sounds/enemies/final_boss_incoming.wav")
+        pygame.mixer.music.play(-1)
 
     @staticmethod
     def __set_cooldown() -> None:
