@@ -99,7 +99,8 @@ is_game_running: bool = True
 has_game_started = False
 has_player_died: bool = False
 has_pause_started: bool = False
-victory: bool = False
+play_victory_music_flag: bool = False
+victory_achieved: bool = False
 
 final_score: int = 0
 uncounted_time: float = 0
@@ -172,13 +173,13 @@ while is_game_running:
         uncounted_time = ClockMethods.get_current_time_in_seconds(2)
 
     # victory screen; play victory music, too
-    if num_enemies_defeated > NUM_ENEMIES_DEFEATED_FOR_VICTORY:
-        if not victory:
+    if victory_achieved:
+        if not play_victory_music_flag:
             pygame.mixer.music.stop()
             pygame.mixer.music.load("sounds/background/victory_music.wav")
             pygame.mixer.music.play(-1)
             time_survived = ClockMethods.get_time_survived(uncounted_time, 2)
-            victory = True
+            play_victory_music_flag = True
         bg_methods.victory(screen, time_survived, WIDTH, HEIGHT)
         pygame.display.update()
         continue
@@ -237,7 +238,7 @@ while is_game_running:
         screen, player, PACK_A_PUNCH_COST, trying_to_buy_item, trying_to_pick_up_weapon
     )
     player.draw(screen)
-    for e in enemies:
+    for index, e in enumerate(enemies):
         e.draw(screen)
 
         enemy_pos_x, enemy_pos_y = e.real_x_position, e.y
@@ -254,18 +255,23 @@ while is_game_running:
                 screen.blit(enemy_explosion, (enemy_pos_x - 5, enemy_pos_y - 10))
                 num_enemies_defeated += 1
 
+                # If boss defeated, remove from [enemies] and signal victory!
+                if e.is_boss:
+                    enemies.pop(index)
+                    victory_achieved = True
+
     # draw score & ammo metadata
     bg_methods.display_points(screen, player.points)
     bg_methods.display_ammo(screen, player.get_current_weapon(), WIDTH)
 
     # progress game
     GameState.progress(
-        screen,
-        enemies,
-        enemy_factory,
-        num_enemies_defeated,
-        NUM_ENEMIES_DEFEATED_FOR_VICTORY,
-    )
+            screen,
+            enemies,
+            enemy_factory,
+            num_enemies_defeated,
+            NUM_ENEMIES_DEFEATED_FOR_VICTORY,
+        )
 
     # update display
     pygame.display.update()

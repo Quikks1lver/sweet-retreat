@@ -38,6 +38,7 @@ class Enemy(Player):
         point_gain_on_defeat: int,
         blitted_health_offset_x: int = 20,
         blitted_health_offset_y: int = 70,
+        is_boss: bool = False
     ):
         """
         Initialize an enemy character
@@ -57,6 +58,7 @@ class Enemy(Player):
         :param point_gain_on_defeat: how many points the player gains by defeating this enemy
         :param blitted_health_offset_x: (optional) offset for where to blit health bar relative to enemy, x
         :param blitted_health_offset_y: (optional) offset for where to blit health bar relative to enemy, y
+        :param is_boss: whether this enemy is of type boss
         """
         super().__init__(
             image_path,
@@ -78,6 +80,7 @@ class Enemy(Player):
         self.point_gain_on_defeat = point_gain_on_defeat
         self.blitted_health_offset_x = blitted_health_offset_x
         self.blitted_health_offset_y = blitted_health_offset_y
+        self.is_boss = is_boss
 
     def draw(self, screen) -> None:
         """
@@ -177,7 +180,8 @@ class Enemy(Player):
             bullet.state = BulletState.READY
             self.take_damage(bullet.damage)
             if self.health <= 0:
-                self.respawn()
+                if not self.is_boss:
+                     self.respawn()
                 return EnemyCollision.DEFEATED
             return EnemyCollision.HIT
         return EnemyCollision.NO_HIT
