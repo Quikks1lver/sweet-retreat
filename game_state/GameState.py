@@ -23,6 +23,8 @@ class GameState:
     enemy_addition_cooldown = 0
     ENEMY_ADDITION_COOLDOWN_AMOUNT_MS = 15000  # 15 seconds
 
+    __has_added_final_boss = False
+
     @staticmethod
     def progress(
         screen,
@@ -36,13 +38,15 @@ class GameState:
         """
         GameState.timed_text_helper.run(screen)
 
-        if len(enemies) == 1:
-            return  # final boss
+        if GameState.__has_added_final_boss:
+            return
 
         if (
             len(enemies) != 1
             and num_enemies_defeated == num_enemies_defeated_for_victory
+            and not GameState.__has_added_final_boss
         ):
+            GameState.__has_added_final_boss = True
             GameState.__add_final_boss(enemies, enemy_factory)
             GameState.__play_final_boss_sound()
             return
@@ -52,11 +56,12 @@ class GameState:
         if not ClockMethods.is_past_this_time(GameState.enemy_addition_cooldown):
             return
 
-        if num_enemies_defeated % 25 == 0:
-            GameState.__add_ice_cream_monster(enemies, enemy_factory)
-            GameState.__play_incoming_enemy_sound()
         if num_enemies_defeated % 50 == 0:
             GameState.__add_brownie_tank(enemies, enemy_factory)
+            GameState.__play_incoming_enemy_sound()
+        elif num_enemies_defeated % 25 == 0:
+            GameState.__add_ice_cream_monster(enemies, enemy_factory)
+            GameState.__play_incoming_enemy_sound()
 
     @staticmethod
     def __play_incoming_enemy_sound() -> None:
@@ -105,9 +110,8 @@ class GameState:
     @staticmethod
     def __add_final_boss(enemies: List[Enemy], enemy_factory: EnemyFactory) -> None:
         """
-        Adds the final boss to the game, wiping all other enemies away
+        Adds the final boss to the game
         """
-        enemies.clear()
         enemies.append(enemy_factory.create_final_boss())
         GameState.__set_cooldown()
         GameState.timed_text_helper.populate_timed_text_parameters(

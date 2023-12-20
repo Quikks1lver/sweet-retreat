@@ -183,7 +183,7 @@ class PackAPunch:
 
         pap_weapon.name = pap_weapon.name + " v2"
         pap_weapon.bullet.damage *= 2
-        pap_weapon.ammo = 100
+        pap_weapon.ammo = pap_weapon.ammo + 100
         pap_weapon.sound.set_volume(0.2)
 
         if weapon.bullet.max_bullet_dist is not None:  # melee weapons
