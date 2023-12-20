@@ -266,12 +266,12 @@ while is_game_running:
 
     # progress game
     GameState.progress(
-            screen,
-            enemies,
-            enemy_factory,
-            num_enemies_defeated,
-            NUM_ENEMIES_DEFEATED_FOR_VICTORY,
-        )
+        screen,
+        enemies,
+        enemy_factory,
+        num_enemies_defeated,
+        NUM_ENEMIES_DEFEATED_FOR_VICTORY,
+    )
 
     # update display
     pygame.display.update()

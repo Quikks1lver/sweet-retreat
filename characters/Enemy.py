@@ -38,7 +38,7 @@ class Enemy(Player):
         point_gain_on_defeat: int,
         blitted_health_offset_x: int = 20,
         blitted_health_offset_y: int = 70,
-        is_boss: bool = False
+        is_boss: bool = False,
     ):
         """
         Initialize an enemy character
@@ -181,7 +181,7 @@ class Enemy(Player):
             self.take_damage(bullet.damage)
             if self.health <= 0:
                 if not self.is_boss:
-                     self.respawn()
+                    self.respawn()
                 return EnemyCollision.DEFEATED
             return EnemyCollision.HIT
         return EnemyCollision.NO_HIT

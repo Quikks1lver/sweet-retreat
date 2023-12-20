@@ -137,5 +137,5 @@ class EnemyFactory:
             point_gain_on_defeat,
             blitted_health_offset_x,
             blitted_health_offset_y,
-            is_boss=True
+            is_boss=True,
         )
