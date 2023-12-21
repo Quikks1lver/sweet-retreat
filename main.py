@@ -108,8 +108,15 @@ pause_time_start: float = PAUSE_START_FLAG
 time_survived: float = 0
 num_enemies_defeated: int = 0
 
+# clock
+clock = pygame.time.Clock()
+FPS: int = 60
+
 # game loop
 while is_game_running:
+    # ensure loop runs according to X frames per second
+    clock.tick(FPS)
+
     has_collision_occurred = False
     trying_to_buy_item = False
     trying_to_pick_up_weapon = False
