@@ -1,7 +1,6 @@
-import math
 import pygame
 
-from background.Sound import play_sound
+from background.SoundHelpers import play_sound
 from color.Colors import Colors
 from text.Text import Text
 from typing import List, Union

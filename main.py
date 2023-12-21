@@ -16,6 +16,7 @@ from characters.EnemyFactory import EnemyFactory
 from game_state.GameState import GameState
 from timing.ClockMethods import ClockMethods
 from weapons.Arsenal import Arsenal
+from background.SoundHelpers import play_sound, play_background_music
 
 # constants
 WIDTH, HEIGHT = 800, 600
@@ -52,12 +53,7 @@ background_collision = pygame.image.load(
 enemy_explosion = pygame.image.load("images/characters/enemy_explosion.png")
 
 # background music
-pygame.mixer.music.load("sounds/background/background_music.wav")
-pygame.mixer.music.play(-1)
-
-# sounds
-explosion_sound = pygame.mixer.Sound("sounds/enemies/explosion.wav")
-explosion_sound.set_volume(0.20)
+play_background_music("background/background_music.wav")
 
 # init player and starting enemy characters
 player = Player(
@@ -182,9 +178,7 @@ while is_game_running:
     # victory screen; play victory music, too
     if victory_achieved:
         if not play_victory_music_flag:
-            pygame.mixer.music.stop()
-            pygame.mixer.music.load("sounds/background/victory_music.wav")
-            pygame.mixer.music.play(-1)
+            play_background_music("background/victory_music.wav")
             time_survived = ClockMethods.get_time_survived(uncounted_time, 2)
             play_victory_music_flag = True
         bg_methods.victory(screen, time_survived, WIDTH, HEIGHT)
@@ -258,7 +252,7 @@ while is_game_running:
                 player.add_points(e.get_point_gain_on_hit())
             elif collision_type == EnemyCollision.DEFEATED:
                 player.add_points(e.get_point_gain_on_defeat())
-                explosion_sound.play()
+                play_sound("enemies/explosion.wav", volume=0.2)
                 screen.blit(enemy_explosion, (enemy_pos_x - 5, enemy_pos_y - 10))
                 num_enemies_defeated += 1
 
