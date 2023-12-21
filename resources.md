@@ -16,6 +16,7 @@
 - [Black pipeline](https://github.com/psf/black/blob/main/docs/integrations/github_actions.md)
 - [Audacity](https://www.audacityteam.org/)
 - [Pygame error with loading .wav files](https://stackoverflow.com/questions/32862110/pygame-error-not-able-to-open-wav-file)
+- [Pygame FPS](https://stackoverflow.com/questions/67963353/how-to-set-framerate-in-pygame)
 
 ### Images
 
