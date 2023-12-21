@@ -1,6 +1,6 @@
 import pygame
 
-from .Sound import play_sound
+from .SoundHelpers import play_sound
 from characters.Player import Player
 from color.Colors import Colors
 from text.Text import Text

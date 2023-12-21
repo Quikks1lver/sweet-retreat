@@ -7,7 +7,7 @@ from color.Colors import Colors
 from text.Text import Text
 from text.TimedText import TimedText
 from timing.ClockMethods import ClockMethods
-
+from background.SoundHelpers import play_sound, play_background_music
 
 class GameState:
     """
@@ -68,18 +68,14 @@ class GameState:
         """
         Plays sound/alert of an incoming enemy
         """
-        incoming_enemy_sound = pygame.mixer.Sound("sounds/enemies/enemy_incoming.wav")
-        incoming_enemy_sound.set_volume(1)
-        incoming_enemy_sound.play()
+        play_sound("enemies/enemy_incoming.wav")
 
     @staticmethod
     def __play_final_boss_sound() -> None:
         """
         Plays sound/alert of the final boss
         """
-        pygame.mixer.music.stop()
-        pygame.mixer.music.load("sounds/enemies/final_boss_incoming.wav")
-        pygame.mixer.music.play(-1)
+        play_background_music("enemies/final_boss_incoming.wav")
 
     @staticmethod
     def __set_cooldown() -> None:
