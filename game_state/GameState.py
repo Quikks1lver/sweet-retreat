@@ -9,6 +9,7 @@ from text.TimedText import TimedText
 from timing.ClockMethods import ClockMethods
 from background.SoundHelpers import play_sound, play_background_music
 
+
 class GameState:
     """
     Deals with game progression

@@ -9,6 +9,7 @@ def play_sound(filepath: str, volume: float = 1):
     sound.set_volume(volume)
     sound.play()
 
+
 def play_background_music(filepath: str):
     """
     Stops any existing background music and plays new one from sounds directory
