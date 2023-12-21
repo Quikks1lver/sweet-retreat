@@ -20,7 +20,7 @@ class Enemy(Player):
     Represents an enemy character in the pygame
     """
 
-    __RANDOM_MOVEMENT_THRESHOLD = 0.25
+    __RANDOM_MOVEMENT_THRESHOLD = 1.25
 
     def __init__(
         self,
@@ -118,12 +118,8 @@ class Enemy(Player):
         :return:
         """
         # inject some randomness
-        self.x += random.randint(
-            -Enemy.__RANDOM_MOVEMENT_THRESHOLD, Enemy.__RANDOM_MOVEMENT_THRESHOLD
-        )
-        self.y += random.randint(
-            -Enemy.__RANDOM_MOVEMENT_THRESHOLD, Enemy.__RANDOM_MOVEMENT_THRESHOLD
-        )
+        self.x += random.randint(-1, 1) * Enemy.__RANDOM_MOVEMENT_THRESHOLD
+        self.y += random.randint(-1, 1) * Enemy.__RANDOM_MOVEMENT_THRESHOLD
 
         # track player's x position
         if self.x > player.x:
