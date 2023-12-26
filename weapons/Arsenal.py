@@ -26,7 +26,7 @@ class Arsenal:
         swap_out_sound_filepath: str = None,
         swap_in_sound_filepath: str = None,
         sound_volume: float = 0.2,
-        weapon_active_sound_filepath=None,
+        weapon_active_sound_filepath: str = None,
     ) -> Weapon:
         """
         Returns a weapon object, with some metadata for filepaths filled in
