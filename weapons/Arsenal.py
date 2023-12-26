@@ -23,6 +23,10 @@ class Arsenal:
         ammo: int,
         full_auto: bool = False,
         max_bullet_dist: int = None,
+        swap_out_sound_filepath: str = None,
+        swap_in_sound_filepath: str = None,
+        sound_volume: float = 0.2,
+        weapon_active_sound_filepath: str = None,
     ) -> Weapon:
         """
         Returns a weapon object, with some metadata for filepaths filled in
@@ -38,6 +42,10 @@ class Arsenal:
             ammo,
             full_auto,
             max_bullet_dist,
+            swap_out_sound_filepath=swap_out_sound_filepath,
+            swap_in_sound_filepath=swap_in_sound_filepath,
+            sound_volume=sound_volume,
+            weapon_active_sound_filepath=weapon_active_sound_filepath,
         )
 
     @staticmethod
@@ -141,4 +149,8 @@ class Arsenal:
             75,
             35,
             max_bullet_dist=30,
+            swap_out_sound_filepath="weapons/lightsaber_swap_out.wav",
+            swap_in_sound_filepath="weapons/lightsaber_swap_in.wav",
+            sound_volume=0.8,
+            weapon_active_sound_filepath="weapons/lightsaber_hum.wav",
         )

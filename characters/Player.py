@@ -185,8 +185,29 @@ class Player:
         if not self.get_current_weapon().is_being_used():
             self.current_weapon += 1
             self.current_weapon %= len(self.weapons)
-            if old_curr != self.current_weapon:
-                play_sound("background/swap_weapon.wav")
+
+            if old_curr != self.current_weapon and len(self.weapons) > 1:
+                old_weapon = self.weapons[old_curr]
+                curr_weapon = self.weapons[self.current_weapon]
+
+                # swap in/out sounds
+                potential_swap_out_filepath = old_weapon.swap_out_sound_filepath
+                potential_swap_in_filepath = curr_weapon.swap_in_sound_filepath
+                sound_to_play = (
+                    potential_swap_in_filepath
+                    if potential_swap_in_filepath is not None
+                    else potential_swap_out_filepath
+                )
+                if sound_to_play is None:
+                    sound_to_play = Weapon.GENERIC_WEAPON_SWAP_SOUND_FILEPATH
+                play_sound(sound_to_play)
+
+                # play looping sound for weapon active, if exists
+                # be sure to stop previous weapon active sound, if existed
+                if old_weapon.weapon_active_sound is not None:
+                    old_weapon.weapon_active_sound.stop()
+                if curr_weapon.weapon_active_sound is not None:
+                    curr_weapon.weapon_active_sound.play(-1)
 
     def get_current_weapon(self) -> Union[Weapon, None]:
         """
