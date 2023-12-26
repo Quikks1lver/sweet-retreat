@@ -1,4 +1,5 @@
 import pygame
+from typing import Union
 from characters import Player
 from .Bullet import Bullet, BulletState, BulletDirection
 
@@ -7,6 +8,8 @@ class Weapon:
     """
     Represents a ranged or melee weapon
     """
+
+    GENERIC_WEAPON_SWAP_SOUND_FILEPATH = "background/swap_weapon.wav"
 
     def __init__(
         self,
@@ -20,6 +23,10 @@ class Weapon:
         ammo: int,
         full_auto: bool = False,
         max_bullet_dist: int = None,
+        swap_out_sound_filepath: str = None,
+        swap_in_sound_filepath: str = None,
+        sound_volume: float = 0.2,
+        weapon_active_sound_filepath: str = None,
     ):
         """
         Initializes a new weapon
@@ -32,6 +39,10 @@ class Weapon:
         :param ammo: how much ammunition the weapon holds
         :param full_auto: (optional) full auto capability
         :param max_bullet_dist: used for melee weapons: how much 'distance' the 'bullet' travels
+        :param swap_out_sound_filepath: filepath inside sounds directory for sound when swapping weapon out
+        :param swap_in_sound_filepath: filepath inside sounds directory for sound when swapping weapon in
+        :param sound_volume: [0.0, 1.0] for sound level of weapon
+        :param weapon_active_sound_filepath: filepath inside sounds directory for weapon active (sound loops)
         """
         self.name = name
 
@@ -40,7 +51,7 @@ class Weapon:
         self.y = 0
 
         self.sound = pygame.mixer.Sound(sound_path)
-        self.sound.set_volume(0.2)
+        self.sound.set_volume(sound_volume)
 
         self.image = pygame.image.load(image_path)
         self.image_width = self.image.get_width()
@@ -59,6 +70,16 @@ class Weapon:
         self.full_auto = full_auto
 
         self.is_upgraded = False
+
+        self.swap_out_sound_filepath = swap_out_sound_filepath
+        self.swap_in_sound_filepath = swap_in_sound_filepath
+
+        self.weapon_active_sound: Union[None, pygame.mixer.Sound] = None
+        if weapon_active_sound_filepath is not None:
+            self.weapon_active_sound = pygame.mixer.Sound(
+                f"sounds/{weapon_active_sound_filepath}"
+            )
+            self.weapon_active_sound.set_volume(0.8)
 
     def draw(self, screen) -> None:
         """
