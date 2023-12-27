@@ -151,6 +151,7 @@ while is_game_running:
                 player.set_y_velocity(0)
     if (
         pygame.key.get_pressed()[pygame.K_SPACE]
+        and player.get_current_weapon() is not None
         and player.get_current_weapon().is_full_auto()
     ):
         player.fire_current_weapon()  # full auto

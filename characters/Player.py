@@ -226,8 +226,9 @@ class Player:
         """
         Removes current weapon from player's hands
         """
-        del self.weapons[self.current_weapon]
+        old_weapon_index = self.current_weapon
         self.switch_to_next_weapon()
+        del self.weapons[old_weapon_index]
 
     def fire_current_weapon(self) -> None:
         """
